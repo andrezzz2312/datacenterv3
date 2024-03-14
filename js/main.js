@@ -9,6 +9,9 @@ let videoloop,
 	buttonContainerMade,
 	buttonGrid,
 	threesixty,
+	cornerIcons,
+	multimedia,
+	inputButtonGrid,
 	delay,
 	subVideoTurn,
 	subVideoBackLoop,
@@ -471,7 +474,9 @@ const buttonContent = {
 			`Piggybacking\n Prevention`,
 			`Tailgating\nPrevention 1`,
 			`Tailgating\nPrevention 2`,
+			`StereoVision`,
 			`Emergency\nEgress`,
+			`Finish\nOptions`,
 			`Glass\nOptions`,
 		],
 		inputButtonId: [
@@ -1020,6 +1025,7 @@ function createSubVideos(source1, source2, source3) {
 }
 
 // Create the content storaged in showCont div / Left and Top position of the container div, label title and content of the paragraph
+
 function createContent(obj, parent) {
 	console.trace()
 	delay = ''
@@ -1090,7 +1096,14 @@ function createContent(obj, parent) {
 			// subbutton function
 			subButton.addEventListener('click', function () {
 				HideShowCont()
-
+				buttonGrid.children.forEach((element) => {
+					console.log(element)
+					element.style.pointerEvents = 'none'
+				})
+				cornerIcons.children.forEach((element) => {
+					console.log(element)
+					element.style.pointerEvents = 'none'
+				})
 				setTimeout(() => {
 					showCont.innerHTML = ''
 				}, 500)
@@ -1194,13 +1207,14 @@ function createContent(obj, parent) {
 					elementContainer.classList.add('elementContainer', 'imageContainer')
 					for (let i = 0; i < e; i++) {
 						let image = document.createElement('img')
-						image.classList.add('tableImg')
+
 						if (
 							currentButton === 'tourlock18' ||
-							currentButton === 'tourlock182' ||
-							currentButton === 'circlelockSo' ||
-							currentButton === 'circlelockSo2'
+							// currentButton === 'tourlock182' ||
+							currentButton === 'circlelockSo'
+							// currentButton === 'circlelockSo2'
 						) {
+							image.classList.add('tableImg')
 							image.src = `assets/${parent}/${currentButton}/${currentButton}${
 								i + 1
 							}.png`
@@ -1210,6 +1224,7 @@ function createContent(obj, parent) {
 								image.style.width = '24em'
 							}
 						} else {
+							image.classList.add('finishImg')
 							image.src = `assets/${parent}/${pageIndex}/${pageIndex}${
 								i + 1
 							}.png`
@@ -1309,13 +1324,39 @@ function createContent(obj, parent) {
 	firstPage.appendChild(textContent)
 	buttonGridContainer.appendChild(buttonGrid)
 	if (pageIndex === 'mainMenuFront') {
+		cornerIcons = document.createElement('div')
+		cornerIcons.classList.add('cornerIcons')
+
+		multimedia = document.createElement('img')
+		multimedia.classList.add('multimedia')
+		multimedia.src = 'assets/icons/document.png'
+
+		multimedia.addEventListener('click', () => {
+			HideShowCont()
+
+			buttonGrid.children.forEach((element) => {
+				console.log(element)
+				element.style.pointerEvents = 'none'
+			})
+			cornerIcons.children.forEach((element) => {
+				console.log(element)
+				element.style.pointerEvents = 'none'
+			})
+
+			setTimeout(() => {
+				showCont.innerHTML = ''
+			}, 500)
+		})
 		threesixty = document.createElement('img')
 		threesixty.classList.add('threesixty')
 		threesixty.src = 'assets/icons/threesixtyLogo.png'
 		threesixty.addEventListener('click', () => {
 			createRotation()
 		})
-		buttonGridContainer.appendChild(threesixty)
+
+		buttonGridContainer.appendChild(cornerIcons)
+		cornerIcons.appendChild(multimedia)
+		cornerIcons.appendChild(threesixty)
 	}
 
 	firstPage.appendChild(buttonGridContainer)
