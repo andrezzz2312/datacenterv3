@@ -10,7 +10,7 @@ let videoloop,
 	buttonGrid,
 	threesixty,
 	cornerIcons,
-	multimedia,
+	documents,
 	inputButtonGrid,
 	delay,
 	subVideoTurn,
@@ -146,10 +146,17 @@ const buttonContent = {
 		inputButtonGrid: [
 			`Standard\nOperation`,
 			`Piggybacking\nPrevention`,
+			`BE Secure`,
 			`Emergency\nEgress`,
 			`Finish\nOptions`,
 		],
-		inputButtonId: [`standardO`, `piggybackingP`, `emergencyE`, `finishO`],
+		inputButtonId: [
+			`standardO`,
+			`piggybackingP`,
+			`beSecure`,
+			`emergencyE`,
+			`finishO`,
+		],
 		boxInfo: {
 			standardO: {
 				textLeft: '0%',
@@ -164,7 +171,6 @@ const buttonContent = {
 					`Exiting can also be set up as free out, requiring no credentials`,
 					`Turnstile does not allow tailgating as it only rotates 120\u00B0 then relocks`,
 				],
-				delay: [1, 5, 10, 16],
 			},
 			piggybackingP: {
 				textLeft: '0%',
@@ -179,7 +185,6 @@ const buttonContent = {
 					`Turnstile remains locked, forcing both people\nto exit the compartment backwards`,
 					`With optional BE Secure Overhead Sensor System, there is never a breach.\nUnauthorized user always exits to the unsecured side.\nEliminate DHO (door held open) and DFO (door forced open) alarms.\nAutomated resolution of issues (no human intervention). Always in compliance`,
 				],
-				delay: [0, 5, 9, 14, 17, 19],
 			},
 			emergencyE: {
 				textLeft: '0%',
@@ -200,6 +205,24 @@ const buttonContent = {
 					`Metal screens can be installed in addition to horizontal bars`,
 				],
 			},
+			beSecure: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold' data-subId = 'beSecure'>Finish Options</span>`,
+				content: [],
+				inputButtonGrid: [
+					`Authorized\nEntry`,
+					`Walk Away\nDetection`,
+					`Piggybacking`,
+				],
+				inputButtonId: [`authorizedE`, `walkA`, `piggyB`],
+			},
+			documents: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold' data-subId = 'documents'>Documents</span>`,
+				content: [],
+			},
 		},
 		// src: buttonsText[1],
 	},
@@ -218,6 +241,7 @@ const buttonContent = {
 		inputButtonGrid: [
 			`Standard\nOperation`,
 			`Operation With\nMetal Detector`,
+
 			`Piggybacking\nPrevention`,
 			`Emergency\nEgress`,
 			`Finish\nOptions`,
@@ -225,6 +249,7 @@ const buttonContent = {
 		inputButtonId: [
 			`standardO`,
 			`operationW`,
+
 			`piggybackingP`,
 			`emergencyE`,
 			`finishO`,
@@ -243,7 +268,6 @@ const buttonContent = {
 					`Exiting can also be set up as free out, requiring no credentials`,
 					`Turnstile does not allow tailgating as it only rotates 120\u00B0 then relocks`,
 				],
-				delay: [1, 5, 11, 16],
 			},
 			operationW: {
 				textLeft: '0%',
@@ -259,7 +283,6 @@ const buttonContent = {
 					`User must exit the turnstile backwards to divest metal`,
 					`Configuration can be provided with a metal detector for inbound and outbound traffic flow`,
 				],
-				delay: [2, 6, 11, 14, 20, 22, 24],
 			},
 			piggybackingP: {
 				textLeft: '0%',
@@ -274,7 +297,6 @@ const buttonContent = {
 					`Turnstile remains locked, forcing both people\nto exit the compartment backwards`,
 					`With optional BE Secure Overhead Sensor System, there is never a breach.\nUnauthorized user always exits to the unsecured side.\nEliminate DHO (door held open) and DFO (door forced open) alarms.\nAutomated resolution of issues (no human intervention). Always in compliance`,
 				],
-				delay: [2, 7, 11, 16, 20, 24],
 			},
 			emergencyE: {
 				textLeft: '0%',
@@ -295,6 +317,12 @@ const buttonContent = {
 					`Tandem space-saving models available`,
 					`Can be incorporated with metal detectors`,
 				],
+			},
+			documents: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold' data-subId = 'documents'>Documents</span>`,
+				content: [],
 			},
 		},
 	},
@@ -347,7 +375,12 @@ const buttonContent = {
 					1,
 					`Other finishes available upon request`,
 				],
-				delay: [1, 2, 3],
+			},
+			documents: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold' data-subId = 'documents'>Documents</span>`,
+				content: [],
 			},
 		},
 	},
@@ -368,14 +401,151 @@ const buttonContent = {
 			`Standard\nOperation`,
 			`Piggybacking\n Prevention 1`,
 			`Piggybacking\n Prevention 2`,
+			`StereoVision`,
 			`Emergency\nEgress`,
+			`Finish\nOptions`,
 			`Glass\nOptions`,
 		],
 		inputButtonId: [
 			`standardO`,
 			`piggybackingP1`,
 			`piggybackingP2`,
+			`stereoV`,
 			`emergencyE`,
+			`finishO`,
+			`glassO`,
+		],
+		boxInfo: {
+			standardO: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold'>Standard Operation</span>`,
+
+				content: [
+					`Credential or push button is presented`,
+					`Valid credential turns LEDs green on the vertical entry post and internal\nmidpost, opens outer door and provides audible signal. Opposite side LED\nturns red until the user exits the door, and the outer door closes`,
+					`StereoVision takes sampling 1`,
+					`Door starts to close. Just prior to closure, StereoVision takes sampling 2`,
+					`An optional, internal biometric device is activated upon door closure.\nThis validates user and prevents substitution`,
+					`Interior door opens, then closes`,
+				],
+				delay: [1, 5, 17, 21, 26, 31],
+			},
+			piggybackingP1: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold'>Piggybacking Prevention 1</span>`,
+				content: [
+					`Piggybacking is an attempt for two people to enter`,
+					`Credential or push button is presented`,
+					`Valid credential turns LEDs green on the vertical entry post and internal\nmidpost, opens outer door and provides audible signal. Opposite side LED\nturns red until the users exit the door, and the outer door closes`,
+					`StereoVision takes sampling 1`,
+					`StereoVision detects two people`,
+					`Door remains open, and voice command prompts both people\nto exit. Turns LEDs red on the vertical entry post and internal midpost,\nand provides audible signal. Opposite side LED\nturns red until the users exit the door, and the outer door closes`,
+					`After exiting, outer door closes`,
+					`Never a breach. Unauthorized user always exits to the unsecure side.\nEliminate DHO (door held open) and DFO (door forced open) alarms.\nAutomated resolution of issues (no human intervention). Always in compliance`,
+				],
+				delay: [2, 5, 10, 21, 25, 28, 41, 45],
+			},
+			piggybackingP2: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold'>Piggybacking Prevention 2</span>`,
+				content: [
+					`Piggybacking is an attempt for two people to enter`,
+					`Credential or push button is presented`,
+					`Valid credential turns LEDs green on the vertical entry post and internal\nmidpost, opens outer door and provides audible signal. Opposite side LED\nturns red until the users exit the door, and the outer door closes`,
+					`StereoVision takes sampling 1. Door closes, StereoVision takes sampling 2`,
+					`StereoVision detects two people`,
+					`Door re-opens, and voice command prompts both people to exit.\nTurns LEDs red on the vertical entry post and internal midpost,\nand provides audible signal. Opposite side LED\nturns red until the users exit the door, and the outer door closes`,
+					`After exiting, outer door closes`,
+					`Never a breach. Unauthorized user always exits to the unsecure side.\nEliminate DHO (door held open) and DFO (door forced open) alarms.\nAutomated resolution of issues (no human intervention). Always in compliance`,
+				],
+			},
+			stereoV: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
+				content: [
+					`Door panel glass is \u00BC" clear tempered`,
+					`Wall panel glass is \u00BC" curved clear tempered `,
+					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
+					`All glass can be replaced by BR level 1 laminated glass`,
+				],
+			},
+			emergencyE: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold'>Emergency Egress</span>`,
+				content: [
+					`Upon signal from alarm system, outer door opens`,
+					`Inner door typically remains closed and locked`,
+					`No entrapment`,
+					`No open door`,
+					`Inner door can be programmed to open also`,
+					`A side swing door is typically required to meet code`,
+				],
+			},
+			finishO: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold' data-subId = 'finishO'>Finish Options</span>`,
+				content: [
+					`Turnstile available in brushed stainless steel`,
+					1,
+					`Other finishes available upon request`,
+				],
+			},
+			glassO: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
+				content: [
+					`Door panel glass is \u00BC" curved clear tempered`,
+					`Wall panel glass is \u00BC" curved clear tempered `,
+					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
+					`All glass can be replaced by BR level 1 laminated glass`,
+				],
+			},
+			documents: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold' data-subId = 'documents'>Documents</span>`,
+				content: [],
+			},
+		},
+
+		// src: buttonsText[1],
+	},
+	circlelockCombi: {
+		textLeft: '0%',
+		textBottom: '0%',
+		title: `<span><span style = 'font-weight:bold'>INTERLOCKING</span> <span>SECURITY PORTAL</span></span>`,
+		subTitle: `Circlelock Solo`,
+		content: [
+			`Prevent unauthorized entry`,
+			`2-way traffic, one direction at a time`,
+			`Low capacity - 60 people in 10 minutes`,
+			`Integrates with any ACS or multi-factor schema`,
+			`Risk Score - 0.8%, Efficiency Score - 99.2%`,
+			1,
+		],
+		inputButtonGrid: [
+			`Standard\nOperation`,
+			`Piggybacking\n Prevention 1`,
+			`Piggybacking\n Prevention 2`,
+			`StereoVision`,
+			`Emergency\nEgress`,
+			`Finish\nOptions`,
+			`Glass\nOptions`,
+		],
+		inputButtonId: [
+			`standardO`,
+			`piggybackingP1`,
+			`piggybackingP2`,
+			`stereoV`,
+			`emergencyE`,
+			`finishO`,
 			`glassO`,
 		],
 		boxInfo: {
@@ -426,6 +596,17 @@ const buttonContent = {
 				],
 				delay: [2, 7, 11, 21, 30, 35, 49, 53],
 			},
+			stereoV: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
+				content: [
+					`Door panel glass is \u00BC" clear tempered`,
+					`Wall panel glass is \u00BC" curved clear tempered `,
+					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
+					`All glass can be replaced by BR level 1 laminated glass`,
+				],
+			},
 			emergencyE: {
 				textLeft: '0%',
 				textTop: '0%',
@@ -440,6 +621,17 @@ const buttonContent = {
 				],
 				delay: [1, 5, 9, 11, 13, 15],
 			},
+			finishO: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
+				content: [
+					`Door panel glass is \u00BC" clear tempered`,
+					`Wall panel glass is \u00BC" curved clear tempered `,
+					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
+					`All glass can be replaced by BR level 1 laminated glass`,
+				],
+			},
 			glassO: {
 				textLeft: '0%',
 				textTop: '0%',
@@ -451,6 +643,12 @@ const buttonContent = {
 					`All glass can be replaced by BR level 1 laminated glass`,
 				],
 				delay: [1, 6, 11, 16],
+			},
+			documents: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold' data-subId = 'documents'>Documents</span>`,
+				content: [],
 			},
 		},
 
@@ -484,7 +682,9 @@ const buttonContent = {
 			`piggybackingP`,
 			`tailgatingP1`,
 			`tailgatingP2`,
+			`stereoV`,
 			`emergencyE`,
+			`finishO`,
 			`glassO`,
 		],
 		boxInfo: {
@@ -502,7 +702,6 @@ const buttonContent = {
 					`Authorized users can exit while authorized users enter`,
 					`Exiting can be free out`,
 				],
-				delay: [1, 5, 11, 16, 24],
 			},
 			piggybackingP: {
 				textLeft: '0%',
@@ -523,7 +722,6 @@ const buttonContent = {
 					`Door reverses 45\u00B0, forcing both people to exit the compartment`,
 					`Never a breach. Unauthorized user always exits to the unsecure side.\nEliminate DHO (door held open) and DFO (door forced open) alarms.\nAutomated resolution of issues (no human intervention).\nAlways in compliance`,
 				],
-				delay: [0, 5, 9, 15, 19, 24, 30, 36, 44, 51, 58],
 			},
 			tailgatingP1: {
 				textLeft: '0%',
@@ -543,7 +741,6 @@ const buttonContent = {
 					`When compartment is empty, door rotates forward an additional\n45\u00B0, repositioned to the "x" rest or home position`,
 					`Never a breach. Unauthorized user always exits to the unsecure side.\nEliminate DHO (door held open) and DFO (door forced open) alarms.\nAutomated resolution of issues (no human intervention).\nAlways in compliance`,
 				],
-				delay: [0, 6, 10, 18, 23, 35, 41, 47, 53],
 			},
 			tailgatingP2: {
 				textLeft: '0%',
@@ -563,7 +760,6 @@ const buttonContent = {
 					`Authorized user re-attempts to exit`,
 					`Never a breach. Unauthorized user always exits to the unsecure side.\nEliminate DHO (door held open) and DFO (door forced open) alarms.\nAutomated resolution of issues (no human intervention).\nAlways in compliance`,
 				],
-				delay: [0, 6, 10, 18, 25, 30, 40, 44, 47],
 			},
 			emergencyE: {
 				textLeft: '0%',
@@ -576,7 +772,6 @@ const buttonContent = {
 					`After alarm situation, doors must be manually reset`,
 					`Building codes require a side door (lockable/alarmable)\nnext to a revolving door`,
 				],
-				delay: [0, 5, 9, 13, 17],
 			},
 			glassO: {
 				textLeft: '0%',
@@ -588,7 +783,34 @@ const buttonContent = {
 					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
 					`All glass can be replaced by BR level 1 laminated glass`,
 				],
-				delay: [1, 5, 11, 17],
+			},
+			stereoV: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
+				content: [
+					`Door panel glass is \u00BC" clear tempered`,
+					`Wall panel glass is \u00BC" curved clear tempered `,
+					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
+					`All glass can be replaced by BR level 1 laminated glass`,
+				],
+			},
+			finishO: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
+				content: [
+					`Door panel glass is \u00BC" clear tempered`,
+					`Wall panel glass is \u00BC" curved clear tempered `,
+					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
+					`All glass can be replaced by BR level 1 laminated glass`,
+				],
+			},
+			documents: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold' data-subId = 'documents'>Documents</span>`,
+				content: [],
 			},
 		},
 
@@ -609,9 +831,16 @@ const buttonContent = {
 			`Standard\nOperation`,
 			`Tailgating\nPrevention`,
 			`Emergency\nEgress`,
+			`Finish\nOptions`,
 			`Glass\nOptions`,
 		],
-		inputButtonId: [`standardO`, `tailgatingP`, `emergencyE`, `glassO`],
+		inputButtonId: [
+			`standardO`,
+			`tailgatingP`,
+			`emergencyE`,
+			`finishO`,
+			`glassO`,
+		],
 		boxInfo: {
 			standardO: {
 				textLeft: '0%',
@@ -645,13 +874,23 @@ const buttonContent = {
 				],
 				delay: [2, 6, 10, 15, 18, 22, 26, 31, 37],
 			},
-
 			emergencyE: {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold'>Emergency Egress</span>`,
 				content: [
 					`Upon signal from alarm system, turnstile panels unlock or swing out`,
+				],
+			},
+			finishO: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
+				content: [
+					`Door panel glass is \u00BC" clear tempered`,
+					`Wall panel glass is \u00BC" curved clear tempered `,
+					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
+					`All glass can be replaced by BR level 1 laminated glass`,
 				],
 			},
 			glassO: {
@@ -663,7 +902,12 @@ const buttonContent = {
 					`Glass can be cabinet height or tall`,
 					`All glass can be enhanced with vandal resistant glass film`,
 				],
-				delay: [2, 6, 10],
+			},
+			documents: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold' data-subId = 'documents'>Documents</span>`,
+				content: [],
 			},
 		},
 
@@ -739,26 +983,27 @@ function HideShowCont() {
 function animations() {
 	console.trace()
 	if (pCont) {
-		// paragraph.style.animation = 'fadein 0.5s ease-in-out forwards'
+		paragraph.style.animation = 'fadein 0.5s ease-in-out forwards'
 
 		const elementContainers = document.querySelectorAll('.elementContainer')
 
-		titleH2.style.animation =
-			'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
-		greenLine.style.animation =
-			'growWide 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
-		greenLine.style.animationDelay = '0.4s'
-		createdSubTitle.style.animation =
-			'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
-		createdSubTitle.style.animationDelay = '0.4s'
+		// titleH2.style.animation =
+		// 	'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
+		// greenLine.style.animation =
+		// 	'growWide 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
+		// greenLine.style.animationDelay = '0.4s'
+		// createdSubTitle.style.animation =
+		// 	'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
+		// createdSubTitle.style.animationDelay = '0.4s'
 		let counter = 0.3
 		console.log(delay)
+
 		if (delay) {
 			console.log(delay)
 			let inputArray = []
 			let bool = false
 			subVideo2.addEventListener('timeupdate', function () {
-				console.log(subVideo2.currentTime)
+				// console.log(subVideo2.currentTime)
 				//currentTime use second, if you want min *60
 
 				delay.forEach((element, i) => {
@@ -887,18 +1132,18 @@ function animations() {
 				}
 			})
 		} else {
-			console.log('else delay')
-
+			console.log(elementContainers)
 			elementContainers.forEach((element, i) => {
+				console.log(element)
+
 				element.style.animation =
 					'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
-
 				element.style.animationDelay = `${counter}s`
 				counter += 0.1
 
-				// setTimeout(() => {
-				// 	element.style.animation = 'fadein 0.5s ease-in-out forwards'
-				// }, 2000)
+				setTimeout(() => {
+					element.style.animation = 'fadein 0.5s ease-in-out forwards'
+				}, 2000)
 			})
 		}
 
@@ -1065,6 +1310,15 @@ function createContent(obj, parent) {
 	buttonGrid = document.createElement('div')
 
 	buttonGrid.classList.add('buttonGrid')
+	if (inputButtonGrid) {
+		if (inputButtonGrid.length === 5) {
+			console.log(inputButtonGrid.length)
+			console.log(buttonGrid)
+			buttonGrid.style.gridTemplateColumns = 'repeat(5, 1fr)'
+		}
+	}
+
+	console.log(inputButtonGrid)
 
 	// let buttonShort = []
 
@@ -1080,7 +1334,7 @@ function createContent(obj, parent) {
 			// 	? (buttonShort[i] =
 			// 			splitText[0].toLowerCase() + splitText[1].substring(0, 1))
 			// 	: (buttonShort[i] = splitText[0].toLowerCase())
-
+			console.log('inputbuttongrid')
 			buttonShort[i] = inputButtonId[i]
 
 			const subButton = document.createElement('button')
@@ -1097,11 +1351,9 @@ function createContent(obj, parent) {
 			subButton.addEventListener('click', function () {
 				HideShowCont()
 				buttonGrid.children.forEach((element) => {
-					console.log(element)
 					element.style.pointerEvents = 'none'
 				})
 				cornerIcons.children.forEach((element) => {
-					console.log(element)
 					element.style.pointerEvents = 'none'
 				})
 				setTimeout(() => {
@@ -1149,17 +1401,17 @@ function createContent(obj, parent) {
 								parent
 							)
 							textContent.style.height = '100%'
+							video2.classList.remove('show')
 							video2.classList.add('short-vanish')
+
 							subVideo1.style.opacity = 1
 							setTimeout(() => {
 								subVideo1.play()
+								HideShowCont()
+								animations()
 								subVideo1.addEventListener('ended', () => {
 									console.log('subVideo1 ending')
-
-									animations()
 									InterpolateVideo(video3, subVideo1, subVideo2)
-
-									HideShowCont()
 								})
 							}, 0)
 						}
@@ -1173,16 +1425,17 @@ function createContent(obj, parent) {
 		pCont = document.createElement('div')
 		pCont.classList.add('pCont')
 
-		// list = document.createElement('ul')
-		titleH2 = document.createElement('span')
-		titleH2.classList.add('title1')
-		titleH2.style.fontSize = globalBigTitleFontvar
-		titleH2.innerHTML = labelTitle
-		greenLine = document.createElement('hr')
-		paragraph = document.createElement('p')
-		titleH2.appendChild(greenLine)
+		list = document.createElement('ul')
 
-		// paragraph.textContent = pContent
+		// titleH2 = document.createElement('span')
+		// titleH2.classList.add('title1')
+		// titleH2.style.fontSize = globalBigTitleFontvar
+		// titleH2.innerHTML = labelTitle
+		// greenLine = document.createElement('hr')
+		paragraph = document.createElement('p')
+		// titleH2.appendChild(greenLine)
+
+		paragraph.textContent = pContent
 		// titleH2.style.fontSize = globalFontvar
 		paragraph.style.fontSize = globalFontvar
 
@@ -1192,7 +1445,7 @@ function createContent(obj, parent) {
 			createdSubTitle.textContent = subTitle
 			createdSubTitle.style.fontWeight = 'bold'
 			createdSubTitle.style.fontSize = globalMediumTitleFontvar
-			titleH2.appendChild(createdSubTitle)
+			// titleH2.appendChild(createdSubTitle)
 		}
 
 		createBackButton()
@@ -1201,60 +1454,114 @@ function createContent(obj, parent) {
 				delay = delayInput
 			}
 			console.log(currentButton)
-			pContent.forEach((e) => {
-				if (Number.isInteger(e)) {
-					elementContainer = document.createElement('span')
-					elementContainer.classList.add('elementContainer', 'imageContainer')
-					for (let i = 0; i < e; i++) {
-						let image = document.createElement('img')
+			console.log(pageIndex)
+			console.log(parent)
+			if (pageIndex === 'documents') {
+				elementContainer = document.createElement('span')
+				elementContainer.classList.add(
+					'elementContainer',
+					'imageContainer',
+					'documentsContainer'
+				)
 
-						if (
-							currentButton === 'tourlock18' ||
-							// currentButton === 'tourlock182' ||
-							currentButton === 'circlelockSo'
-							// currentButton === 'circlelockSo2'
-						) {
-							image.classList.add('tableImg')
-							image.src = `assets/${parent}/${currentButton}/${currentButton}${
-								i + 1
-							}.png`
-							if (isMobile) {
-								image.style.width = '20em'
-							} else {
-								image.style.width = '24em'
-							}
-						} else {
-							image.classList.add('finishImg')
-							image.src = `assets/${parent}/${pageIndex}/${pageIndex}${
-								i + 1
-							}.png`
-							if (isMobile) {
-								image.style.width = '6em'
-							} else {
-								image.style.width = '6em'
-							}
-						}
+				for (let i = 0; i < 4; i++) {
+					let infoContainer = document.createElement('div')
+					infoContainer.classList.add('infoContainer')
+					let title = document.createElement('h3')
+					title.classList.add('infoContainerTitle')
+					switch (i) {
+						case 0:
+							title.textContent = 'Photo/Video'
+							break
+						case 1:
+							title.textContent = 'Specifications'
+							break
+						case 2:
+							title.textContent = 'Drawings'
+							break
+						case 3:
+							title.textContent = 'Miscellaneous'
+							break
 
-						elementContainer.appendChild(image)
-						paragraph.appendChild(elementContainer)
+						default:
+							break
 					}
-				} else {
-					elementContainer = document.createElement('span')
-					elementContainer.classList.add('elementContainer')
-					elementContainer.setAttribute('id', 'pCont1')
 
-					icon = document.createElement('img')
-					icon.src = 'assets/icons/bp.png'
-					icon.style.width = '1.3em'
-
-					element = document.createElement('span')
-					element.textContent = e
-					element.style.fontSize = globalFontvar
-					elementContainer.appendChild(icon)
-					elementContainer.appendChild(element)
+					let image = document.createElement('img')
+					image.classList.add('finishImg')
+					image.src = `assets/${parent}/${pageIndex}/${pageIndex}${i + 1}.png`
+					if (isMobile) {
+						image.style.width = '6em'
+					} else {
+						image.style.width = '6em'
+					}
+					infoContainer.appendChild(title)
+					infoContainer.appendChild(image)
+					elementContainer.appendChild(infoContainer)
+					console.log(pCont)
+					console.log(paragraph)
+					console.log(elementContainer)
+					pCont.appendChild(paragraph)
 					paragraph.appendChild(elementContainer)
 				}
-			})
+
+				paragraph.appendChild(elementContainer)
+			} else {
+				pContent.forEach((e) => {
+					if (Number.isInteger(e)) {
+						elementContainer = document.createElement('span')
+						elementContainer.classList.add('elementContainer', 'imageContainer')
+						for (let i = 0; i < e; i++) {
+							let image = document.createElement('img')
+
+							if (
+								currentButton === 'tourlock18' ||
+								currentButton === 'tourlock182' ||
+								currentButton === 'circlelockSo' ||
+								currentButton === 'circlelockSo2'
+							) {
+								image.classList.add('tableImg')
+								image.src = `assets/${parent}/${currentButton}/${currentButton}${
+									i + 1
+								}.png`
+								if (isMobile) {
+									image.style.width = '20em'
+								} else {
+									image.style.width = '24em'
+								}
+							} else {
+								image.classList.add('finishImg')
+								image.src = `assets/${parent}/${pageIndex}/${pageIndex}${
+									i + 1
+								}.png`
+								if (isMobile) {
+									image.style.width = '6em'
+								} else {
+									image.style.width = '6em'
+								}
+							}
+
+							elementContainer.appendChild(image)
+							paragraph.appendChild(elementContainer)
+						}
+					} else {
+						elementContainer = document.createElement('span')
+						elementContainer.classList.add('elementContainer')
+						elementContainer.setAttribute('id', 'pCont1')
+
+						icon = document.createElement('img')
+						icon.src = 'assets/icons/bp.png'
+						icon.style.width = '1.3em'
+
+						element = document.createElement('span')
+						element.textContent = e
+						element.style.fontSize = globalFontvar
+						elementContainer.appendChild(icon)
+						elementContainer.appendChild(element)
+						paragraph.appendChild(elementContainer)
+					}
+				})
+			}
 		}
 
 		if (pContent2) {
@@ -1316,36 +1623,95 @@ function createContent(obj, parent) {
 				})
 			}
 		}
-		pCont.appendChild(titleH2)
-		pCont.appendChild(paragraph)
-		textContent.appendChild(pCont)
+		// pCont.appendChild(titleH2)
+		if (pageIndex === 'documents') {
+			pCont.appendChild(paragraph)
+			textContent.appendChild(pCont)
+		}
 	}
 
 	firstPage.appendChild(textContent)
+	if (pageIndex === 'beSecure') {
+		let gridTitle = document.createElement('h3')
+		gridTitle.classList.add('gridTitle')
+
+		gridTitle.textContent = 'BE Secure escenarios'
+		buttonGridContainer.style.flexDirection = 'column'
+		buttonGridContainer.style.alignItems = 'start'
+		buttonGridContainer.appendChild(gridTitle)
+	}
 	buttonGridContainer.appendChild(buttonGrid)
+
 	if (pageIndex === 'mainMenuFront') {
 		cornerIcons = document.createElement('div')
 		cornerIcons.classList.add('cornerIcons')
 
-		multimedia = document.createElement('img')
-		multimedia.classList.add('multimedia')
-		multimedia.src = 'assets/icons/document.png'
+		documents = document.createElement('img')
+		documents.classList.add('documents')
+		documents.src = 'assets/icons/document.png'
 
-		multimedia.addEventListener('click', () => {
+		documents.addEventListener('click', function () {
+			console.log('checkere')
 			HideShowCont()
-
 			buttonGrid.children.forEach((element) => {
-				console.log(element)
 				element.style.pointerEvents = 'none'
 			})
 			cornerIcons.children.forEach((element) => {
-				console.log(element)
 				element.style.pointerEvents = 'none'
 			})
-
 			setTimeout(() => {
 				showCont.innerHTML = ''
 			}, 500)
+			console.log(currentButton)
+			console.log(pageIndex)
+			pageIndex = 'documents'
+			console.log(parent)
+			// 	// Con esto veo que boton es /////////////////////////////////
+			createSubVideos(
+				`assets/${parent}/${pageIndex}/${pageIndex}1.mp4`,
+				`assets/${parent}/${pageIndex}/${pageIndex}2.mp4`,
+				`assets/${parent}/${pageIndex}/${pageIndex}3.mp4`
+			)
+			check1()
+			let videosCheck = false
+			function check1() {
+				clearcheck = setInterval(repeatcheck, 600)
+				function repeatcheck() {
+					if (
+						subVideo1.readyState === 4 &&
+						subVideo2.readyState === 4 &&
+						subVideo3.readyState === 4
+					) {
+						videosCheck = true
+					}
+					setTimeout(() => {
+						if (!videosCheck) {
+							loader.style.zIndex = '200'
+							loader.classList.add('show')
+						}
+					}, 3000)
+					if (videosCheck) {
+						loader.classList.remove('show')
+						loader.classList.add('short-vanish')
+						loader.style.zIndex = '-200'
+						clearInterval(clearcheck)
+						globalParent = parent
+
+						createContent(buttonContent[parent].boxInfo[pageIndex], parent)
+						textContent.style.height = '100%'
+						video2.classList.add('short-vanish')
+						subVideo1.style.opacity = 1
+						setTimeout(() => {
+							subVideo1.play()
+							subVideo1.addEventListener('ended', () => {
+								animations()
+								InterpolateVideo(video3, subVideo1, subVideo2)
+								HideShowCont()
+							})
+						}, 0)
+					}
+				}
+			}
 		})
 		threesixty = document.createElement('img')
 		threesixty.classList.add('threesixty')
@@ -1355,10 +1721,12 @@ function createContent(obj, parent) {
 		})
 
 		buttonGridContainer.appendChild(cornerIcons)
-		cornerIcons.appendChild(multimedia)
+		cornerIcons.appendChild(documents)
 		cornerIcons.appendChild(threesixty)
+		console.log(firstPage)
 	}
-
+	console.log(buttonGridContainer)
+	console.log(firstPage)
 	firstPage.appendChild(buttonGridContainer)
 
 	showCont.appendChild(centerContainerMade)
@@ -1553,7 +1921,11 @@ function backButtonFunctionFront() {
 	HideShowCont()
 	subVideo3.addEventListener('ended', () => {
 		subVideo3.classList.add('short-vanish')
-		video2.classList.remove('short-vanish')
+		setTimeout(() => {
+			video2.classList.remove('short-vanish')
+			video2.classList.add('show')
+		}, 500)
+
 		showCont.innerHTML = ''
 		console.log('back from back')
 
@@ -1565,9 +1937,11 @@ function backButtonFunctionFront() {
 		animations()
 
 		HideShowCont()
-		subVideo1.remove()
-		subVideo2.remove()
-		subVideo3.remove()
+		setTimeout(() => {
+			subVideo1.remove()
+			subVideo2.remove()
+			subVideo3.remove()
+		}, 500)
 	})
 }
 
@@ -1666,7 +2040,10 @@ function createBackButton(param) {
 			pageIndex === 'glassO' ||
 			pageIndex === 'piggybackingP1' ||
 			pageIndex === 'piggybackingP2' ||
-			pageIndex === 'operationW'
+			pageIndex === 'operationW' ||
+			pageIndex === 'beSecure' ||
+			pageIndex === 'stereoV' ||
+			pageIndex === 'documents'
 		) {
 			console.log('submenu')
 			backButton.addEventListener('click', backButtonFunctionFront)
@@ -1814,14 +2191,9 @@ fullscreen_button.addEventListener('click', function (e) {
 mainMenuB.forEach((e, i) => {
 	dataId[i] = e.dataset.id
 	dataVariant[i] = e.dataset.variant
-	console.log(dataId[i])
-	console.log(dataVariant)
+	// console.log(dataId[i])
+	// console.log(dataVariant)
 	e.addEventListener('click', function (e) {
-		// if (dataId[i] === 'view3') {
-		// 	console.log('perraje')
-		// 	return
-		// }
-
 		pageIndex = 'mainMenuFront'
 		currentButton = dataId[i]
 		HideShowMainButtons()
@@ -1831,7 +2203,6 @@ mainMenuB.forEach((e, i) => {
 				`assets/${dataId[i]}${dataVariant[i]}/${dataId[i]}2.mp4`,
 				`assets/${dataId[i]}${dataVariant[i]}/${dataId[i]}3.mp4`
 			)
-			// console.log(dataVariant[i])
 		} else {
 			createVideos(
 				`assets/${dataId[i]}/${dataId[i]}1.mp4`,
@@ -1839,8 +2210,6 @@ mainMenuB.forEach((e, i) => {
 				`assets/${dataId[i]}/${dataId[i]}3.mp4`
 			)
 		}
-
-		/////////////////////////// CURRENT
 
 		if (showCont.innerHTML !== '') {
 			setTimeout(() => {
@@ -1909,6 +2278,7 @@ mainMenuB.forEach((e, i) => {
 					setTimeout(() => {
 						video1.play()
 						video1.addEventListener('ended', () => {
+							console.log('video1 ended')
 							animations()
 
 							InterpolateVideo(loop, video1, video2)

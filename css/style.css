@@ -467,15 +467,16 @@ a {
 .buttonGrid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: repeat(auto, 1fr);
+
 	gap: 0.7vw;
-	margin-left: 7%;
+	margin-left: 5.5%;
 	padding: 0.7vw;
 }
 
 .buttonGridContainer {
 	display: flex;
 	flex-direction: row;
+
 	justify-content: space-between;
 	align-items: flex-end;
 	width: max-content;
@@ -485,7 +486,11 @@ a {
 	opacity: 0;
 	pointer-events: none;
 }
-
+.gridTitle {
+	color: white;
+	margin-left: 5.5%;
+	padding-left: 0.7vw;
+}
 .cornerIcons {
 	display: flex;
 	flex-direction: column;
@@ -500,7 +505,7 @@ a {
 	animation: morph 1s linear infinite;
 }
 
-.multimedia {
+.documents {
 	width: 3vw;
 	cursor: pointer;
 	animation: morph 1s linear infinite;
@@ -509,7 +514,7 @@ a {
 .text {
 	height: 75%;
 	width: 100%;
-	margin-left: 15%;
+	/* margin-left: 5vw; */
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -591,6 +596,7 @@ a {
 	color: white;
 	width: 47%;
 	height: 100%;
+	margin-left: 6.5%;
 	/* width: calc(250px + (480 - 250) * ((100vw - 320px) / (1440 - 320))); */
 	/* transform: scale(0); */
 	/* overflow: hidden; */
@@ -624,11 +630,27 @@ p {
 	gap: 0.7rem;
 	opacity: 0;
 }
+
+.infoContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5vw;
+}
 .imageContainer {
 	margin-left: 4em;
-
 	gap: 3em;
 	opacity: 0;
+}
+
+.documentsContainer {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	width: min-content;
+	grid-column-gap: 8vw;
+	grid-row-gap: 3vw;
+	margin-top: 8vw;
+	margin-left: 5vw;
 }
 .elementContainer > span {
 	margin-top: 1em;
@@ -648,7 +670,7 @@ li:last-child {
 	/* padding: 1% 1%; */
 	/* pointer-events: all; */
 	height: 80%;
-	margin-left: 8%;
+	margin-left: 6.5%;
 	/* position: absolute; */
 	/* margin-left: 5%;
 	margin-top: 3%; */
