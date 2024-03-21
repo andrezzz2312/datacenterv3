@@ -85,13 +85,6 @@ const quality = document.querySelector('#quality_button')
 const mainMenuB = document.querySelectorAll('.mainMenuB')
 const titulo = document.querySelectorAll('.titulo')
 
-// let details = navigator.userAgent
-// let regexp = /android|iphone|kindle|ipad/i
-// let ios = /iphone|ipad/i
-// let macosPlatforms = /(macintosh|macintel|macppc|mac68k|macos)/i
-// let isMobileDevice = regexp.test(details)
-// let isIOS = ios.test(details)
-// let isMac = macosPlatforms.test(details)
 let isMobile = false
 window.mobileCheck = function () {
 	let mobile = (function (a) {
@@ -763,12 +756,14 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
-				content: [
-					`Door panel glass is \u00BC" clear tempered`,
-					`Wall panel glass is \u00BC" curved clear tempered `,
-					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
-					`All glass can be replaced by BR level 1 laminated glass`,
+				content: [],
+				inputButtonGrid: [
+					`One Person`,
+					`Low Object`,
+					`Multiple Persons`,
+					`Sensor Blinding`,
 				],
+				inputButtonId: [`oneP`, `lowO`, `multipleP`, `sensorB`],
 			},
 			finishO: {
 				textLeft: '0%',
@@ -1081,7 +1076,6 @@ function animations() {
 							}
 						}
 					}
-					// console.log(pageIndex)
 				})
 
 				if (inputArray.length === delay.length && !bool) {
@@ -1242,7 +1236,6 @@ function createSubVideos(source1, source2, source3) {
 function createContent(obj, parent) {
 	console.trace()
 	delay = ''
-
 	textLeft = obj.textLeft
 	textTop = obj.textTop
 	textRight = obj.textRight
@@ -1255,6 +1248,7 @@ function createContent(obj, parent) {
 	inputButtonId = obj.inputButtonId
 	delayInput = obj.delay
 	paint = obj.paint
+	globalParent = parent
 
 	const centerContainerMade = document.createElement('div')
 	centerContainerMade.classList.add('centerContainer')
@@ -1277,36 +1271,18 @@ function createContent(obj, parent) {
 	buttonGridContainer = document.createElement('div')
 	buttonGridContainer.classList.add('buttonGridContainer')
 	buttonGrid = document.createElement('div')
-
 	buttonGrid.classList.add('buttonGrid')
+
 	if (inputButtonGrid) {
 		if (inputButtonGrid.length === 5) {
-			console.log(inputButtonGrid.length)
-			console.log(buttonGrid)
 			buttonGrid.style.gridTemplateColumns = 'repeat(5, 1fr)'
 		}
-	}
 
-	console.log(inputButtonGrid)
-
-	// let buttonShort = []
-
-	if (inputButtonGrid) {
 		inputButtonGrid.forEach((e, i) => {
-			// console.log(e)
-			// const splitText = e
-			// 	.replace(/[\n\r]+|[\s]{2,}/g, ' ')
-			// 	.trim()
-			// 	.split(' ')
-
-			// splitText[1]
-			// 	? (buttonShort[i] =
-			// 			splitText[0].toLowerCase() + splitText[1].substring(0, 1))
-			// 	: (buttonShort[i] = splitText[0].toLowerCase())
-			console.log('inputbuttongrid')
 			buttonShort[i] = inputButtonId[i]
 
 			const subButton = document.createElement('button')
+
 			subButton.classList.add('pageButton')
 			subButton.style.width = `calc(40px + (145 - 40) * ((${
 				containVideoWidth + 'px'
@@ -1331,11 +1307,17 @@ function createContent(obj, parent) {
 
 				pageIndex = buttonShort[i]
 				// 	// Con esto veo que boton es /////////////////////////////////
-				console.log(buttonShort[i])
+
+				console.log('currentButton:' + currentButton)
+				console.log('parent:' + parent)
+				console.log('pageindex:' + pageIndex)
+				if (parent === 'stereoV') {
+					console.log('specific button checkequerias.com')
+				}
 				createSubVideos(
-					`assets/${parent}/${buttonShort[i]}/${buttonShort[i]}1.mp4`,
-					`assets/${parent}/${buttonShort[i]}/${buttonShort[i]}2.mp4`,
-					`assets/${parent}/${buttonShort[i]}/${buttonShort[i]}3.mp4`
+					`assets/${parent}/${pageIndex}/${pageIndex}1.mp4`,
+					`assets/${parent}/${pageIndex}/${pageIndex}2.mp4`,
+					`assets/${parent}/${pageIndex}/${pageIndex}3.mp4`
 				)
 				check1()
 				let videosCheck = false
@@ -1361,13 +1343,10 @@ function createContent(obj, parent) {
 							loader.style.zIndex = '-200'
 							clearInterval(clearcheck)
 
-							globalParent = parent
+							// globalParent = parent
 
-							createContent(
-								buttonContent[parent].boxInfo[pageIndex],
+							createContent(buttonContent[parent].boxInfo[pageIndex], parent)
 
-								parent
-							)
 							// textContent.style.height = '100%'
 							video2.classList.remove('show')
 							video2.classList.add('short-vanish')
@@ -1708,7 +1687,7 @@ function createContent(obj, parent) {
 						loader.classList.add('short-vanish')
 						loader.style.zIndex = '-200'
 						clearInterval(clearcheck)
-						globalParent = parent
+						// globalParent = parent
 
 						createContent(buttonContent[parent].boxInfo[pageIndex], parent)
 						// textContent.style.height = '100%'
@@ -1739,8 +1718,7 @@ function createContent(obj, parent) {
 		cornerIcons.appendChild(threesixty)
 		console.log(firstPage)
 	}
-	console.log(buttonGridContainer)
-	console.log(firstPage)
+
 	firstPage.appendChild(buttonGridContainer)
 
 	showCont.appendChild(centerContainerMade)
@@ -2210,6 +2188,7 @@ mainMenuB.forEach((e, i) => {
 	e.addEventListener('click', function (e) {
 		pageIndex = 'mainMenuFront'
 		currentButton = dataId[i]
+		console.log(currentButton)
 		HideShowMainButtons()
 		if (dataVariant[i]) {
 			createVideos(
@@ -2232,7 +2211,7 @@ mainMenuB.forEach((e, i) => {
 		}
 
 		createContent(buttonContent[dataId[i]], dataId[i])
-		console.log(dataId[i])
+
 		window.addEventListener('resize', function (e) {
 			if (showCont.hasChildNodes()) {
 				const textContainer = document.querySelector('#centerContainer_text')
@@ -2241,17 +2220,14 @@ mainMenuB.forEach((e, i) => {
 					'#centerContainer_backButton'
 				)
 				textContainer.remove()
-				console.log('test resize')
+
 				// backButtonContainer.remove()
-				console.log(pageIndex)
 
 				if (pageIndex === 'mainMenuFront') {
-					console.log('main TEST')
 					console.log(globalParent)
 					console.log(buttonContent[globalParent])
 					createContent(buttonContent[dataId[i]], dataId[i])
 				} else {
-					console.log('else TEST')
 					createContent(
 						buttonContent[globalParent].boxInfo[pageIndex],
 						dataId[i]
