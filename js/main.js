@@ -43,8 +43,10 @@ let videoloop,
 	pCont2,
 	list,
 	globalParent,
-	pageIndex
+	pageIndex,
+	nextButton
 
+let currentButton = 'mainMenuFront'
 let boxVideo = []
 let buttonShort = []
 let dataId = []
@@ -921,6 +923,7 @@ function InterpolateVideo(videoToPause, videoToVanish, videoToPlay) {
 	}
 
 	videoToVanish.classList.add('short-vanish')
+	videoToVanish.classList.remove('show')
 
 	videoToPlay.style.opacity = 1
 
@@ -950,14 +953,6 @@ function animations() {
 
 		const elementContainers = document.querySelectorAll('.elementContainer')
 
-		// titleH2.style.animation =
-		// 	'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
-		// greenLine.style.animation =
-		// 	'growWide 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
-		// greenLine.style.animationDelay = '0.4s'
-		// createdSubTitle.style.animation =
-		// 	'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
-		// createdSubTitle.style.animationDelay = '0.4s'
 		let counter = 0.3
 		console.log(delay)
 
@@ -1192,14 +1187,14 @@ function createSubVideos(source1, source2, source3) {
 		subVideo2 = document.createElement('video')
 		subVideo2.src = source2
 		if (
-			currentButton === 'turnlock10' ||
-			currentButton === 'turnlock15' ||
-			currentButton === 'tourlock18' ||
-			currentButton === 'tourlock182' ||
-			currentButton === 'circlelockSo' ||
-			currentButton === 'circlelockSo2' ||
-			currentButton === 'lifelineSw' ||
-			currentButton === 'trilock60'
+			nextButton === 'turnlock10' ||
+			nextButton === 'turnlock15' ||
+			nextButton === 'tourlock18' ||
+			nextButton === 'tourlock182' ||
+			nextButton === 'circlelockSo' ||
+			nextButton === 'circlelockSo2' ||
+			nextButton === 'lifelineSw' ||
+			nextButton === 'trilock60'
 		) {
 			if (pageIndex === 'emergencyE') {
 				subVideo2.loop = true
@@ -1233,8 +1228,9 @@ function createSubVideos(source1, source2, source3) {
 
 // Create the content storaged in showCont div / Left and Top position of the container div, label title and content of the paragraph
 
-function createContent(obj, parent) {
+function createContent(obj, parentSection) {
 	console.trace()
+
 	delay = ''
 	textLeft = obj.textLeft
 	textTop = obj.textTop
@@ -1248,7 +1244,7 @@ function createContent(obj, parent) {
 	inputButtonId = obj.inputButtonId
 	delayInput = obj.delay
 	paint = obj.paint
-	globalParent = parent
+	globalParent = parentSection
 
 	const centerContainerMade = document.createElement('div')
 	centerContainerMade.classList.add('centerContainer')
@@ -1306,18 +1302,20 @@ function createContent(obj, parent) {
 				}, 500)
 
 				pageIndex = buttonShort[i]
+				currentButton = buttonShort[i]
+				nextButton = buttonShort[i]
 				// 	// Con esto veo que boton es /////////////////////////////////
 
-				console.log('currentButton:' + currentButton)
-				console.log('parent:' + parent)
+				console.log('nextButton:' + nextButton)
+				console.log('parentSection:' + parentSection)
 				console.log('pageindex:' + pageIndex)
-				if (parent === 'stereoV') {
+				if (parentSection === 'stereoV') {
 					console.log('specific button checkequerias.com')
 				}
 				createSubVideos(
-					`assets/${parent}/${pageIndex}/${pageIndex}1.mp4`,
-					`assets/${parent}/${pageIndex}/${pageIndex}2.mp4`,
-					`assets/${parent}/${pageIndex}/${pageIndex}3.mp4`
+					`assets/${parentSection}/${nextButton}/${nextButton}1.mp4`,
+					`assets/${parentSection}/${nextButton}/${nextButton}2.mp4`,
+					`assets/${parentSection}/${nextButton}/${nextButton}3.mp4`
 				)
 				check1()
 				let videosCheck = false
@@ -1343,9 +1341,12 @@ function createContent(obj, parent) {
 							loader.style.zIndex = '-200'
 							clearInterval(clearcheck)
 
-							// globalParent = parent
+							// globalParent = parentSection
 
-							createContent(buttonContent[parent].boxInfo[pageIndex], parent)
+							createContent(
+								buttonContent[parentSection].boxInfo[nextButton],
+								parentSection
+							)
 
 							// textContent.style.height = '100%'
 							video2.classList.remove('show')
@@ -1399,9 +1400,11 @@ function createContent(obj, parent) {
 			if (delayInput) {
 				delay = delayInput
 			}
-			console.log('currentButton:' + currentButton)
 			console.log('pageIndex:' + pageIndex)
-			console.log('parent:' + parent)
+			console.log('currentButton:' + currentButton)
+			console.log('nextButton:' + nextButton)
+
+			console.log('parentSection:' + parentSection)
 			if (pageIndex === 'documents') {
 				elementContainer = document.createElement('span')
 				elementContainer.classList.add(
@@ -1467,7 +1470,9 @@ function createContent(obj, parent) {
 
 					let image = document.createElement('img')
 					image.classList.add('finishImg')
-					image.src = `assets/${parent}/${pageIndex}/${pageIndex}${i + 1}.png`
+					image.src = `assets/${parentSection}/${pageIndex}/${pageIndex}${
+						i + 1
+					}.png`
 					if (isMobile) {
 						image.style.width = '6em'
 					} else {
@@ -1478,10 +1483,10 @@ function createContent(obj, parent) {
 
 						console.log(i)
 
-						subVideo2.src = `assets/${parent}/${pageIndex}/paint/${pageIndex}${
+						subVideo2.src = `assets/${parentSection}/${pageIndex}/paint/${pageIndex}${
 							i + 1
 						}.mp4`
-						subVideo3.src = `assets/${parent}/${pageIndex}/paint/${pageIndex}${
+						subVideo3.src = `assets/${parentSection}/${pageIndex}/paint/${pageIndex}${
 							i + 1
 						}.mp4`
 					})
@@ -1505,13 +1510,13 @@ function createContent(obj, parent) {
 							let image = document.createElement('img')
 
 							if (
-								currentButton === 'tourlock18' ||
-								currentButton === 'tourlock182' ||
-								currentButton === 'circlelockSo' ||
-								currentButton === 'circlelockSo2'
+								nextButton === 'tourlock18' ||
+								nextButton === 'tourlock182' ||
+								nextButton === 'circlelockSo' ||
+								nextButton === 'circlelockSo2'
 							) {
 								image.classList.add('tableImg')
-								image.src = `assets/${parent}/${currentButton}/${currentButton}${
+								image.src = `assets/${parentSection}/${nextButton}/${nextButton}${
 									i + 1
 								}.png`
 								if (isMobile) {
@@ -1521,7 +1526,7 @@ function createContent(obj, parent) {
 								}
 							} else {
 								image.classList.add('finishImg')
-								image.src = `assets/${parent}/${pageIndex}/${pageIndex}${
+								image.src = `assets/${parentSection}/${pageIndex}/${pageIndex}${
 									i + 1
 								}.png`
 								if (isMobile) {
@@ -1559,7 +1564,7 @@ function createContent(obj, parent) {
 				if (delayInput) {
 					delay = delayInput
 				}
-				console.log(currentButton)
+				console.log(nextButton)
 				pContent2.forEach((e) => {
 					if (Number.isInteger(e)) {
 						elementContainer = document.createElement('span')
@@ -1568,12 +1573,12 @@ function createContent(obj, parent) {
 							let image = document.createElement('img')
 							image.classList.add('extraImg')
 							if (
-								currentButton === 'tourlock18' ||
-								currentButton === 'tourlock182' ||
-								currentButton === 'circlelockSo' ||
-								currentButton === 'circlelockSo2'
+								nextButton === 'tourlock18' ||
+								nextButton === 'tourlock182' ||
+								nextButton === 'circlelockSo' ||
+								nextButton === 'circlelockSo2'
 							) {
-								image.src = `assets/${parent}/${currentButton}/${currentButton}${
+								image.src = `assets/${parentSection}/${nextButton}/${nextButton}${
 									i + 1
 								}.png`
 								if (isMobile) {
@@ -1582,7 +1587,7 @@ function createContent(obj, parent) {
 									image.style.width = '25em'
 								}
 							} else {
-								image.src = `assets/${parent}/${pageIndex}/${pageIndex}${
+								image.src = `assets/${parentSection}/${pageIndex}/${pageIndex}${
 									i + 1
 								}.png`
 								if (isMobile) {
@@ -1652,17 +1657,17 @@ function createContent(obj, parent) {
 				showCont.innerHTML = ''
 			}, 500)
 
-			console.log('currentButton:' + currentButton)
+			console.log('nextButton:' + nextButton)
 			console.log('pageIndex:' + pageIndex)
-			console.log('parent:' + parent)
+			console.log('parentSection:' + parentSection)
 
 			pageIndex = 'documents'
 
 			// 	// Con esto veo que boton es /////////////////////////////////
 			createSubVideos(
-				`assets/${parent}/${pageIndex}/${pageIndex}1.mp4`,
-				`assets/${parent}/${pageIndex}/${pageIndex}2.mp4`,
-				`assets/${parent}/${pageIndex}/${pageIndex}3.mp4`
+				`assets/${parentSection}/${pageIndex}/${pageIndex}1.mp4`,
+				`assets/${parentSection}/${pageIndex}/${pageIndex}2.mp4`,
+				`assets/${parentSection}/${pageIndex}/${pageIndex}3.mp4`
 			)
 			check1()
 			let videosCheck = false
@@ -1687,9 +1692,12 @@ function createContent(obj, parent) {
 						loader.classList.add('short-vanish')
 						loader.style.zIndex = '-200'
 						clearInterval(clearcheck)
-						// globalParent = parent
+						// globalParent = parentSection
 
-						createContent(buttonContent[parent].boxInfo[pageIndex], parent)
+						createContent(
+							buttonContent[parentSection].boxInfo[pageIndex],
+							parentSection
+						)
 						// textContent.style.height = '100%'
 						video2.classList.remove('show')
 						video2.classList.add('short-vanish')
@@ -1716,7 +1724,6 @@ function createContent(obj, parent) {
 		buttonGridContainer.appendChild(cornerIcons)
 		cornerIcons.appendChild(documents)
 		cornerIcons.appendChild(threesixty)
-		console.log(firstPage)
 	}
 
 	firstPage.appendChild(buttonGridContainer)
@@ -1767,7 +1774,7 @@ function setFontSizes() {
 	}
 }
 function createRotation() {
-	console.log(currentButton)
+	console.log(nextButton)
 	console.log(pageIndex)
 	// if (rotation) {
 	// 	rotation.innerHTML = ''
@@ -1780,10 +1787,7 @@ function createRotation() {
 
 	HideShowCont()
 	$('#product-reel')
-		.reel(
-			'images',
-			`./assets/${currentButton}/threesixty/${currentButton}_#.jpg`
-		)
+		.reel('images', `./assets/${nextButton}/threesixty/${nextButton}_#.jpg`)
 		.bind('loaded', function () {
 			initial.classList.remove('show')
 			initial.classList.add('short-vanish')
@@ -1817,7 +1821,7 @@ function exitRotation() {
 	backButtonRotation.style.pointerEvents = 'none'
 	rotation.classList.remove('show')
 	rotation.classList.add('short-vanish')
-	createContent(buttonContent[currentButton], currentButton)
+	createContent(buttonContent[nextButton], nextButton)
 	animations()
 
 	HideShowCont()
@@ -1919,12 +1923,14 @@ function backButtonFunctionFront() {
 		}, 500)
 
 		showCont.innerHTML = ''
-		console.log('back from back')
 
 		video2.currentTime = 0
+		console.log(globalParent)
 		pageIndex = 'mainMenuFront'
-		console.log(currentButton)
-		createContent(buttonContent[currentButton], currentButton)
+		nextButton = globalParent
+		createContent(buttonContent[globalParent], globalParent)
+
+		console.log(nextButton)
 
 		animations()
 
@@ -1960,7 +1966,7 @@ function createBackButton(param) {
 	if (rotationBackButton) {
 		rotationBackButton.remove()
 	}
-	console.log(pageIndex)
+
 	if (param === 'rotationPage') {
 		const centerContainerMade = document.createElement('div')
 		centerContainerMade.classList.add('centerContainer')
@@ -2020,29 +2026,31 @@ function createBackButton(param) {
 
 		backButtonContainer.appendChild(backButton)
 		backButtonContainer.appendChild(brandIcon)
+
 		if (param === 'rotation') {
 		} else if (
-			pageIndex === 'standardO' ||
-			pageIndex === 'piggybackingP' ||
-			pageIndex === 'emergencyE' ||
-			pageIndex === 'finishO' ||
-			pageIndex === 'tailgatingP' ||
-			pageIndex === 'tailgatingP1' ||
-			pageIndex === 'tailgatingP2' ||
-			pageIndex === 'glassO' ||
-			pageIndex === 'piggybackingP1' ||
-			pageIndex === 'piggybackingP2' ||
-			pageIndex === 'operationW' ||
-			pageIndex === 'beSecure' ||
-			pageIndex === 'stereoV' ||
-			pageIndex === 'documents'
+			nextButton === 'standardO' ||
+			nextButton === 'piggybackingP' ||
+			nextButton === 'emergencyE' ||
+			nextButton === 'finishO' ||
+			nextButton === 'tailgatingP' ||
+			nextButton === 'tailgatingP1' ||
+			nextButton === 'tailgatingP2' ||
+			nextButton === 'glassO' ||
+			nextButton === 'piggybackingP1' ||
+			nextButton === 'piggybackingP2' ||
+			nextButton === 'operationW' ||
+			nextButton === 'beSecure' ||
+			nextButton === 'stereoV' ||
+			nextButton === 'documents'
 		) {
 			console.log('submenu')
+
 			backButton.addEventListener('click', backButtonFunctionFront)
 		} else if (
-			pageIndex === 'easyR' ||
-			pageIndex === 'ex78934S' ||
-			pageIndex === 'kr-bkzdinB'
+			nextButton === 'easyR' ||
+			nextButton === 'ex78934S' ||
+			nextButton === 'kr-bkzdinB'
 		) {
 			backButton.addEventListener('click', backButtonFunctionBack)
 		} else if (pageIndex === 'mainMenuFront') {
@@ -2187,8 +2195,8 @@ mainMenuB.forEach((e, i) => {
 	// console.log(dataVariant)
 	e.addEventListener('click', function (e) {
 		pageIndex = 'mainMenuFront'
-		currentButton = dataId[i]
-		console.log(currentButton)
+		nextButton = dataId[i]
+
 		HideShowMainButtons()
 		if (dataVariant[i]) {
 			createVideos(
@@ -2224,8 +2232,6 @@ mainMenuB.forEach((e, i) => {
 				// backButtonContainer.remove()
 
 				if (pageIndex === 'mainMenuFront') {
-					console.log(globalParent)
-					console.log(buttonContent[globalParent])
 					createContent(buttonContent[dataId[i]], dataId[i])
 				} else {
 					createContent(
