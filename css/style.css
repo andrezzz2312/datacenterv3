@@ -27,6 +27,9 @@
 	animation: morph 1s linear infinite;
 	cursor: pointer;
 }
+.finishContainer {
+	margin-top: 2vw;
+}
 * {
 	font-family: IBMP, sans-serif;
 	/* font-weight: bold; */
@@ -494,9 +497,11 @@ a {
 .cornerIcons {
 	display: flex;
 	flex-direction: column;
-	gap: 1vw;
+	/* align-items: center; */
+	gap: 2vw;
 	align-items: center;
 	margin-right: 2%;
+	padding: 0.7vw;
 }
 
 .threesixty {
@@ -506,7 +511,7 @@ a {
 }
 
 .documents {
-	width: 3vw;
+	width: 4vw;
 	cursor: pointer;
 	animation: morph 1s linear infinite;
 }
@@ -611,13 +616,16 @@ a {
 p {
 	white-space: pre-line;
 	display: flex;
+	justify-content: center;
+
 	/* flex-wrap: wrap; */
 	flex-direction: column;
 	/* gap: 5.2%; */
 	gap: 4.5%;
 	height: 100%;
-	/* margin-top: 4.5%; */
-	margin-top: 3%;
+
+	/* margin-top: 3%; */
+
 	/* margin-bottom: 0.5em; */
 	/* opacity: 0; */
 	/*Cambiar esto tambien si se quiere separar la bullet del texto */

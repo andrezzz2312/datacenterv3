@@ -198,12 +198,9 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold' data-subId = 'finishO'>Finish Options</span>`,
-				content: [
-					`Turnstile available in galvanized steel, powder-coated steel or stainless steel`,
-					3,
-					`Tandem space-saving models available`,
-					`Metal screens can be installed in addition to horizontal bars`,
-				],
+				content: [],
+				paint: 3,
+				delay: [3],
 			},
 			beSecure: {
 				textLeft: '0%',
@@ -310,13 +307,7 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold' data-subId = 'finishO'>Finish Options</span>`,
-				content: [
-					`Turnstile available in anodized or painted aluminum`,
-					2,
-					`Curved metal or plexi-glass wall panels available`,
-					`Tandem space-saving models available`,
-					`Can be incorporated with metal detectors`,
-				],
+				content: [],
 			},
 			documents: {
 				textLeft: '0%',
@@ -370,11 +361,7 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold' data-subId = 'finishO'>Finish Options</span>`,
-				content: [
-					`Turnstile available in brushed stainless steel`,
-					1,
-					`Other finishes available upon request`,
-				],
+				content: [],
 			},
 			documents: {
 				textLeft: '0%',
@@ -490,11 +477,9 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold' data-subId = 'finishO'>Finish Options</span>`,
-				content: [
-					`Turnstile available in brushed stainless steel`,
-					1,
-					`Other finishes available upon request`,
-				],
+				content: [],
+				paint: 3,
+				delay: [2],
 			},
 			glassO: {
 				textLeft: '0%',
@@ -522,14 +507,7 @@ const buttonContent = {
 		textBottom: '0%',
 		title: `<span><span style = 'font-weight:bold'>INTERLOCKING</span> <span>SECURITY PORTAL</span></span>`,
 		subTitle: `Circlelock Solo`,
-		content: [
-			`Prevent unauthorized entry`,
-			`2-way traffic, one direction at a time`,
-			`Low capacity - 60 people in 10 minutes`,
-			`Integrates with any ACS or multi-factor schema`,
-			`Risk Score - 0.8%, Efficiency Score - 99.2%`,
-			1,
-		],
+		content: [],
 		inputButtonGrid: [
 			`Standard\nOperation`,
 			`Piggybacking\n Prevention 1`,
@@ -625,12 +603,9 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
-				content: [
-					`Door panel glass is \u00BC" clear tempered`,
-					`Wall panel glass is \u00BC" curved clear tempered `,
-					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
-					`All glass can be replaced by BR level 1 laminated glass`,
-				],
+				content: [],
+				paint: 3,
+				delay: [2],
 			},
 			glassO: {
 				textLeft: '0%',
@@ -799,12 +774,9 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
-				content: [
-					`Door panel glass is \u00BC" clear tempered`,
-					`Wall panel glass is \u00BC" curved clear tempered `,
-					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
-					`All glass can be replaced by BR level 1 laminated glass`,
-				],
+				content: [],
+				paint: 3,
+				delay: [3],
 			},
 			documents: {
 				textLeft: '0%',
@@ -886,12 +858,9 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
-				content: [
-					`Door panel glass is \u00BC" clear tempered`,
-					`Wall panel glass is \u00BC" curved clear tempered `,
-					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
-					`All glass can be replaced by BR level 1 laminated glass`,
-				],
+				content: [],
+				paint: [2],
+				delay: [1],
 			},
 			glassO: {
 				textLeft: '0%',
@@ -959,9 +928,8 @@ function InterpolateVideo(videoToPause, videoToVanish, videoToPlay) {
 	videoToVanish.classList.add('short-vanish')
 
 	videoToPlay.style.opacity = 1
-	setTimeout(() => {
-		videoToPlay.play()
-	}, 0)
+
+	videoToPlay.play()
 }
 
 // loop.currentTime = 60
@@ -1002,17 +970,17 @@ function animations() {
 			console.log(delay)
 			let inputArray = []
 			let bool = false
-			subVideo2.addEventListener('timeupdate', function () {
-				// console.log(subVideo2.currentTime)
+			subVideo1.addEventListener('timeupdate', function () {
+				console.log(subVideo1.currentTime)
 				//currentTime use second, if you want min *60
 
 				delay.forEach((element, i) => {
-					if (Math.floor(subVideo2.currentTime) === element) {
+					if (Math.floor(subVideo1.currentTime) === element) {
 						if (inputArray.length === 0) {
 							elementContainers[i].style.animation =
 								'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
 
-							inputArray.push(Math.floor(subVideo2.currentTime))
+							inputArray.push(Math.floor(subVideo1.currentTime))
 							console.log(inputArray)
 						} else {
 							if (
@@ -1023,7 +991,7 @@ function animations() {
 							) {
 							} else {
 								if (pageIndex === 'piggybackingP') {
-									if (Math.floor(subVideo2.currentTime) === 36) {
+									if (Math.floor(subVideo1.currentTime) === 36) {
 										const elementContainersId =
 											document.querySelectorAll('#pCont1')
 										console.log(elementContainersId)
@@ -1042,15 +1010,15 @@ function animations() {
 										elementContainers[i].style.animation =
 											'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
 
-										inputArray.push(Math.floor(subVideo2.currentTime))
+										inputArray.push(Math.floor(subVideo1.currentTime))
 									} else {
 										elementContainers[i].style.animation =
 											'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
 
-										inputArray.push(Math.floor(subVideo2.currentTime))
+										inputArray.push(Math.floor(subVideo1.currentTime))
 									}
 								} else if (pageIndex === 'tailgatingP1') {
-									if (Math.floor(subVideo2.currentTime) === 35) {
+									if (Math.floor(subVideo1.currentTime) === 35) {
 										const elementContainersId =
 											document.querySelectorAll('#pCont1')
 										console.log(elementContainersId)
@@ -1069,15 +1037,15 @@ function animations() {
 										elementContainers[i].style.animation =
 											'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
 
-										inputArray.push(Math.floor(subVideo2.currentTime))
+										inputArray.push(Math.floor(subVideo1.currentTime))
 									} else {
 										elementContainers[i].style.animation =
 											'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
 
-										inputArray.push(Math.floor(subVideo2.currentTime))
+										inputArray.push(Math.floor(subVideo1.currentTime))
 									}
 								} else if (pageIndex === 'tailgatingP2') {
-									if (Math.floor(subVideo2.currentTime) === 30) {
+									if (Math.floor(subVideo1.currentTime) === 30) {
 										const elementContainersId =
 											document.querySelectorAll('#pCont1')
 										console.log(elementContainersId)
@@ -1096,17 +1064,17 @@ function animations() {
 										elementContainers[i].style.animation =
 											'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
 
-										inputArray.push(Math.floor(subVideo2.currentTime))
+										inputArray.push(Math.floor(subVideo1.currentTime))
 									} else {
 										elementContainers[i].style.animation =
 											'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
 
-										inputArray.push(Math.floor(subVideo2.currentTime))
+										inputArray.push(Math.floor(subVideo1.currentTime))
 									}
 								} else {
 									elementContainers[i].style.animation =
 										'fadein 0.5s ease-in-out forwards'
-									inputArray.push(Math.floor(subVideo2.currentTime))
+									inputArray.push(Math.floor(subVideo1.currentTime))
 								}
 
 								console.log(inputArray)
@@ -1286,6 +1254,7 @@ function createContent(obj, parent) {
 	inputButtonGrid = obj.inputButtonGrid
 	inputButtonId = obj.inputButtonId
 	delayInput = obj.delay
+	paint = obj.paint
 
 	const centerContainerMade = document.createElement('div')
 	centerContainerMade.classList.add('centerContainer')
@@ -1391,8 +1360,7 @@ function createContent(obj, parent) {
 							loader.classList.add('short-vanish')
 							loader.style.zIndex = '-200'
 							clearInterval(clearcheck)
-							// console.log('creando contenido')
-							// console.log(parent)
+
 							globalParent = parent
 
 							createContent(
@@ -1400,20 +1368,19 @@ function createContent(obj, parent) {
 
 								parent
 							)
-							textContent.style.height = '100%'
+							// textContent.style.height = '100%'
 							video2.classList.remove('show')
 							video2.classList.add('short-vanish')
 
 							subVideo1.style.opacity = 1
-							setTimeout(() => {
-								subVideo1.play()
-								HideShowCont()
-								animations()
-								subVideo1.addEventListener('ended', () => {
-									console.log('subVideo1 ending')
-									InterpolateVideo(video3, subVideo1, subVideo2)
-								})
-							}, 0)
+
+							subVideo1.play()
+							HideShowCont()
+							animations()
+							subVideo1.addEventListener('ended', () => {
+								console.log('subVideo1 ending')
+								InterpolateVideo(video3, subVideo1, subVideo2)
+							})
 						}
 					}
 				}
@@ -1453,9 +1420,9 @@ function createContent(obj, parent) {
 			if (delayInput) {
 				delay = delayInput
 			}
-			console.log(currentButton)
-			console.log(pageIndex)
-			console.log(parent)
+			console.log('currentButton:' + currentButton)
+			console.log('pageIndex:' + pageIndex)
+			console.log('parent:' + parent)
 			if (pageIndex === 'documents') {
 				elementContainer = document.createElement('span')
 				elementContainer.classList.add(
@@ -1489,7 +1456,7 @@ function createContent(obj, parent) {
 
 					let image = document.createElement('img')
 					image.classList.add('finishImg')
-					image.src = `assets/${parent}/${pageIndex}/${pageIndex}${i + 1}.png`
+					image.src = `assets/icons/documents${i + 1}.png`
 					if (isMobile) {
 						image.style.width = '6em'
 					} else {
@@ -1498,9 +1465,53 @@ function createContent(obj, parent) {
 					infoContainer.appendChild(title)
 					infoContainer.appendChild(image)
 					elementContainer.appendChild(infoContainer)
-					console.log(pCont)
-					console.log(paragraph)
-					console.log(elementContainer)
+					// console.log(pCont)
+					// console.log(paragraph)
+					// console.log(elementContainer)
+					pCont.appendChild(paragraph)
+					paragraph.appendChild(elementContainer)
+				}
+
+				paragraph.appendChild(elementContainer)
+			} else if (pageIndex === 'finishO') {
+				console.log('finishOText')
+				elementContainer = document.createElement('span')
+				elementContainer.classList.add(
+					'elementContainer',
+					'imageContainer',
+					'finishContainer'
+				)
+
+				for (let i = 0; i < paint; i++) {
+					let infoContainer = document.createElement('div')
+					infoContainer.classList.add('infoContainer')
+
+					let image = document.createElement('img')
+					image.classList.add('finishImg')
+					image.src = `assets/${parent}/${pageIndex}/${pageIndex}${i + 1}.png`
+					if (isMobile) {
+						image.style.width = '6em'
+					} else {
+						image.style.width = '6em'
+					}
+					image.addEventListener('click', (e, index) => {
+						console.log(e)
+
+						console.log(i)
+
+						subVideo2.src = `assets/${parent}/${pageIndex}/paint/${pageIndex}${
+							i + 1
+						}.mp4`
+						subVideo3.src = `assets/${parent}/${pageIndex}/paint/${pageIndex}${
+							i + 1
+						}.mp4`
+					})
+					// infoContainer.appendChild(title)
+					infoContainer.appendChild(image)
+					elementContainer.appendChild(infoContainer)
+					// console.log(pCont)
+					// console.log(paragraph)
+					// console.log(elementContainer)
 					pCont.appendChild(paragraph)
 					paragraph.appendChild(elementContainer)
 				}
@@ -1624,7 +1635,7 @@ function createContent(obj, parent) {
 			}
 		}
 		// pCont.appendChild(titleH2)
-		if (pageIndex === 'documents') {
+		if (pageIndex === 'documents' || pageIndex === 'finishO') {
 			pCont.appendChild(paragraph)
 			textContent.appendChild(pCont)
 		}
@@ -1651,7 +1662,6 @@ function createContent(obj, parent) {
 		documents.src = 'assets/icons/document.png'
 
 		documents.addEventListener('click', function () {
-			console.log('checkere')
 			HideShowCont()
 			buttonGrid.children.forEach((element) => {
 				element.style.pointerEvents = 'none'
@@ -1662,10 +1672,13 @@ function createContent(obj, parent) {
 			setTimeout(() => {
 				showCont.innerHTML = ''
 			}, 500)
-			console.log(currentButton)
-			console.log(pageIndex)
+
+			console.log('currentButton:' + currentButton)
+			console.log('pageIndex:' + pageIndex)
+			console.log('parent:' + parent)
+
 			pageIndex = 'documents'
-			console.log(parent)
+
 			// 	// Con esto veo que boton es /////////////////////////////////
 			createSubVideos(
 				`assets/${parent}/${pageIndex}/${pageIndex}1.mp4`,
@@ -1698,7 +1711,8 @@ function createContent(obj, parent) {
 						globalParent = parent
 
 						createContent(buttonContent[parent].boxInfo[pageIndex], parent)
-						textContent.style.height = '100%'
+						// textContent.style.height = '100%'
+						video2.classList.remove('show')
 						video2.classList.add('short-vanish')
 						subVideo1.style.opacity = 1
 						setTimeout(() => {
@@ -2227,18 +2241,22 @@ mainMenuB.forEach((e, i) => {
 					'#centerContainer_backButton'
 				)
 				textContainer.remove()
-
+				console.log('test resize')
 				// backButtonContainer.remove()
 				console.log(pageIndex)
+
 				if (pageIndex === 'mainMenuFront') {
+					console.log('main TEST')
 					console.log(globalParent)
 					console.log(buttonContent[globalParent])
 					createContent(buttonContent[dataId[i]], dataId[i])
 				} else {
+					console.log('else TEST')
 					createContent(
 						buttonContent[globalParent].boxInfo[pageIndex],
 						dataId[i]
 					)
+					elementContainer.style.opacity = '1'
 				}
 
 				animations()
