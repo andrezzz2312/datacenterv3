@@ -42,9 +42,9 @@ let videoloop,
 	pCont,
 	pCont2,
 	list,
-	globalParent,
 	pageIndex,
-	nextButton
+	nextButton,
+	specificVideo
 
 let currentButton = 'mainMenuFront'
 let boxVideo = []
@@ -61,6 +61,7 @@ const loopContainer = document.querySelector('#loop')
 const video1Container = document.querySelector('#video1')
 const video2Container = document.querySelector('#video2')
 const video3Container = document.querySelector('#video3')
+const specificVideoContainer = document.querySelector('#specificVideo')
 const subVideo1Container = document.querySelector('#subVideo1')
 const subVideo2Container = document.querySelector('#subVideo2')
 const subVideo3Container = document.querySelector('#subVideo3')
@@ -111,19 +112,6 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
 }
 
 // var buttonsText = []
-
-// mainMenuB.forEach((e, i) => {
-// const splitText = e.textContent.trim().split('\n')
-// const splitText = e.textContent
-// 	.replace(/[\n\r]+|[\s]{2,}/g, ' ')
-// 	.trim()
-// 	.split(' ')
-// splitText[1]
-// 	? (buttonsText[i] =
-// 			splitText[0].toLowerCase() + splitText[1].substring(0, 2))
-// 	: (buttonsText[i] = splitText[0].toLowerCase())
-// console.log(buttonsText[i])
-// })
 
 const buttonContent = {
 	turnlock10: {
@@ -207,7 +195,7 @@ const buttonContent = {
 					`Walk Away\nDetection`,
 					`Piggybacking`,
 				],
-				inputButtonId: [`authorizedE`, `walkA`, `piggyB`],
+				inputButtonId: [`authorizedE`, `walkA`, `piggyBBS`],
 			},
 			documents: {
 				textLeft: '0%',
@@ -448,12 +436,14 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
-				content: [
-					`Door panel glass is \u00BC" clear tempered`,
-					`Wall panel glass is \u00BC" curved clear tempered `,
-					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
-					`All glass can be replaced by BR level 1 laminated glass`,
+				content: [],
+				inputButtonGrid: [
+					`One Person`,
+					`Low Object`,
+					`Multiple Persons`,
+					`Sensor Blinding`,
 				],
+				inputButtonId: [`oneP`, `lowO`, `multipleP`, `sensorB`],
 			},
 			emergencyE: {
 				textLeft: '0%',
@@ -573,12 +563,14 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
-				content: [
-					`Door panel glass is \u00BC" clear tempered`,
-					`Wall panel glass is \u00BC" curved clear tempered `,
-					`All glass can be enhanced with vandal resistant or bullet resistant glass film`,
-					`All glass can be replaced by BR level 1 laminated glass`,
+				content: [],
+				inputButtonGrid: [
+					`One Person`,
+					`Low Object`,
+					`Multiple Persons`,
+					`Sensor Blinding`,
 				],
+				inputButtonId: [`oneP`, `lowO`, `multipleP`, `sensorB`],
 			},
 			emergencyE: {
 				textLeft: '0%',
@@ -1228,23 +1220,30 @@ function createSubVideos(source1, source2, source3) {
 
 // Create the content storaged in showCont div / Left and Top position of the container div, label title and content of the paragraph
 
-function createContent(obj, parentSection) {
+function createContent(obj) {
+	console.log('nextButton:' + nextButton)
+	console.log('currentButton:' + currentButton)
+	console.log('pageIndex:' + pageIndex)
 	console.trace()
 
 	delay = ''
-	textLeft = obj.textLeft
-	textTop = obj.textTop
-	textRight = obj.textRight
-	textBottom = obj.textBottom
-	labelTitle = obj.title
-	pContent = obj.content
-	pContent2 = obj.content2
-	subTitle = obj.subTitle
-	inputButtonGrid = obj.inputButtonGrid
-	inputButtonId = obj.inputButtonId
-	delayInput = obj.delay
-	paint = obj.paint
-	globalParent = parentSection
+	if (obj) {
+		console.log('SI HAY OBJ')
+
+		textLeft = obj.textLeft
+		textTop = obj.textTop
+		textRight = obj.textRight
+		textBottom = obj.textBottom
+		labelTitle = obj.title
+		pContent = obj.content
+		pContent2 = obj.content2
+		subTitle = obj.subTitle
+		inputButtonGrid = obj.inputButtonGrid
+		inputButtonId = obj.inputButtonId
+		delayInput = obj.delay
+		paint = obj.paint
+		console.log(inputButtonGrid)
+	}
 
 	const centerContainerMade = document.createElement('div')
 	centerContainerMade.classList.add('centerContainer')
@@ -1289,82 +1288,153 @@ function createContent(obj, parentSection) {
 			buttonDimensions = subButton
 
 			// subbutton function
-			subButton.addEventListener('click', function () {
-				HideShowCont()
-				buttonGrid.children.forEach((element) => {
-					element.style.pointerEvents = 'none'
-				})
-				cornerIcons.children.forEach((element) => {
-					element.style.pointerEvents = 'none'
-				})
-				setTimeout(() => {
-					showCont.innerHTML = ''
-				}, 500)
-
-				pageIndex = buttonShort[i]
-				currentButton = buttonShort[i]
-				nextButton = buttonShort[i]
-				// 	// Con esto veo que boton es /////////////////////////////////
-
+			// console.log('nextButton:' + nextButton)
+			// console.log('currentButton:' + currentButton)
+			// console.log('pageIndex:' + pageIndex)
+			if (nextButton === 'beSecure' || nextButton === 'stereoV') {
 				console.log('nextButton:' + nextButton)
-				console.log('parentSection:' + parentSection)
-				console.log('pageindex:' + pageIndex)
-				if (parentSection === 'stereoV') {
-					console.log('specific button checkequerias.com')
-				}
-				createSubVideos(
-					`assets/${parentSection}/${nextButton}/${nextButton}1.mp4`,
-					`assets/${parentSection}/${nextButton}/${nextButton}2.mp4`,
-					`assets/${parentSection}/${nextButton}/${nextButton}3.mp4`
-				)
-				check1()
-				let videosCheck = false
-				function check1() {
-					clearcheck = setInterval(repeatcheck, 600)
-					function repeatcheck() {
-						if (
-							subVideo1.readyState === 4 &&
-							subVideo2.readyState === 4 &&
-							subVideo3.readyState === 4
-						) {
-							videosCheck = true
-						}
-						setTimeout(() => {
-							if (!videosCheck) {
-								loader.style.zIndex = '200'
-								loader.classList.add('show')
+				console.log('currentButton:' + currentButton)
+				console.log('pageIndex:' + pageIndex)
+				console.log('SUB BUTTON CLICK BESECURE')
+				subButton.addEventListener('click', function () {
+					HideShowCont()
+					buttonGrid.children.forEach((element) => {
+						element.style.pointerEvents = 'none'
+					})
+					cornerIcons.children.forEach((element) => {
+						element.style.pointerEvents = 'none'
+					})
+					backButton.style.pointerEvents = 'none'
+					setTimeout(() => {
+						showCont.innerHTML = ''
+					}, 500)
+					pageIndex = currentButton
+					currentButton = nextButton
+					nextButton = buttonShort[i]
+					console.log('nextButton:' + nextButton)
+					console.log('currentButton:' + currentButton)
+					console.log('pageIndex:' + pageIndex)
+					specificVideo = document.createElement('video')
+					specificVideo.src = `assets/${pageIndex}/${currentButton}/${currentButton}/${nextButton}1.mp4`
+					specificVideo.muted = true
+					specificVideo.setAttribute('playsinline', 'playsinline')
+					specificVideo.controls = false
+					specificVideo.autoplay = true
+					specificVideo.classList.add('video')
+					specificVideo.style.opacity = 0
+					specificVideo.pause()
+
+					specificVideoContainer.appendChild(specificVideo)
+					check1()
+					function check1() {
+						clearcheck = setInterval(repeatcheck, 600)
+						function repeatcheck() {
+							if (specificVideo.readyState === 4) {
+								videosCheck = true
 							}
-						}, 3000)
-						if (videosCheck) {
-							loader.classList.remove('show')
-							loader.classList.add('short-vanish')
-							loader.style.zIndex = '-200'
-							clearInterval(clearcheck)
+							setTimeout(() => {
+								if (!videosCheck) {
+									loader.style.zIndex = '200'
+									loader.classList.add('show')
+								}
+							}, 3000)
+							if (videosCheck) {
+								loader.classList.remove('show')
+								loader.classList.add('short-vanish')
+								loader.style.zIndex = '-200'
+								clearInterval(clearcheck)
 
-							// globalParent = parentSection
+								inputButtonGrid = ''
+								createContent()
 
-							createContent(
-								buttonContent[parentSection].boxInfo[nextButton],
-								parentSection
-							)
+								specificVideo.classList.add('show')
 
-							// textContent.style.height = '100%'
-							video2.classList.remove('show')
-							video2.classList.add('short-vanish')
-
-							subVideo1.style.opacity = 1
-
-							subVideo1.play()
-							HideShowCont()
-							animations()
-							subVideo1.addEventListener('ended', () => {
-								console.log('subVideo1 ending')
-								InterpolateVideo(video3, subVideo1, subVideo2)
-							})
+								specificVideo.play()
+								animations()
+								HideShowCont()
+							}
 						}
 					}
-				}
-			})
+				})
+			} else {
+				console.log('nextButton:' + nextButton)
+				console.log('currentButton:' + currentButton)
+				console.log('pageIndex:' + pageIndex)
+				console.log('SUB BUTTON CLICK NORMAL')
+				subButton.addEventListener('click', function () {
+					HideShowCont()
+					buttonGrid.children.forEach((element) => {
+						element.style.pointerEvents = 'none'
+					})
+					cornerIcons.children.forEach((element) => {
+						element.style.pointerEvents = 'none'
+					})
+					backButton.style.pointerEvents = 'none'
+
+					setTimeout(() => {
+						showCont.innerHTML = ''
+					}, 500)
+
+					pageIndex = currentButton
+					currentButton = nextButton
+					nextButton = buttonShort[i]
+					console.log('nextButton:' + nextButton)
+					console.log('currentButton:' + currentButton)
+					console.log('pageIndex:' + pageIndex)
+					// 	// Con esto veo que boton es /////////////////////////////////
+
+					createSubVideos(
+						`assets/${currentButton}/${nextButton}/${nextButton}1.mp4`,
+						`assets/${currentButton}/${nextButton}/${nextButton}2.mp4`,
+						`assets/${currentButton}/${nextButton}/${nextButton}3.mp4`
+					)
+					check1()
+					let videosCheck = false
+					function check1() {
+						clearcheck = setInterval(repeatcheck, 600)
+						function repeatcheck() {
+							if (
+								subVideo1.readyState === 4 &&
+								subVideo2.readyState === 4 &&
+								subVideo3.readyState === 4
+							) {
+								videosCheck = true
+							}
+							setTimeout(() => {
+								if (!videosCheck) {
+									loader.style.zIndex = '200'
+									loader.classList.add('show')
+								}
+							}, 3000)
+							if (videosCheck) {
+								loader.classList.remove('show')
+								loader.classList.add('short-vanish')
+								loader.style.zIndex = '-200'
+								clearInterval(clearcheck)
+
+								createContent(
+									buttonContent[currentButton].boxInfo[nextButton],
+									currentButton
+								)
+
+								// textContent.style.height = '100%'
+								video2.classList.remove('show')
+								video2.classList.add('short-vanish')
+
+								subVideo1.style.opacity = 1
+
+								subVideo1.play()
+								HideShowCont()
+								animations()
+								subVideo1.addEventListener('ended', () => {
+									console.log('subVideo1 ending')
+									InterpolateVideo(video3, subVideo1, subVideo2)
+								})
+							}
+						}
+					}
+				})
+			}
 		})
 	}
 
@@ -1400,12 +1470,8 @@ function createContent(obj, parentSection) {
 			if (delayInput) {
 				delay = delayInput
 			}
-			console.log('pageIndex:' + pageIndex)
-			console.log('currentButton:' + currentButton)
-			console.log('nextButton:' + nextButton)
 
-			console.log('parentSection:' + parentSection)
-			if (pageIndex === 'documents') {
+			if (nextButton === 'documents') {
 				elementContainer = document.createElement('span')
 				elementContainer.classList.add(
 					'elementContainer',
@@ -1455,7 +1521,7 @@ function createContent(obj, parentSection) {
 				}
 
 				paragraph.appendChild(elementContainer)
-			} else if (pageIndex === 'finishO') {
+			} else if (nextButton === 'finishO') {
 				console.log('finishOText')
 				elementContainer = document.createElement('span')
 				elementContainer.classList.add(
@@ -1470,7 +1536,7 @@ function createContent(obj, parentSection) {
 
 					let image = document.createElement('img')
 					image.classList.add('finishImg')
-					image.src = `assets/${parentSection}/${pageIndex}/${pageIndex}${
+					image.src = `assets/${currentButton}/${nextButton}/${nextButton}${
 						i + 1
 					}.png`
 					if (isMobile) {
@@ -1483,10 +1549,10 @@ function createContent(obj, parentSection) {
 
 						console.log(i)
 
-						subVideo2.src = `assets/${parentSection}/${pageIndex}/paint/${pageIndex}${
+						subVideo2.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${
 							i + 1
 						}.mp4`
-						subVideo3.src = `assets/${parentSection}/${pageIndex}/paint/${pageIndex}${
+						subVideo3.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${
 							i + 1
 						}.mp4`
 					})
@@ -1516,7 +1582,7 @@ function createContent(obj, parentSection) {
 								nextButton === 'circlelockSo2'
 							) {
 								image.classList.add('tableImg')
-								image.src = `assets/${parentSection}/${nextButton}/${nextButton}${
+								image.src = `assets/${currentButton}/${nextButton}/${nextButton}${
 									i + 1
 								}.png`
 								if (isMobile) {
@@ -1526,7 +1592,7 @@ function createContent(obj, parentSection) {
 								}
 							} else {
 								image.classList.add('finishImg')
-								image.src = `assets/${parentSection}/${pageIndex}/${pageIndex}${
+								image.src = `assets/${currentButton}/${pageIndex}/${pageIndex}${
 									i + 1
 								}.png`
 								if (isMobile) {
@@ -1578,7 +1644,7 @@ function createContent(obj, parentSection) {
 								nextButton === 'circlelockSo' ||
 								nextButton === 'circlelockSo2'
 							) {
-								image.src = `assets/${parentSection}/${nextButton}/${nextButton}${
+								image.src = `assets/${currentButton}/${nextButton}/${nextButton}${
 									i + 1
 								}.png`
 								if (isMobile) {
@@ -1587,7 +1653,7 @@ function createContent(obj, parentSection) {
 									image.style.width = '25em'
 								}
 							} else {
-								image.src = `assets/${parentSection}/${pageIndex}/${pageIndex}${
+								image.src = `assets/${currentButton}/${pageIndex}/${pageIndex}${
 									i + 1
 								}.png`
 								if (isMobile) {
@@ -1619,25 +1685,36 @@ function createContent(obj, parentSection) {
 			}
 		}
 		// pCont.appendChild(titleH2)
-		if (pageIndex === 'documents' || pageIndex === 'finishO') {
+		if (nextButton === 'documents' || nextButton === 'finishO') {
 			pCont.appendChild(paragraph)
 			textContent.appendChild(pCont)
 		}
 	}
 
 	firstPage.appendChild(textContent)
-	if (pageIndex === 'beSecure') {
+	if (nextButton === 'beSecure' || nextButton === 'stereoV') {
 		let gridTitle = document.createElement('h3')
 		gridTitle.classList.add('gridTitle')
 
-		gridTitle.textContent = 'BE Secure escenarios'
+		if (nextButton === 'beSecure') {
+			gridTitle.textContent = 'BE Secure escenarios'
+		} else if (nextButton === 'stereoV') {
+			gridTitle.textContent = 'StereoVision escenarios'
+		}
+
 		buttonGridContainer.style.flexDirection = 'column'
 		buttonGridContainer.style.alignItems = 'start'
 		buttonGridContainer.appendChild(gridTitle)
 	}
 	buttonGridContainer.appendChild(buttonGrid)
 
-	if (pageIndex === 'mainMenuFront') {
+	if (
+		nextButton === 'turnlock10' ||
+		nextButton === 'tourlock18' ||
+		nextButton === 'lifelineSw' ||
+		nextButton === 'circlelockSo' ||
+		nextButton === 'circlelockCombi'
+	) {
 		cornerIcons = document.createElement('div')
 		cornerIcons.classList.add('cornerIcons')
 
@@ -1657,17 +1734,14 @@ function createContent(obj, parentSection) {
 				showCont.innerHTML = ''
 			}, 500)
 
-			console.log('nextButton:' + nextButton)
-			console.log('pageIndex:' + pageIndex)
-			console.log('parentSection:' + parentSection)
-
-			pageIndex = 'documents'
+			currentButton = nextButton
+			nextButton = 'documents'
 
 			// 	// Con esto veo que boton es /////////////////////////////////
 			createSubVideos(
-				`assets/${parentSection}/${pageIndex}/${pageIndex}1.mp4`,
-				`assets/${parentSection}/${pageIndex}/${pageIndex}2.mp4`,
-				`assets/${parentSection}/${pageIndex}/${pageIndex}3.mp4`
+				`assets/${currentButton}/${nextButton}/${nextButton}1.mp4`,
+				`assets/${currentButton}/${nextButton}/${nextButton}2.mp4`,
+				`assets/${currentButton}/${nextButton}/${nextButton}3.mp4`
 			)
 			check1()
 			let videosCheck = false
@@ -1692,11 +1766,10 @@ function createContent(obj, parentSection) {
 						loader.classList.add('short-vanish')
 						loader.style.zIndex = '-200'
 						clearInterval(clearcheck)
-						// globalParent = parentSection
 
 						createContent(
-							buttonContent[parentSection].boxInfo[pageIndex],
-							parentSection
+							buttonContent[currentButton].boxInfo[nextButton],
+							currentButton
 						)
 						// textContent.style.height = '100%'
 						video2.classList.remove('show')
@@ -1916,6 +1989,7 @@ function backButtonFunctionFront() {
 	InterpolateVideo(subVideo2, subVideo2, subVideo3)
 	HideShowCont()
 	subVideo3.addEventListener('ended', () => {
+		console.log('video3 ended')
 		subVideo3.classList.add('short-vanish')
 		setTimeout(() => {
 			video2.classList.remove('short-vanish')
@@ -1925,10 +1999,11 @@ function backButtonFunctionFront() {
 		showCont.innerHTML = ''
 
 		video2.currentTime = 0
-		console.log(globalParent)
+
 		pageIndex = 'mainMenuFront'
-		nextButton = globalParent
-		createContent(buttonContent[globalParent], globalParent)
+
+		nextButton = currentButton
+		createContent(buttonContent[currentButton], currentButton)
 
 		console.log(nextButton)
 
@@ -1942,7 +2017,41 @@ function backButtonFunctionFront() {
 		}, 500)
 	})
 }
+function backButtonFunctionSpecific() {
+	ArreglarLineas()
 
+	console.log('backbuttonfunctionSpecific')
+	backButton.style.pointerEvents = 'none'
+
+	// InterpolateVideo(subVideo2, subVideo2, subVideo3)
+	specificVideo.classList.remove('show')
+	specificVideo.classList.add('short-vanish')
+	HideShowCont()
+
+	// setTimeout(() => {
+	// 	video2.classList.remove('short-vanish')
+	// 	video2.classList.add('show')
+	// }, 500)
+
+	showCont.innerHTML = ''
+
+	// subVideo2.currentTime = 0
+
+	console.log(buttonContent[currentButton])
+	nextButton = currentButton
+	createContent(buttonContent[pageIndex].boxInfo[currentButton])
+	currentButton = pageIndex
+	pageIndex = 'mainMenuFront'
+	console.log('nextButton:' + nextButton)
+	console.log('currentButton:' + currentButton)
+	console.log('pageIndex:' + pageIndex)
+	animations()
+
+	HideShowCont()
+	setTimeout(() => {
+		specificVideo.remove()
+	}, 500)
+}
 function backButtonFunctionBack() {
 	ArreglarLineas()
 	backButton.style.pointerEvents = 'none'
@@ -2047,6 +2156,8 @@ function createBackButton(param) {
 			console.log('submenu')
 
 			backButton.addEventListener('click', backButtonFunctionFront)
+		} else if (currentButton === 'stereoV' || currentButton === 'beSecure') {
+			backButton.addEventListener('click', backButtonFunctionSpecific)
 		} else if (
 			nextButton === 'easyR' ||
 			nextButton === 'ex78934S' ||
@@ -2191,6 +2302,7 @@ fullscreen_button.addEventListener('click', function (e) {
 mainMenuB.forEach((e, i) => {
 	dataId[i] = e.dataset.id
 	dataVariant[i] = e.dataset.variant
+
 	// console.log(dataId[i])
 	// console.log(dataVariant)
 	e.addEventListener('click', function (e) {
@@ -2223,21 +2335,25 @@ mainMenuB.forEach((e, i) => {
 		window.addEventListener('resize', function (e) {
 			if (showCont.hasChildNodes()) {
 				const textContainer = document.querySelector('#centerContainer_text')
-
-				const backButtonContainer = document.querySelector(
-					'#centerContainer_backButton'
-				)
 				textContainer.remove()
-
 				// backButtonContainer.remove()
 
 				if (pageIndex === 'mainMenuFront') {
 					createContent(buttonContent[dataId[i]], dataId[i])
 				} else {
-					createContent(
-						buttonContent[globalParent].boxInfo[pageIndex],
-						dataId[i]
-					)
+					if (
+						nextButton === 'authorizedE' ||
+						nextButton === 'walkA' ||
+						nextButton === 'piggyBBS' ||
+						nextButton === 'oneP' ||
+						nextButton === 'lowO' ||
+						nextButton === 'multipleP' ||
+						nextButton === 'sensorB'
+					) {
+						createContent()
+					} else {
+						createContent(buttonContent[currentButton].boxInfo[nextButton])
+					}
 					elementContainer.style.opacity = '1'
 				}
 
