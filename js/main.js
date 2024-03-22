@@ -1496,27 +1496,38 @@ function createContent(obj) {
 					image.addEventListener('click', () => {
 						//documentShowCase
 						const documentShowCase = document.querySelector('.documentShowCase')
-						const centerContainerMade = document.createElement('div')
-						centerContainerMade.classList.add('centerContainer')
-						centerContainerMade.setAttribute('id', 'centerContainer_text')
-						const textContainerMade = document.createElement('div')
-						textContainerMade.classList.add('textContainer')
-						textContainerMade.style.width = containVideoWidth + 'px'
-						textContainerMade.style.height = containVideoHeight + 'px'
-						const imageModalContainer = document.createElement('div')
-						imageModalContainer.classList.add('imageModalContainer')
-						const imageModal = document.createElement('div')
-						imageModal.classList.add('imageModal')
-						imageModal.textContent = 'asd'
+						// const centerContainerMade = document.createElement('div')
+						// centerContainerMade.classList.add('centerContainer')
+						// centerContainerMade.setAttribute('id', 'centerContainer_text')
+						const textContainerImageModal = document.querySelector(
+							'.textContainerImageModal'
+						)
+						// textContainerMade.classList.add('textContainer')
+						textContainerImageModal.style.width = containVideoWidth + 'px'
+						textContainerImageModal.style.height = containVideoHeight + 'px'
+						// const imageModalContainer = document.createElement('div')
+						// imageModalContainer.classList.add('imageModalContainer')
+						// const imageModal = document.createElement('div')
+						// imageModal.classList.add('imageModal')
+						// imageModal.textContent = 'asd'
 						// const textContent = document.createElement('div')
 						// textContent.classList.add('text')
 
 						// imageModalContainer.appendChild(textContent)
 						// imageModalContainer.appendChild(buttonGridContainer)
-						imageModalContainer.appendChild(imageModal)
-						documentShowCase.appendChild(centerContainerMade)
-						centerContainerMade.appendChild(textContainerMade)
-						textContainerMade.appendChild(imageModalContainer)
+						// imageModalContainer.appendChild(imageModal)
+						// documentShowCase.appendChild(centerContainerMade)
+						// centerContainerMade.appendChild(textContainerMade)
+						// textContainerMade.appendChild(imageModalContainer)
+
+						// const imageModalLeft = document.createElement('div')
+						// imageModalLeft.classList.add('imageModalLeft')
+						// const imageModalRight = document.createElement('div')
+						// imageModalRight.classList.add('imageModalRight')
+						// const imageModalCenter = document.createElement('div')
+						// imageModalCenter.classList.add('imageModalCenter')
+
+						// imageModal.appendChild()
 						// buttonGridContainer = document.createElement('div')
 						// buttonGridContainer.classList.add('buttonGridContainer')
 						// buttonGrid = document.createElement('div')
@@ -2351,7 +2362,9 @@ mainMenuB.forEach((e, i) => {
 		window.addEventListener('resize', function (e) {
 			if (showCont.hasChildNodes()) {
 				const textContainer = document.querySelector('#centerContainer_text')
+
 				textContainer.remove()
+
 				// backButtonContainer.remove()
 
 				if (pageIndex === 'mainMenuFront') {

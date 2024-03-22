@@ -534,6 +534,10 @@ a {
 	position: relative;
 	overflow: hidden;
 }
+.textContainerImageModal {
+	position: relative;
+	overflow: hidden;
+}
 
 .labelCont {
 	white-space: pre-wrap;
