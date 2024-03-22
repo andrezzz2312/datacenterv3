@@ -910,10 +910,10 @@ function InterpolateVideo(videoToPause, videoToVanish, videoToPlay) {
 
 	videoToVanish.classList.add('short-vanish')
 	videoToVanish.classList.remove('show')
-
 	videoToPlay.style.opacity = 1
-
-	videoToPlay.play()
+	setTimeout(() => {
+		videoToPlay.play()
+	}, 500)
 }
 
 // loop.currentTime = 60
