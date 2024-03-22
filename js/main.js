@@ -17,6 +17,7 @@ let videoloop,
 	subVideoBackLoop,
 	buttonDimensions,
 	firstPage,
+	SecondPage,
 	rotationPage,
 	textContent,
 	label,
@@ -119,13 +120,7 @@ const buttonContent = {
 		textBottom: '0%',
 		title: `<span><span style = 'font-weight:bold'>FULL HEIGHT</span>  <span>TURNSTILE</span></span>`,
 		subTitle: `Turnlock 100`,
-		content: [
-			`Deter unauthorized entry `,
-			`Prevent unauthorized entry with optional\nBE Secure Overhead Sensor System`,
-			`2-way traffic, one direction at a time`,
-			`High capacity - 200 people in 10 minutes (in one direction)`,
-			`Integrates with any ACS or multi-factor schema`,
-		],
+		content: [],
 		inputButtonGrid: [
 			`Standard\nOperation`,
 			`Piggybacking\nPrevention`,
@@ -330,7 +325,6 @@ const buttonContent = {
 					`User pushes arm to pass through`,
 					`Trilock relocks and waits for next user`,
 				],
-				delay: [1, 7, 12, 20, 25, 31],
 			},
 			emergencyE: {
 				textLeft: '0%',
@@ -946,7 +940,7 @@ function animations() {
 		const elementContainers = document.querySelectorAll('.elementContainer')
 
 		let counter = 0.3
-		console.log(delay)
+		// console.log(delay)
 
 		if (delay) {
 			console.log(delay)
@@ -1081,10 +1075,7 @@ function animations() {
 				}
 			})
 		} else {
-			console.log(elementContainers)
 			elementContainers.forEach((element, i) => {
-				console.log(element)
-
 				element.style.animation =
 					'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
 				element.style.animationDelay = `${counter}s`
@@ -1221,15 +1212,13 @@ function createSubVideos(source1, source2, source3) {
 // Create the content storaged in showCont div / Left and Top position of the container div, label title and content of the paragraph
 
 function createContent(obj) {
-	console.log('nextButton:' + nextButton)
-	console.log('currentButton:' + currentButton)
-	console.log('pageIndex:' + pageIndex)
+	// console.log('nextButton:' + nextButton)
+	// console.log('currentButton:' + currentButton)
+	// console.log('pageIndex:' + pageIndex)
 	console.trace()
 
 	delay = ''
 	if (obj) {
-		console.log('SI HAY OBJ')
-
 		textLeft = obj.textLeft
 		textTop = obj.textTop
 		textRight = obj.textRight
@@ -1242,7 +1231,6 @@ function createContent(obj) {
 		inputButtonId = obj.inputButtonId
 		delayInput = obj.delay
 		paint = obj.paint
-		console.log(inputButtonGrid)
 	}
 
 	const centerContainerMade = document.createElement('div')
@@ -1292,10 +1280,10 @@ function createContent(obj) {
 			// console.log('currentButton:' + currentButton)
 			// console.log('pageIndex:' + pageIndex)
 			if (nextButton === 'beSecure' || nextButton === 'stereoV') {
-				console.log('nextButton:' + nextButton)
-				console.log('currentButton:' + currentButton)
-				console.log('pageIndex:' + pageIndex)
-				console.log('SUB BUTTON CLICK BESECURE')
+				// console.log('nextButton:' + nextButton)
+				// console.log('currentButton:' + currentButton)
+				// console.log('pageIndex:' + pageIndex)
+
 				subButton.addEventListener('click', function () {
 					HideShowCont()
 					buttonGrid.children.forEach((element) => {
@@ -1357,10 +1345,10 @@ function createContent(obj) {
 					}
 				})
 			} else {
-				console.log('nextButton:' + nextButton)
-				console.log('currentButton:' + currentButton)
-				console.log('pageIndex:' + pageIndex)
-				console.log('SUB BUTTON CLICK NORMAL')
+				// console.log('nextButton:' + nextButton)
+				// console.log('currentButton:' + currentButton)
+				// console.log('pageIndex:' + pageIndex)
+
 				subButton.addEventListener('click', function () {
 					HideShowCont()
 					buttonGrid.children.forEach((element) => {
@@ -1473,6 +1461,7 @@ function createContent(obj) {
 
 			if (nextButton === 'documents') {
 				elementContainer = document.createElement('span')
+				firstPage.style.justifyContent = 'flex-start'
 				elementContainer.classList.add(
 					'elementContainer',
 					'imageContainer',
@@ -1504,6 +1493,36 @@ function createContent(obj) {
 
 					let image = document.createElement('img')
 					image.classList.add('finishImg')
+					image.addEventListener('click', () => {
+						//documentShowCase
+						const documentShowCase = document.querySelector('.documentShowCase')
+						const centerContainerMade = document.createElement('div')
+						centerContainerMade.classList.add('centerContainer')
+						centerContainerMade.setAttribute('id', 'centerContainer_text')
+						const textContainerMade = document.createElement('div')
+						textContainerMade.classList.add('textContainer')
+						textContainerMade.style.width = containVideoWidth + 'px'
+						textContainerMade.style.height = containVideoHeight + 'px'
+						const imageModalContainer = document.createElement('div')
+						imageModalContainer.classList.add('imageModalContainer')
+						const imageModal = document.createElement('div')
+						imageModal.classList.add('imageModal')
+						imageModal.textContent = 'asd'
+						// const textContent = document.createElement('div')
+						// textContent.classList.add('text')
+
+						// imageModalContainer.appendChild(textContent)
+						// imageModalContainer.appendChild(buttonGridContainer)
+						imageModalContainer.appendChild(imageModal)
+						documentShowCase.appendChild(centerContainerMade)
+						centerContainerMade.appendChild(textContainerMade)
+						textContainerMade.appendChild(imageModalContainer)
+						// buttonGridContainer = document.createElement('div')
+						// buttonGridContainer.classList.add('buttonGridContainer')
+						// buttonGrid = document.createElement('div')
+						// buttonGrid.classList.add('buttonGrid')
+						console.log(i)
+					})
 					image.src = `assets/icons/documents${i + 1}.png`
 					if (isMobile) {
 						image.style.width = '6em'
@@ -1513,9 +1532,7 @@ function createContent(obj) {
 					infoContainer.appendChild(title)
 					infoContainer.appendChild(image)
 					elementContainer.appendChild(infoContainer)
-					// console.log(pCont)
-					// console.log(paragraph)
-					// console.log(elementContainer)
+
 					pCont.appendChild(paragraph)
 					paragraph.appendChild(elementContainer)
 				}
@@ -1544,11 +1561,7 @@ function createContent(obj) {
 					} else {
 						image.style.width = '6em'
 					}
-					image.addEventListener('click', (e, index) => {
-						console.log(e)
-
-						console.log(i)
-
+					image.addEventListener('click', () => {
 						subVideo2.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${
 							i + 1
 						}.mp4`
@@ -1703,7 +1716,7 @@ function createContent(obj) {
 		}
 
 		buttonGridContainer.style.flexDirection = 'column'
-		buttonGridContainer.style.alignItems = 'start'
+		buttonGridContainer.style.alignItems = 'flex-start'
 		buttonGridContainer.appendChild(gridTitle)
 	}
 	buttonGridContainer.appendChild(buttonGrid)
@@ -1737,6 +1750,9 @@ function createContent(obj) {
 			currentButton = nextButton
 			nextButton = 'documents'
 
+			console.log('nextButton:' + nextButton)
+			console.log('currentButton:' + currentButton)
+			console.log('pageIndex:' + pageIndex)
 			// 	// Con esto veo que boton es /////////////////////////////////
 			createSubVideos(
 				`assets/${currentButton}/${nextButton}/${nextButton}1.mp4`,
@@ -2339,7 +2355,7 @@ mainMenuB.forEach((e, i) => {
 				// backButtonContainer.remove()
 
 				if (pageIndex === 'mainMenuFront') {
-					createContent(buttonContent[dataId[i]], dataId[i])
+					createContent(buttonContent[nextButton], nextButton)
 				} else {
 					if (
 						nextButton === 'authorizedE' ||
@@ -2352,6 +2368,8 @@ mainMenuB.forEach((e, i) => {
 					) {
 						createContent()
 					} else {
+						console.log(currentButton)
+						console.log(nextButton)
 						createContent(buttonContent[currentButton].boxInfo[nextButton])
 					}
 					elementContainer.style.opacity = '1'
@@ -2394,20 +2412,15 @@ mainMenuB.forEach((e, i) => {
 					setTimeout(() => {
 						video1.play()
 						video1.addEventListener('ended', () => {
-							console.log('video1 ended')
 							animations()
-
 							InterpolateVideo(loop, video1, video2)
 							if (
 								dataId[i] === 'whyF' ||
 								dataId[i] === 'in-houseT' ||
 								dataId[i] === 'useC'
 							) {
-								console.log(video2, video3)
 								video2.loop = false
 								video2.addEventListener('ended', () => {
-									console.log('se ha hecho ')
-
 									backButtonFunction()
 								})
 							}
