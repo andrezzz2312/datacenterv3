@@ -1,3 +1,10 @@
+const imageFileNames = [
+	'turnlock101.png',
+	'turnlock102.png',
+	'turnlock103.png',
+	// Add more image file names here
+]
+
 // Variables
 let videoloop,
 	video1,
@@ -924,12 +931,13 @@ function InterpolateVideo(videoToPause, videoToVanish, videoToPlay) {
 		videoToPause.pause()
 	}
 
-	videoToVanish.classList.add('short-vanish')
-	videoToVanish.classList.remove('show')
+	// videoToVanish.classList.add('short-vanish')
+	// videoToVanish.classList.remove('show')
+	videoToVanish.style.opacity = 0
 	videoToPlay.style.opacity = 1
-	setTimeout(() => {
-		videoToPlay.play()
-	}, 500)
+	// setTimeout(() => {
+	videoToPlay.play()
+	// }, 500)
 }
 
 // loop.currentTime = 60
@@ -1514,42 +1522,20 @@ function createContent(obj) {
 					image.addEventListener('click', () => {
 						//documentShowCase
 						const documentShowCase = document.querySelector('.documentShowCase')
-						// const centerContainerMade = document.createElement('div')
-						// centerContainerMade.classList.add('centerContainer')
-						// centerContainerMade.setAttribute('id', 'centerContainer_text')
+
 						const textContainerImageModal = document.querySelector(
 							'.textContainerImageModal'
 						)
 						// textContainerMade.classList.add('textContainer')
 						textContainerImageModal.style.width = containVideoWidth + 'px'
 						textContainerImageModal.style.height = containVideoHeight + 'px'
-						// const imageModalContainer = document.createElement('div')
-						// imageModalContainer.classList.add('imageModalContainer')
-						// const imageModal = document.createElement('div')
-						// imageModal.classList.add('imageModal')
-						// imageModal.textContent = 'asd'
-						// const textContent = document.createElement('div')
-						// textContent.classList.add('text')
-
-						// imageModalContainer.appendChild(textContent)
-						// imageModalContainer.appendChild(buttonGridContainer)
-						// imageModalContainer.appendChild(imageModal)
-						// documentShowCase.appendChild(centerContainerMade)
-						// centerContainerMade.appendChild(textContainerMade)
-						// textContainerMade.appendChild(imageModalContainer)
-
-						// const imageModalLeft = document.createElement('div')
-						// imageModalLeft.classList.add('imageModalLeft')
-						// const imageModalRight = document.createElement('div')
-						// imageModalRight.classList.add('imageModalRight')
-						// const imageModalCenter = document.createElement('div')
-						// imageModalCenter.classList.add('imageModalCenter')
-
-						// imageModal.appendChild()
-						// buttonGridContainer = document.createElement('div')
-						// buttonGridContainer.classList.add('buttonGridContainer')
-						// buttonGrid = document.createElement('div')
-						// buttonGrid.classList.add('buttonGrid')
+						const imageShowedContainer = document.querySelector(
+							'.imageShowedContainer'
+						)
+						const imageTest = document.createElement('img')
+						imageTest.classList.add('imageShowed')
+						imageTest.src = `../assets/turnlock10/documents/imagesVideos/${imageFileNames[0]}`
+						imageShowedContainer.appendChild(imageTest)
 						console.log(i)
 					})
 					image.src = `assets/icons/documents${i + 1}.png`

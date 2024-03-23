@@ -625,7 +625,18 @@ a {
 	/* background-color: rgb(48, 48, 48); */
 	background-color: rgb(11, 181, 233);
 }
-
+.imageShowedContainer {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.imageShowed {
+	padding: 3vw;
+	width: 100%;
+	object-fit: contain;
+	border-radius: 5vw;
+}
 .imageRightContainer {
 	background-color: rgb(48, 48, 48);
 }
