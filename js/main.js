@@ -45,7 +45,23 @@ let videoloop,
 	list,
 	pageIndex,
 	nextButton,
-	specificVideo
+	specificVideo,
+	globalTitleFontvar,
+	globalMediumTitleFontvar,
+	globalBigTitleFontvar,
+	textLeft,
+	textTop,
+	textRight,
+	textBottom,
+	labelTitle,
+	pContent,
+	pContent2,
+	subTitle,
+	inputButtonId,
+	delayInput,
+	paint,
+	clearcheck,
+	elementContainer
 
 let currentButton = 'mainMenuFront'
 let boxVideo = []
@@ -953,8 +969,10 @@ function animations() {
 				delay.forEach((element, i) => {
 					if (Math.floor(subVideo1.currentTime) === element) {
 						if (inputArray.length === 0) {
-							elementContainers[i].style.animation =
-								'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
+							if (elementContainers) {
+								elementContainers[i].style.animation =
+									'fadein 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards'
+							}
 
 							inputArray.push(Math.floor(subVideo1.currentTime))
 							console.log(inputArray)
@@ -1634,11 +1652,11 @@ function createContent(obj) {
 						elementContainer.classList.add('elementContainer')
 						elementContainer.setAttribute('id', 'pCont1')
 
-						icon = document.createElement('img')
+						let icon = document.createElement('img')
 						icon.src = 'assets/icons/bp.png'
 						icon.style.width = '1.3em'
 
-						element = document.createElement('span')
+						let element = document.createElement('span')
 						element.textContent = e
 						element.style.fontSize = globalFontvar
 						elementContainer.appendChild(icon)
@@ -1691,14 +1709,14 @@ function createContent(obj) {
 							paragraph.appendChild(elementContainer)
 						}
 					} else {
-						elementContainer = document.createElement('span')
+						let elementContainer = document.createElement('span')
 						elementContainer.classList.add('elementContainer')
 						elementContainer.setAttribute('id', 'pCont2')
-						icon = document.createElement('img')
+						let icon = document.createElement('img')
 						icon.src = 'assets/icons/bp.png'
 						icon.style.width = '1.3em'
 
-						element = document.createElement('span')
+						let element = document.createElement('span')
 						element.textContent = e
 						element.style.fontSize = globalFontvar
 						elementContainer.appendChild(icon)
