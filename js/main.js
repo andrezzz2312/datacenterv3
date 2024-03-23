@@ -926,14 +926,17 @@ if (!isMobile) {
 // }
 
 // Set which videos are going to swap
-function InterpolateVideo(videoToPause, videoToVanish, videoToPlay) {
+function InterpolateVideo(videoToPause, videoToVanish, videoToPlay, props) {
 	if (videoToPause) {
 		videoToPause.pause()
 	}
+	if (props === 'back') {
+		videoToVanish.classList.add('short-vanish')
+		videoToVanish.classList.remove('show')
+	} else {
+		videoToVanish.style.opacity = 0
+	}
 
-	// videoToVanish.classList.add('short-vanish')
-	// videoToVanish.classList.remove('show')
-	videoToVanish.style.opacity = 0
 	videoToPlay.style.opacity = 1
 	// setTimeout(() => {
 	videoToPlay.play()
@@ -1939,7 +1942,7 @@ function backButtonFunction() {
 	buttonGrid.style.pointerEvents = 'none'
 	backButton.style.pointerEvents = 'none'
 
-	InterpolateVideo(video2, video2, video3)
+	InterpolateVideo(video2, video2, video3, 'back')
 	HideShowCont()
 	loop.style.zIndex = '-5'
 	loop.currentTime = 0
@@ -2017,7 +2020,7 @@ function backButtonFunctionFront() {
 	console.log('backbuttonfunctionfront')
 	backButton.style.pointerEvents = 'none'
 
-	InterpolateVideo(subVideo2, subVideo2, subVideo3)
+	InterpolateVideo(subVideo2, subVideo2, subVideo3, 'back')
 	HideShowCont()
 	subVideo3.addEventListener('ended', () => {
 		console.log('video3 ended')
@@ -2087,7 +2090,7 @@ function backButtonFunctionBack() {
 	ArreglarLineas()
 	backButton.style.pointerEvents = 'none'
 
-	InterpolateVideo(subVideo2, subVideo2, subVideo3)
+	InterpolateVideo(subVideo2, subVideo2, subVideo3, 'back')
 	HideShowCont()
 	subVideo3.addEventListener('ended', () => {
 		subVideo3.classList.add('short-vanish')
