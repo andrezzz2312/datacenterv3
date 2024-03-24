@@ -2,12 +2,60 @@ const imageFileNames = [
 	'turnlock101.png',
 	'turnlock102.png',
 	'turnlock103.png',
+	'turnlock104.mp4',
 	// Add more image file names here
 ]
 
+const documentRoutes = {
+	turnlock10: {
+		imageVideos: [
+			'turnlock101.png',
+			'turnlock102.png',
+			'turnlock103.png',
+			'turnlock104.mp4',
+		],
+		pdfs: '',
+	},
+	tourlock18: {
+		imageVideos: [
+			'turnlock101.png',
+			'turnlock102.png',
+			'turnlock103.png',
+			'turnlock104.mp4',
+		],
+		pdfs: '',
+	},
+	lifelineSw: {
+		imageVideos: [
+			'turnlock101.png',
+			'turnlock102.png',
+			'turnlock103.png',
+			'turnlock104.mp4',
+		],
+		pdfs: '',
+	},
+	circlelockSo: {
+		imageVideos: [
+			'turnlock101.png',
+			'turnlock102.png',
+			'turnlock103.png',
+			'turnlock104.mp4',
+		],
+		pdfs: '',
+	},
+	circlelockCombi: {
+		imageVideos: [
+			'turnlock101.png',
+			'turnlock102.png',
+			'turnlock103.png',
+			'turnlock104.mp4',
+		],
+		pdfs: '',
+	},
+}
+
 // Variables
-let videoloop,
-	video1,
+let video1,
 	video2,
 	video3,
 	subVideo1,
@@ -1240,6 +1288,29 @@ function createSubVideos(source1, source2, source3) {
 
 // Create the content storaged in showCont div / Left and Top position of the container div, label title and content of the paragraph
 
+function setMediaElementSource(index, route) {
+	const selectedRoute = documentRoutes[route]
+	const fileName = selectedRoute.imageVideos[index]
+	const extension = fileName.split('.').pop()
+	const filePath = `../assets/${route}/documents/imagesVideos/${fileName}`
+
+	if (extension === 'mp4') {
+		const videoElement = document.createElement('video')
+		videoElement.classList.add('videoShowed')
+		videoElement.src = filePath
+		videoElement.poster = ''
+		videoElement.controls = true
+		return videoElement
+	} else {
+		const imageElement = document.createElement('img')
+		imageElement.classList.add('imageShowed')
+		imageElement.src = filePath
+		imageElement.poster = ''
+		imageElement.controls = false
+		return imageElement
+	}
+}
+
 function createContent(obj) {
 	// console.log('nextButton:' + nextButton)
 	// console.log('currentButton:' + currentButton)
@@ -1488,6 +1559,89 @@ function createContent(obj) {
 				delay = delayInput
 			}
 
+			function toggleEventListener(element, event, handler, add) {
+				if (add) {
+					element.addEventListener(event, handler)
+				} else {
+					element.removeEventListener(event, handler)
+				}
+			}
+			let imageIndex = 0
+			function createInfoContainer(title, icon) {
+				const infoContainer = document.createElement('div')
+				infoContainer.classList.add('infoContainer')
+
+				const titleElement = document.createElement('h3')
+				titleElement.classList.add('infoContainerTitle')
+				titleElement.textContent = title
+
+				const img = document.createElement('img')
+				img.classList.add('finishImg')
+				img.src = `assets/icons/${icon}`
+
+				img.addEventListener('click', () => {
+					const textContainerImageModal = document.querySelector(
+						'.textContainerImageModal'
+					)
+					textContainerImageModal.style.width = containVideoWidth + 'px'
+					textContainerImageModal.style.height = containVideoHeight + 'px'
+
+					const imageShowedHolder = document.querySelector('.imageShowedHolder')
+
+					let mediaElement = null
+
+					const leftArrow = document.querySelector('.leftArrow')
+					const rightArrow = document.querySelector('.rightArrow')
+					const imageX = document.querySelector('.imageX')
+
+					toggleEventListener(leftArrow, 'click', leftArrow.clickHandler, false)
+					toggleEventListener(
+						rightArrow,
+						'click',
+						rightArrow.clickHandler,
+						false
+					)
+					toggleEventListener(imageX, 'click', imageX.clickHandler, false)
+
+					leftArrow.clickHandler = () => {
+						imageIndex =
+							(imageIndex - 1 + imageFileNames.length) % imageFileNames.length
+						mediaElement = setMediaElementSource(imageIndex, currentButton)
+						imageShowedHolder.innerHTML = ''
+						imageShowedHolder.appendChild(mediaElement)
+					}
+					toggleEventListener(leftArrow, 'click', leftArrow.clickHandler, true)
+					rightArrow.clickHandler = () => {
+						imageIndex = (imageIndex + 1) % imageFileNames.length
+						mediaElement = setMediaElementSource(imageIndex, currentButton)
+						imageShowedHolder.innerHTML = ''
+						imageShowedHolder.appendChild(mediaElement)
+					}
+					toggleEventListener(
+						rightArrow,
+						'click',
+						rightArrow.clickHandler,
+						true
+					)
+
+					imageX.clickHandler = () => {
+						textContainerImageModal.style.width = '0px'
+						textContainerImageModal.style.height = '0px'
+					}
+					toggleEventListener(imageX, 'click', imageX.clickHandler, true)
+
+					mediaElement = setMediaElementSource(imageIndex, currentButton)
+					if (!imageShowedHolder.hasChildNodes()) {
+						imageShowedHolder.appendChild(mediaElement)
+					}
+				})
+
+				infoContainer.appendChild(titleElement)
+				infoContainer.appendChild(img)
+
+				return infoContainer
+			}
+
 			if (nextButton === 'documents') {
 				elementContainer = document.createElement('span')
 				firstPage.style.justifyContent = 'flex-start'
@@ -1497,63 +1651,17 @@ function createContent(obj) {
 					'documentsContainer'
 				)
 
-				for (let i = 0; i < 4; i++) {
-					let infoContainer = document.createElement('div')
-					infoContainer.classList.add('infoContainer')
-					let title = document.createElement('h3')
-					title.classList.add('infoContainerTitle')
-					switch (i) {
-						case 0:
-							title.textContent = 'Photo/Video'
-							break
-						case 1:
-							title.textContent = 'Specifications'
-							break
-						case 2:
-							title.textContent = 'Drawings'
-							break
-						case 3:
-							title.textContent = 'Miscellaneous'
-							break
+				const documentTypes = [
+					{ title: 'Photo/Video', icon: 'documents1.png' },
+					{ title: 'Specifications', icon: 'documents2.png' },
+					{ title: 'Drawings', icon: 'documents3.png' },
+					{ title: 'Miscellaneous', icon: 'documents4.png' },
+				]
 
-						default:
-							break
-					}
-
-					let image = document.createElement('img')
-					image.classList.add('finishImg')
-					image.addEventListener('click', () => {
-						//documentShowCase
-						const documentShowCase = document.querySelector('.documentShowCase')
-
-						const textContainerImageModal = document.querySelector(
-							'.textContainerImageModal'
-						)
-						// textContainerMade.classList.add('textContainer')
-						textContainerImageModal.style.width = containVideoWidth + 'px'
-						textContainerImageModal.style.height = containVideoHeight + 'px'
-						const imageShowedContainer = document.querySelector(
-							'.imageShowedContainer'
-						)
-						const imageTest = document.createElement('img')
-						imageTest.classList.add('imageShowed')
-						imageTest.src = `../assets/turnlock10/documents/imagesVideos/${imageFileNames[0]}`
-						imageShowedContainer.appendChild(imageTest)
-						console.log(i)
-					})
-					image.src = `assets/icons/documents${i + 1}.png`
-					if (isMobile) {
-						image.style.width = '6em'
-					} else {
-						image.style.width = '6em'
-					}
-					infoContainer.appendChild(title)
-					infoContainer.appendChild(image)
+				documentTypes.forEach(({ title, icon }) => {
+					const infoContainer = createInfoContainer(title, icon)
 					elementContainer.appendChild(infoContainer)
-
-					pCont.appendChild(paragraph)
-					paragraph.appendChild(elementContainer)
-				}
+				})
 
 				paragraph.appendChild(elementContainer)
 			} else if (nextButton === 'finishO') {
