@@ -1,58 +1,84 @@
-const imageFileNames = [
-	'turnlock101.png',
-	'turnlock102.png',
-	'turnlock103.png',
-	'turnlock104.mp4',
-	// Add more image file names here
-]
-
+//variableStart
 const documentRoutes = {
 	turnlock10: {
-		imageVideos: [
+		imagesVideos: [
+			'turnlock101 - Copy (2).png',
+			'turnlock101 - Copy.png',
 			'turnlock101.png',
-			'turnlock102.png',
-			'turnlock103.png',
-			'turnlock104.mp4',
 		],
-		pdfs: '',
+		drawings: [],
+		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
+		miscellaneous: ['turnlock101.png'],
 	},
 	tourlock18: {
-		imageVideos: [
+		imagesVideos: [
 			'turnlock101.png',
 			'turnlock102.png',
 			'turnlock103.png',
 			'turnlock104.mp4',
+			'turnlock104.png',
+			'turnlock105.png',
 		],
-		pdfs: '',
+		drawings: [
+			'TURNLOCK-100EC CUTSHEET.pdf',
+			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
+			'TURNLOCK-100ECP CUTSHEET.pdf',
+			'TURNLOCK-100ES CUTSHEET.pdf',
+			'TURNLOCK-100TC CUTSHEET.pdf',
+			'TURNLOCK-100TCP CUTSHEET.pdf',
+			'TURNLOCK-100TS -CUTSHEET.pdf',
+		],
+		specifications: [
+			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
+			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
+			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
+			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
+		],
+		miscellaneous: ['turnlock101.png'],
 	},
 	lifelineSw: {
-		imageVideos: [
+		imagesVideos: [
 			'turnlock101.png',
 			'turnlock102.png',
 			'turnlock103.png',
 			'turnlock104.mp4',
+			'turnlock104.png',
+			'turnlock105.png',
 		],
-		pdfs: '',
+		drawings: [
+			'TURNLOCK-100EC CUTSHEET.pdf',
+			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
+			'TURNLOCK-100ECP CUTSHEET.pdf',
+			'TURNLOCK-100ES CUTSHEET.pdf',
+			'TURNLOCK-100TC CUTSHEET.pdf',
+			'TURNLOCK-100TCP CUTSHEET.pdf',
+			'TURNLOCK-100TS -CUTSHEET.pdf',
+		],
+		specifications: [],
+		miscellaneous: ['turnlock101.png'],
 	},
 	circlelockSo: {
-		imageVideos: [
+		imagesVideos: [
 			'turnlock101.png',
 			'turnlock102.png',
 			'turnlock103.png',
 			'turnlock104.mp4',
 		],
-		pdfs: '',
+		drawings: [
+			'TURNLOCK-100EC CUTSHEET.pdf',
+			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
+		],
+		specifications: [],
+		miscellaneous: ['turnlock101.png'],
 	},
 	circlelockCombi: {
-		imageVideos: [
-			'turnlock101.png',
-			'turnlock102.png',
-			'turnlock103.png',
-			'turnlock104.mp4',
-		],
-		pdfs: '',
+		imagesVideos: ['turnlock101.png'],
+		drawings: [],
+		specifications: [],
+		miscellaneous: ['turnlock101.png'],
 	},
 }
+//variableEnd
 
 // Variables
 let video1,
@@ -159,6 +185,9 @@ const modalalert = document.querySelector('.modalalert')
 const quality = document.querySelector('#quality_button')
 const mainMenuB = document.querySelectorAll('.mainMenuB')
 const titulo = document.querySelectorAll('.titulo')
+const subVideoFinish1 = document.querySelector('#subVideoFinish1')
+const subVideoFinish2 = document.querySelector('#subVideoFinish2')
+const subVideoFinish3 = document.querySelector('#subVideoFinish3')
 
 let isMobile = false
 window.mobileCheck = function () {
@@ -978,17 +1007,16 @@ function InterpolateVideo(videoToPause, videoToVanish, videoToPlay, props) {
 	if (videoToPause) {
 		videoToPause.pause()
 	}
+
 	if (props === 'back') {
+		console.log('backarandas')
 		videoToVanish.classList.add('short-vanish')
 		videoToVanish.classList.remove('show')
 	} else {
 		videoToVanish.style.opacity = 0
 	}
-
 	videoToPlay.style.opacity = 1
-	// setTimeout(() => {
 	videoToPlay.play()
-	// }, 500)
 }
 
 // loop.currentTime = 60
@@ -1236,7 +1264,7 @@ function createSubVideos(source1, source2, source3) {
 		subVideo1.setAttribute('playsinline', 'playsinline')
 		subVideo1.controls = false
 		subVideo1.autoplay = true
-		subVideo1.classList.add('video')
+		subVideo1.classList.add('subVideo')
 		subVideo1.style.opacity = 0
 		subVideo1.pause()
 		// loopContainer.appendChild(subVideo1)
@@ -1246,21 +1274,10 @@ function createSubVideos(source1, source2, source3) {
 	if (source2) {
 		subVideo2 = document.createElement('video')
 		subVideo2.src = source2
-		if (
-			nextButton === 'turnlock10' ||
-			nextButton === 'turnlock15' ||
-			nextButton === 'tourlock18' ||
-			nextButton === 'tourlock182' ||
-			nextButton === 'circlelockSo' ||
-			nextButton === 'circlelockSo2' ||
-			nextButton === 'lifelineSw' ||
-			nextButton === 'trilock60'
-		) {
-			if (pageIndex === 'emergencyE') {
-				subVideo2.loop = true
-			}
+		if (nextButton === 'emergencyE') {
+			subVideo2.loop = true
 		}
-
+		// subVideo2.loop = true
 		subVideo2.muted = true
 		subVideo2.setAttribute('playsinline', 'playsinline')
 		subVideo2.controls = false
@@ -1360,12 +1377,9 @@ function createContent(obj) {
 		if (inputButtonGrid.length === 5) {
 			buttonGrid.style.gridTemplateColumns = 'repeat(5, 1fr)'
 		}
-
 		inputButtonGrid.forEach((e, i) => {
 			buttonShort[i] = inputButtonId[i]
-
 			const subButton = document.createElement('button')
-
 			subButton.classList.add('pageButton')
 			subButton.style.width = `calc(40px + (145 - 40) * ((${
 				containVideoWidth + 'px'
@@ -1375,15 +1389,7 @@ function createContent(obj) {
 			buttonGrid.appendChild(subButton)
 			buttonDimensions = subButton
 
-			// subbutton function
-			// console.log('nextButton:' + nextButton)
-			// console.log('currentButton:' + currentButton)
-			// console.log('pageIndex:' + pageIndex)
 			if (nextButton === 'beSecure' || nextButton === 'stereoV') {
-				// console.log('nextButton:' + nextButton)
-				// console.log('currentButton:' + currentButton)
-				// console.log('pageIndex:' + pageIndex)
-
 				subButton.addEventListener('click', function () {
 					HideShowCont()
 					buttonGrid.children.forEach((element) => {
@@ -1411,8 +1417,9 @@ function createContent(obj) {
 					specificVideo.classList.add('video')
 					specificVideo.style.opacity = 0
 					specificVideo.pause()
-
 					specificVideoContainer.appendChild(specificVideo)
+
+					let videosCheck = false
 					check1()
 					function check1() {
 						clearcheck = setInterval(repeatcheck, 600)
@@ -1445,10 +1452,6 @@ function createContent(obj) {
 					}
 				})
 			} else {
-				// console.log('nextButton:' + nextButton)
-				// console.log('currentButton:' + currentButton)
-				// console.log('pageIndex:' + pageIndex)
-
 				subButton.addEventListener('click', function () {
 					HideShowCont()
 					buttonGrid.children.forEach((element) => {
@@ -1476,10 +1479,11 @@ function createContent(obj) {
 						`assets/${currentButton}/${nextButton}/${nextButton}2.mp4`,
 						`assets/${currentButton}/${nextButton}/${nextButton}3.mp4`
 					)
-					check1()
 					let videosCheck = false
+					check1()
 					function check1() {
 						clearcheck = setInterval(repeatcheck, 600)
+
 						function repeatcheck() {
 							if (
 								subVideo1.readyState === 4 &&
@@ -1487,6 +1491,16 @@ function createContent(obj) {
 								subVideo3.readyState === 4
 							) {
 								videosCheck = true
+							} else {
+								if (subVideo1.readyState !== 4) {
+									subVideo1.load()
+								}
+								if (subVideo2.readyState !== 4) {
+									subVideo2.load()
+								}
+								if (subVideo3.readyState !== 4) {
+									subVideo3.load()
+								}
 							}
 							setTimeout(() => {
 								if (!videosCheck) {
@@ -1665,13 +1679,16 @@ function createContent(obj) {
 
 				paragraph.appendChild(elementContainer)
 			} else if (nextButton === 'finishO') {
-				console.log('finishOText')
 				elementContainer = document.createElement('span')
 				elementContainer.classList.add(
 					'elementContainer',
 					'imageContainer',
 					'finishContainer'
 				)
+
+				subVideoFinish1.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${1}.mp4`
+				subVideoFinish2.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${2}.mp4`
+				subVideoFinish3.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${3}.mp4`
 
 				for (let i = 0; i < paint; i++) {
 					let infoContainer = document.createElement('div')
@@ -1688,6 +1705,25 @@ function createContent(obj) {
 						image.style.width = '6em'
 					}
 					image.addEventListener('click', () => {
+						console.log('clickaste perroide')
+						if (i + 1 === 1) {
+							subVideoFinish1.style.opacity = 1
+							subVideoFinish2.style.opacity = 0
+							subVideoFinish3.style.opacity = 0
+							subVideo2.style.opacity = 0
+						}
+						if (i + 1 === 2) {
+							subVideoFinish1.style.opacity = 0
+							subVideoFinish2.style.opacity = 1
+							subVideoFinish3.style.opacity = 0
+							subVideo2.style.opacity = 0
+						}
+						if (i + 1 === 3) {
+							subVideoFinish1.style.opacity = 0
+							subVideoFinish2.style.opacity = 0
+							subVideoFinish3.style.opacity = 1
+							subVideo2.style.opacity = 0
+						}
 						subVideo2.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${
 							i + 1
 						}.mp4`
@@ -1695,7 +1731,9 @@ function createContent(obj) {
 							i + 1
 						}.mp4`
 					})
-					// infoContainer.appendChild(title)
+
+					console.log(subVideoFinish2)
+
 					infoContainer.appendChild(image)
 					elementContainer.appendChild(infoContainer)
 					// console.log(pCont)
@@ -1842,6 +1880,7 @@ function createContent(obj) {
 		}
 
 		buttonGridContainer.style.flexDirection = 'column'
+		buttonGridContainer.style.justifyContent = 'flex-end'
 		buttonGridContainer.style.alignItems = 'flex-start'
 		buttonGridContainer.appendChild(gridTitle)
 	}
@@ -1885,8 +1924,8 @@ function createContent(obj) {
 				`assets/${currentButton}/${nextButton}/${nextButton}2.mp4`,
 				`assets/${currentButton}/${nextButton}/${nextButton}3.mp4`
 			)
-			check1()
 			let videosCheck = false
+			check1()
 			function check1() {
 				clearcheck = setInterval(repeatcheck, 600)
 				function repeatcheck() {
@@ -2127,27 +2166,33 @@ function backButtonFunctionFront() {
 
 	console.log('backbuttonfunctionfront')
 	backButton.style.pointerEvents = 'none'
+	if (nextButton === 'finishO') {
+		subVideoFinish1.style.opacity = 0
+		subVideoFinish2.style.opacity = 0
+		subVideoFinish3.style.opacity = 0
+		subVideo2.style.opacity = 1
+	}
 
 	InterpolateVideo(subVideo2, subVideo2, subVideo3, 'back')
 	HideShowCont()
 	subVideo3.addEventListener('ended', () => {
 		console.log('video3 ended')
 		subVideo3.classList.add('short-vanish')
-		setTimeout(() => {
-			video2.classList.remove('short-vanish')
-			video2.classList.add('show')
-		}, 500)
+
+		video2.classList.remove('short-vanish')
+		video2.classList.add('show')
 
 		showCont.innerHTML = ''
-
 		video2.currentTime = 0
+		video2.pause()
+		setTimeout(() => {
+			video2.play()
+		}, 500)
 
 		pageIndex = 'mainMenuFront'
 
 		nextButton = currentButton
 		createContent(buttonContent[currentButton], currentButton)
-
-		console.log(nextButton)
 
 		animations()
 
@@ -2295,8 +2340,6 @@ function createBackButton(param) {
 			nextButton === 'stereoV' ||
 			nextButton === 'documents'
 		) {
-			console.log('submenu')
-
 			backButton.addEventListener('click', backButtonFunctionFront)
 		} else if (currentButton === 'stereoV' || currentButton === 'beSecure') {
 			backButton.addEventListener('click', backButtonFunctionSpecific)
@@ -2445,8 +2488,6 @@ mainMenuB.forEach((e, i) => {
 	dataId[i] = e.dataset.id
 	dataVariant[i] = e.dataset.variant
 
-	// console.log(dataId[i])
-	// console.log(dataVariant)
 	e.addEventListener('click', function (e) {
 		pageIndex = 'mainMenuFront'
 		nextButton = dataId[i]
@@ -2454,25 +2495,23 @@ mainMenuB.forEach((e, i) => {
 		HideShowMainButtons()
 		if (dataVariant[i]) {
 			createVideos(
-				`assets/${dataId[i]}${dataVariant[i]}/${dataId[i]}1.mp4`,
-				`assets/${dataId[i]}${dataVariant[i]}/${dataId[i]}2.mp4`,
-				`assets/${dataId[i]}${dataVariant[i]}/${dataId[i]}3.mp4`
+				`assets/${nextButton}${dataVariant[i]}/${nextButton}1.mp4`,
+				`assets/${nextButton}${dataVariant[i]}/${nextButton}2.mp4`,
+				`assets/${nextButton}${dataVariant[i]}/${nextButton}3.mp4`
 			)
 		} else {
 			createVideos(
-				`assets/${dataId[i]}/${dataId[i]}1.mp4`,
-				`assets/${dataId[i]}/${dataId[i]}2.mp4`,
-				`assets/${dataId[i]}/${dataId[i]}3.mp4`
+				`assets/${nextButton}/${nextButton}1.mp4`,
+				`assets/${nextButton}/${nextButton}2.mp4`,
+				`assets/${nextButton}/${nextButton}3.mp4`
 			)
 		}
 
 		if (showCont.innerHTML !== '') {
-			setTimeout(() => {
-				showCont.innerHTML = ''
-			}, 0)
+			showCont.innerHTML = ''
 		}
 
-		createContent(buttonContent[dataId[i]], dataId[i])
+		createContent(buttonContent[nextButton], nextButton)
 
 		window.addEventListener('resize', function (e) {
 			if (showCont.hasChildNodes()) {
@@ -2510,23 +2549,23 @@ mainMenuB.forEach((e, i) => {
 				}
 			}
 		})
+		let videosCheck = false
 		check1()
-		let videoscheck = false
 		function check1() {
 			clearcheck = setInterval(repeatcheck, 600)
 			function repeatcheck() {
 				if (video1.readyState === 4) {
-					videoscheck = true
+					videosCheck = true
 				}
 
 				setTimeout(() => {
-					if (!videoscheck) {
+					if (!videosCheck) {
 						loader.style.zIndex = '200'
 						loader.classList.add('show')
 					}
 				}, 3000)
 
-				if (videoscheck) {
+				if (videosCheck) {
 					loader.classList.remove('show')
 					loader.classList.add('short-vanish')
 					loader.style.zIndex = '-200'
@@ -2537,28 +2576,15 @@ mainMenuB.forEach((e, i) => {
 					loop.classList.remove('show')
 					video1.style.opacity = 1
 
-					setTimeout(() => {
-						video1.play()
-						video1.addEventListener('ended', () => {
-							animations()
-							InterpolateVideo(loop, video1, video2)
-							if (
-								dataId[i] === 'whyF' ||
-								dataId[i] === 'in-houseT' ||
-								dataId[i] === 'useC'
-							) {
-								video2.loop = false
-								video2.addEventListener('ended', () => {
-									backButtonFunction()
-								})
-							}
-							HideShowCont()
-						})
-					}, 0)
+					video1.play()
+					video1.addEventListener('ended', () => {
+						animations()
+						InterpolateVideo(loop, video1, video2)
+						HideShowCont()
+					})
 				}
 			}
 		}
-		// a
 	})
 })
 

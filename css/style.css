@@ -777,7 +777,7 @@ p {
 .imageContainer {
 	margin-left: 4em;
 	gap: 3em;
-	opacity: 0;
+	/* opacity: 0; */
 }
 .imageModal {
 	background-color: black;
