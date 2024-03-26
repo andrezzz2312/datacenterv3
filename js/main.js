@@ -1,36 +1,79 @@
 //variableStart
 const documentRoutes = {
-    turnlock10: {
-        imagesVideos: ['turnlock101.png', 'turnlock102.png'],
-        drawings: [],
-        specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
-        miscellaneous: ['turnlock101.png'],
-    },
-    tourlock18: {
-        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.png', 'turnlock104.mp4', 'turnlock104.png', 'turnlock105.png'],
-        drawings: ['TURNLOCK-100EC CUTSHEET.pdf', 'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf', 'TURNLOCK-100ECP CUTSHEET.pdf', 'TURNLOCK-100ES CUTSHEET.pdf', 'TURNLOCK-100TC CUTSHEET.pdf', 'TURNLOCK-100TCP CUTSHEET.pdf', 'TURNLOCK-100TS -CUTSHEET.pdf'],
-        specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx', 'Boon Edam Spec_Turnlock 100_Rev_012023.docx', 'Boon Edam Spec_Turnlock 100_Rev_012023.docx', 'Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
-        miscellaneous: ['turnlock101.png'],
-    },
-    lifelineSw: {
-        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.png', 'turnlock104.mp4', 'turnlock104.png', 'turnlock105.png'],
-        drawings: ['TURNLOCK-100EC CUTSHEET.pdf', 'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf', 'TURNLOCK-100ECP CUTSHEET.pdf', 'TURNLOCK-100ES CUTSHEET.pdf', 'TURNLOCK-100TC CUTSHEET.pdf', 'TURNLOCK-100TCP CUTSHEET.pdf', 'TURNLOCK-100TS -CUTSHEET.pdf'],
-        specifications: [],
-        miscellaneous: ['turnlock101.png'],
-    },
-    circlelockSo: {
-        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.png', 'turnlock104.mp4'],
-        drawings: ['TURNLOCK-100EC CUTSHEET.pdf', 'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf'],
-        specifications: [],
-        miscellaneous: ['turnlock101.png'],
-    },
-    circlelockCombi: {
-        imagesVideos: ['turnlock101.png'],
-        drawings: [],
-        specifications: [],
-        miscellaneous: ['turnlock101.png'],
-    },
-};
+	turnlock10: {
+		imagesVideos: ['turnlock101.png', 'turnlock102.png'],
+		drawings: [],
+		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
+		miscellaneous: ['turnlock101.png'],
+	},
+	tourlock18: {
+		imagesVideos: [
+			'turnlock101.png',
+			'turnlock102.png',
+			'turnlock103.png',
+			'turnlock104.mp4',
+			'turnlock104.png',
+			'turnlock105.png',
+		],
+		drawings: [
+			'TURNLOCK-100EC CUTSHEET.pdf',
+			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
+			'TURNLOCK-100ECP CUTSHEET.pdf',
+			'TURNLOCK-100ES CUTSHEET.pdf',
+			'TURNLOCK-100TC CUTSHEET.pdf',
+			'TURNLOCK-100TCP CUTSHEET.pdf',
+			'TURNLOCK-100TS -CUTSHEET.pdf',
+		],
+		specifications: [
+			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
+			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
+			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
+			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
+		],
+		miscellaneous: ['turnlock101.png'],
+	},
+	lifelineSw: {
+		imagesVideos: [
+			'turnlock101.png',
+			'turnlock102.png',
+			'turnlock103.png',
+			'turnlock104.mp4',
+			'turnlock104.png',
+			'turnlock105.png',
+		],
+		drawings: [
+			'TURNLOCK-100EC CUTSHEET.pdf',
+			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
+			'TURNLOCK-100ECP CUTSHEET.pdf',
+			'TURNLOCK-100ES CUTSHEET.pdf',
+			'TURNLOCK-100TC CUTSHEET.pdf',
+			'TURNLOCK-100TCP CUTSHEET.pdf',
+			'TURNLOCK-100TS -CUTSHEET.pdf',
+		],
+		specifications: [],
+		miscellaneous: ['turnlock101.png'],
+	},
+	circlelockSo: {
+		imagesVideos: [
+			'turnlock101.png',
+			'turnlock102.png',
+			'turnlock103.png',
+			'turnlock104.mp4',
+		],
+		drawings: [
+			'TURNLOCK-100EC CUTSHEET.pdf',
+			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
+		],
+		specifications: [],
+		miscellaneous: ['turnlock101.png'],
+	},
+	circlelockCombi: {
+		imagesVideos: ['turnlock101.png'],
+		drawings: [],
+		specifications: [],
+		miscellaneous: ['turnlock101.png'],
+	},
+}
 //variableEnd
 
 // Variables
@@ -1502,17 +1545,8 @@ function createContent(obj) {
 		pCont.classList.add('pCont')
 
 		list = document.createElement('ul')
-
-		// titleH2 = document.createElement('span')
-		// titleH2.classList.add('title1')
-		// titleH2.style.fontSize = globalBigTitleFontvar
-		// titleH2.innerHTML = labelTitle
-		// greenLine = document.createElement('hr')
 		paragraph = document.createElement('p')
-		// titleH2.appendChild(greenLine)
-
 		paragraph.textContent = pContent
-		// titleH2.style.fontSize = globalFontvar
 		paragraph.style.fontSize = globalFontvar
 
 		if (subTitle) {
@@ -1521,7 +1555,6 @@ function createContent(obj) {
 			createdSubTitle.textContent = subTitle
 			createdSubTitle.style.fontWeight = 'bold'
 			createdSubTitle.style.fontSize = globalMediumTitleFontvar
-			// titleH2.appendChild(createdSubTitle)
 		}
 
 		createBackButton()
@@ -1537,8 +1570,9 @@ function createContent(obj) {
 					element.removeEventListener(event, handler)
 				}
 			}
+
 			let imageIndex = 0
-			function createInfoContainer(title, icon) {
+			function createInfoContainer(title, icon, documentIndex) {
 				const infoContainer = document.createElement('div')
 				infoContainer.classList.add('infoContainer')
 
@@ -1547,69 +1581,97 @@ function createContent(obj) {
 				titleElement.textContent = title
 
 				const img = document.createElement('img')
+
+				// documentIcons
+				// here it get the ids
+
+				img.setAttribute('id', title)
 				img.classList.add('finishImg')
 				img.src = `assets/icons/${icon}`
 
 				img.addEventListener('click', () => {
-					const textContainerImageModal = document.querySelector(
-						'.textContainerImageModal'
-					)
-					textContainerImageModal.style.width = containVideoWidth + 'px'
-					textContainerImageModal.style.height = containVideoHeight + 'px'
+					console.log(documentIndex)
+					if (documentIndex === 0) {
+						const textContainerImageModal = document.querySelector(
+							'.textContainerImageModal'
+						)
+						textContainerImageModal.style.width = containVideoWidth + 'px'
+						textContainerImageModal.style.height = containVideoHeight + 'px'
+						const imageShowedHolder =
+							document.querySelector('.imageShowedHolder')
+						let mediaElement = null
+						const leftArrow = document.querySelector('.leftArrow')
+						const rightArrow = document.querySelector('.rightArrow')
+						const imageX = document.querySelector('.imageX')
+						toggleEventListener(
+							leftArrow,
+							'click',
+							leftArrow.clickHandler,
+							false
+						)
+						toggleEventListener(
+							rightArrow,
+							'click',
+							rightArrow.clickHandler,
+							false
+						)
+						toggleEventListener(imageX, 'click', imageX.clickHandler, false)
+						leftArrow.clickHandler = () => {
+							imageIndex =
+								(imageIndex -
+									1 +
+									documentRoutes[currentButton].imagesVideos.length) %
+								documentRoutes[currentButton].imagesVideos.length
 
-					const imageShowedHolder = document.querySelector('.imageShowedHolder')
+							mediaElement = setMediaElementSource(imageIndex, currentButton)
+							imageShowedHolder.innerHTML = ''
+							imageShowedHolder.appendChild(mediaElement)
+						}
+						toggleEventListener(
+							leftArrow,
+							'click',
+							leftArrow.clickHandler,
+							true
+						)
+						rightArrow.clickHandler = () => {
+							imageIndex =
+								(imageIndex + 1) %
+								documentRoutes[currentButton].imagesVideos.length
+							mediaElement = setMediaElementSource(imageIndex, currentButton)
+							imageShowedHolder.innerHTML = ''
+							imageShowedHolder.appendChild(mediaElement)
+						}
+						toggleEventListener(
+							rightArrow,
+							'click',
+							rightArrow.clickHandler,
+							true
+						)
 
-					let mediaElement = null
-
-					const leftArrow = document.querySelector('.leftArrow')
-					const rightArrow = document.querySelector('.rightArrow')
-					const imageX = document.querySelector('.imageX')
-
-					toggleEventListener(leftArrow, 'click', leftArrow.clickHandler, false)
-					toggleEventListener(
-						rightArrow,
-						'click',
-						rightArrow.clickHandler,
-						false
-					)
-					toggleEventListener(imageX, 'click', imageX.clickHandler, false)
-
-					leftArrow.clickHandler = () => {
-						imageIndex =
-							(imageIndex -
-								1 +
-								documentRoutes[currentButton].imagesVideos.length) %
-							documentRoutes[currentButton].imagesVideos.length
+						imageX.clickHandler = () => {
+							textContainerImageModal.style.width = '0px'
+							textContainerImageModal.style.height = '0px'
+						}
+						toggleEventListener(imageX, 'click', imageX.clickHandler, true)
 
 						mediaElement = setMediaElementSource(imageIndex, currentButton)
-						imageShowedHolder.innerHTML = ''
-						imageShowedHolder.appendChild(mediaElement)
-					}
-					toggleEventListener(leftArrow, 'click', leftArrow.clickHandler, true)
-					rightArrow.clickHandler = () => {
-						imageIndex =
-							(imageIndex + 1) %
-							documentRoutes[currentButton].imagesVideos.length
-						mediaElement = setMediaElementSource(imageIndex, currentButton)
-						imageShowedHolder.innerHTML = ''
-						imageShowedHolder.appendChild(mediaElement)
-					}
-					toggleEventListener(
-						rightArrow,
-						'click',
-						rightArrow.clickHandler,
-						true
-					)
-
-					imageX.clickHandler = () => {
-						textContainerImageModal.style.width = '0px'
-						textContainerImageModal.style.height = '0px'
-					}
-					toggleEventListener(imageX, 'click', imageX.clickHandler, true)
-
-					mediaElement = setMediaElementSource(imageIndex, currentButton)
-					if (!imageShowedHolder.hasChildNodes()) {
-						imageShowedHolder.appendChild(mediaElement)
+						if (!imageShowedHolder.hasChildNodes()) {
+							imageShowedHolder.appendChild(mediaElement)
+						}
+					} else if (documentIndex === 1) {
+						const specX = document.querySelector('.specX')
+						const textContainerSpecModal = document.querySelector(
+							'.textContainerSpecModal'
+						)
+						textContainerSpecModal.style.width = containVideoWidth + 'px'
+						textContainerSpecModal.style.height = containVideoHeight + 'px'
+						toggleEventListener(specX, 'click', specX.clickHandler, false)
+						specX.clickHandler = () => {
+							console.log('specX')
+							textContainerSpecModal.style.width = '0px'
+							textContainerSpecModal.style.height = '0px'
+						}
+						toggleEventListener(specX, 'click', specX.clickHandler, true)
 					}
 				})
 
@@ -1635,8 +1697,8 @@ function createContent(obj) {
 					{ title: 'Miscellaneous', icon: 'documents4.png' },
 				]
 
-				documentTypes.forEach(({ title, icon }) => {
-					const infoContainer = createInfoContainer(title, icon)
+				documentTypes.forEach(({ title, icon }, i) => {
+					const infoContainer = createInfoContainer(title, icon, i)
 					elementContainer.appendChild(infoContainer)
 				})
 
@@ -1668,7 +1730,6 @@ function createContent(obj) {
 						image.style.width = '6em'
 					}
 					image.addEventListener('click', () => {
-						console.log('clickaste perroide')
 						if (i + 1 === 1) {
 							subVideoFinish1.style.opacity = 1
 							subVideoFinish2.style.opacity = 0
@@ -1695,13 +1756,8 @@ function createContent(obj) {
 						}.mp4`
 					})
 
-					console.log(subVideoFinish2)
-
 					infoContainer.appendChild(image)
 					elementContainer.appendChild(infoContainer)
-					// console.log(pCont)
-					// console.log(paragraph)
-					// console.log(elementContainer)
 					pCont.appendChild(paragraph)
 					paragraph.appendChild(elementContainer)
 				}
