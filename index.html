@@ -75,7 +75,12 @@
 						<div class="imageModalContainer">
 							<div class="imageLeftContainer">
 								<div class="xContainer">
-									<img class="imageX" src="assets/icons/x.png" alt="" />
+									<img
+										id="imageX"
+										class="imageX"
+										src="assets/icons/x.png"
+										alt=""
+									/>
 								</div>
 								<div class="leftArrowContainer">
 									<img class="leftArrow" src="assets/icons/left.png" alt="" />
@@ -104,14 +109,32 @@
 					<div class="textContainerSpecModal">
 						<div class="specModalContainer">
 							<div class="specTopContainer">
-								<img class="specX" src="assets/icons/x.png" alt="" />
 								<img
-									class="brandIconImage"
+									id="specX"
+									class="imageX"
+									src="assets/icons/x.png"
+									alt=""
+								/>
+								<img
+									class="brandIconImagePdf"
 									src="assets/icons/onefiftyLogo.png"
 									alt=""
 								/>
 							</div>
 							<div class="specCenterContainer"></div>
+						</div>
+						<div class="pdfShowed">
+							<div class="pdfLeftContainer">
+								<img
+									class="brandIconShowedPdf"
+									src="assets/icons/onefiftyLogo.png"
+									alt=""
+								/>
+							</div>
+							<div class="pdfCenterContainer"></div>
+							<div class="pdfRightContainer">
+								<img id="pdfX" class="imageX" src="assets/icons/x.png" alt="" />
+							</div>
 						</div>
 					</div>
 				</div>
@@ -308,6 +331,7 @@
 	</body>
 	<script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/svg.min.js"></script>
 	<script src="https://scripts.sirv.com/sirv.js"></script>
+	<script src="./js/pdfObj.js"></script>
 
 	<script src="./js/main.js"></script>
 </html>

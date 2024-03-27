@@ -422,6 +422,38 @@ a {
 	margin-bottom: 0.5%;
 	opacity: 1;
 }
+.brandIconImagePdf {
+	width: 8vw;
+	height: auto;
+	object-fit: contain;
+	opacity: 1;
+}
+.pdfobject-container {
+	height: 90%;
+	width: 90%;
+	border: 1px solid #ccc;
+}
+.brandIconShowedPdf {
+	margin-top: 2vw;
+	width: 8vw;
+	height: auto;
+	object-fit: contain;
+	opacity: 1;
+}
+.pdfRightContainer {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	background-color: rgb(48, 48, 48);
+}
+.pdfCenterContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#pdfX {
+	margin-top: 1.5vw;
+}
 .brandIconR {
 	opacity: 1;
 }
@@ -551,6 +583,7 @@ a {
 .textContainerSpecModal {
 	position: relative;
 	overflow: hidden;
+	width: 0;
 }
 
 .labelCont {
@@ -605,21 +638,78 @@ a {
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	z-index: 10;
-	background-color: hsla(189, 98%, 63%, 0.432);
+	z-index: 2;
+	background-color: rgb(48, 48, 48);
 }
 .specTopContainer {
 	padding: 0 3vw 0 3vw;
 	width: 100%;
 	flex: 0 0 15%;
-	background-color: hsla(130, 100%, 75%, 0.432);
+	background-color: rgb(48, 48, 48);
 	display: flex;
 	justify-content: space-between;
 }
 .specCenterContainer {
 	width: 100%;
+	display: flex;
+	justify-content: center;
+
 	flex: 1;
-	background-color: hsla(258, 98%, 63%, 0.432);
+	background-color: rgb(48, 48, 48);
+}
+.fileGrid {
+	width: 80%;
+	height: min-content;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	justify-content: center;
+
+	gap: 1vw 2vw;
+
+	background-color: rgb(48, 48, 48);
+}
+.pdfShowed {
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	z-index: 3;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(48, 48, 48);
+	transition: transform 0.3s ease-in-out;
+	transform: scale(0);
+}
+.pdfShowed > * {
+	flex: 1; /* Each child takes equal space initially */
+}
+.pdfShowed > :first-child,
+.pdfShowed > :last-child {
+	flex: 0 0 15%; /* First and last children occupy 15% width and don't shrink or grow */
+}
+
+.pdfShowed > :nth-child(2) {
+	flex: 0 0 70%; /* Middle child occupies 70% width and doesn't shrink or grow */
+}
+.pdfLeftContainer {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	background-color: rgb(48, 48, 48);
+}
+.fileImg {
+	width: 4vw;
+}
+.file {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1vw;
+	cursor: pointer;
+}
+.fileTitle {
+	text-align: center;
+	color: white;
 }
 .imageLeftContainer,
 .imageRightContainer {

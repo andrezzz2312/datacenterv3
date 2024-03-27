@@ -1,10 +1,10 @@
 //variableStart
 const documentRoutes = {
 	turnlock10: {
-		imagesVideos: ['turnlock101.png', 'turnlock102.png'],
-		drawings: [],
-		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
-		miscellaneous: ['turnlock101.png'],
+		imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
+		drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
+		specifications: ['test1.pdf'],
+		miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
 	},
 	tourlock18: {
 		imagesVideos: [
@@ -69,7 +69,7 @@ const documentRoutes = {
 	},
 	circlelockCombi: {
 		imagesVideos: ['turnlock101.png'],
-		drawings: [],
+		drawings: ['turnlock101.png'],
 		specifications: [],
 		miscellaneous: ['turnlock101.png'],
 	},
@@ -138,7 +138,8 @@ let video1,
 	delayInput,
 	paint,
 	clearcheck,
-	elementContainer
+	elementContainer,
+	documentWindow = false
 
 let currentButton = 'mainMenuFront'
 let boxVideo = []
@@ -1032,14 +1033,12 @@ function HideShowCont() {
 
 // Set animations for the buttons
 function animations() {
-	console.trace()
 	if (pCont) {
 		paragraph.style.animation = 'fadein 0.5s ease-in-out forwards'
 
 		const elementContainers = document.querySelectorAll('.elementContainer')
 
 		let counter = 0.3
-		// console.log(delay)
 
 		if (delay) {
 			console.log(delay)
@@ -1302,10 +1301,6 @@ function createSubVideos(source1, source2, source3) {
 // Create the content storaged in showCont div / Left and Top position of the container div, label title and content of the paragraph
 
 function setMediaElementSource(index, route) {
-	console.log(index)
-	console.log(route)
-	console.trace()
-	console.log(documentRoutes[route])
 	const selectedRoute = documentRoutes[route]
 	const fileName = selectedRoute.imagesVideos[index]
 	const extension = fileName.split('.').pop()
@@ -1315,6 +1310,7 @@ function setMediaElementSource(index, route) {
 		const videoElement = document.createElement('video')
 		videoElement.classList.add('videoShowed')
 		videoElement.src = filePath
+		videoElement.autoplay = true
 		videoElement.poster = ''
 		videoElement.controls = true
 		return videoElement
@@ -1323,17 +1319,11 @@ function setMediaElementSource(index, route) {
 		imageElement.classList.add('imageShowed')
 		imageElement.src = filePath
 		imageElement.poster = ''
-		imageElement.controls = false
 		return imageElement
 	}
 }
 
 function createContent(obj) {
-	// console.log('nextButton:' + nextButton)
-	// console.log('currentButton:' + currentButton)
-	// console.log('pageIndex:' + pageIndex)
-	console.trace()
-
 	delay = ''
 	if (obj) {
 		textLeft = obj.textLeft
@@ -1572,6 +1562,7 @@ function createContent(obj) {
 			}
 
 			let imageIndex = 0
+
 			function createInfoContainer(title, icon, documentIndex) {
 				const infoContainer = document.createElement('div')
 				infoContainer.classList.add('infoContainer')
@@ -1590,11 +1581,17 @@ function createContent(obj) {
 				img.src = `assets/icons/${icon}`
 
 				img.addEventListener('click', () => {
-					console.log(documentIndex)
+					const textContainerImageModal = document.querySelector(
+						'.textContainerImageModal'
+					)
+					const textContainerSpecModal = document.querySelector(
+						'.textContainerSpecModal'
+					)
+					const specCenterContainer = document.querySelector(
+						'.specCenterContainer'
+					)
 					if (documentIndex === 0) {
-						const textContainerImageModal = document.querySelector(
-							'.textContainerImageModal'
-						)
+						documentWindow = 'img'
 						textContainerImageModal.style.width = containVideoWidth + 'px'
 						textContainerImageModal.style.height = containVideoHeight + 'px'
 						const imageShowedHolder =
@@ -1602,7 +1599,8 @@ function createContent(obj) {
 						let mediaElement = null
 						const leftArrow = document.querySelector('.leftArrow')
 						const rightArrow = document.querySelector('.rightArrow')
-						const imageX = document.querySelector('.imageX')
+						const imageX = document.querySelector('#imageX')
+
 						toggleEventListener(
 							leftArrow,
 							'click',
@@ -1651,6 +1649,7 @@ function createContent(obj) {
 						imageX.clickHandler = () => {
 							textContainerImageModal.style.width = '0px'
 							textContainerImageModal.style.height = '0px'
+							documentWindow = false
 						}
 						toggleEventListener(imageX, 'click', imageX.clickHandler, true)
 
@@ -1659,20 +1658,225 @@ function createContent(obj) {
 							imageShowedHolder.appendChild(mediaElement)
 						}
 					} else if (documentIndex === 1) {
-						const specX = document.querySelector('.specX')
-						const textContainerSpecModal = document.querySelector(
-							'.textContainerSpecModal'
-						)
+						documentWindow = 'pdf'
+						const specX = document.querySelector('#specX')
+
 						textContainerSpecModal.style.width = containVideoWidth + 'px'
 						textContainerSpecModal.style.height = containVideoHeight + 'px'
 						toggleEventListener(specX, 'click', specX.clickHandler, false)
 						specX.clickHandler = () => {
-							console.log('specX')
+							documentWindow = false
 							textContainerSpecModal.style.width = '0px'
 							textContainerSpecModal.style.height = '0px'
 						}
 						toggleEventListener(specX, 'click', specX.clickHandler, true)
+						specCenterContainer.innerHTML = ''
+						const fileGrid = document.createElement('div')
+						fileGrid.classList.add('fileGrid')
+						specCenterContainer.appendChild(fileGrid)
+						for (
+							let index = 0;
+							index < documentRoutes[currentButton].specifications.length;
+							index++
+						) {
+							const file = document.createElement('div')
+							file.classList.add('file')
+							const fileImg = document.createElement('img')
+							fileImg.classList.add('fileImg')
+							fileImg.src = 'assets/icons/document.png'
+							const fileTitle = document.createElement('h3')
+							fileTitle.classList.add('fileTitle')
+							fileTitle.style.fontSize = globalFontvar
+
+							fileTitle.textContent =
+								documentRoutes[currentButton].specifications[index]
+							file.appendChild(fileImg)
+							file.appendChild(fileTitle)
+							fileGrid.appendChild(file)
+							const pdfShowed = document.querySelector('.pdfShowed')
+							const pdfX = document.querySelector('#pdfX')
+							const pdfCenterContainer = document.querySelector(
+								'.pdfCenterContainer'
+							)
+							pdfX.addEventListener('click', () => {
+								pdfShowed.style.transform = 'scale(0)'
+
+								setTimeout(() => {
+									pdfCenterContainer.innerHTML = ''
+								}, 300)
+							})
+							file.addEventListener('click', () => {
+								const pdfContainer = document.createElement('div')
+								pdfContainer.setAttribute('id', 'my-pdf')
+								pdfCenterContainer.appendChild(pdfContainer)
+
+								console.log(documentRoutes[currentButton].specifications[index])
+								var pdfPath = `/assets/${currentButton}/documents/specifications/${documentRoutes[currentButton].specifications[index]}`
+								PDFObject.embed(pdfPath, '#my-pdf')
+								pdfShowed.style.transform = 'scale(1)'
+							})
+						}
+					} else if (documentIndex === 2) {
+						documentWindow = 'pdf'
+						const specX = document.querySelector('#specX')
+
+						textContainerSpecModal.style.width = containVideoWidth + 'px'
+						textContainerSpecModal.style.height = containVideoHeight + 'px'
+						toggleEventListener(specX, 'click', specX.clickHandler, false)
+						specX.clickHandler = () => {
+							documentWindow = false
+							textContainerSpecModal.style.width = '0px'
+							textContainerSpecModal.style.height = '0px'
+						}
+						toggleEventListener(specX, 'click', specX.clickHandler, true)
+
+						specCenterContainer.innerHTML = ''
+						const fileGrid = document.createElement('div')
+						fileGrid.classList.add('fileGrid')
+						specCenterContainer.appendChild(fileGrid)
+						for (
+							let index = 0;
+							index < documentRoutes[currentButton].drawings.length;
+							index++
+						) {
+							const file = document.createElement('div')
+							file.classList.add('file')
+							const fileImg = document.createElement('img')
+							fileImg.classList.add('fileImg')
+							fileImg.src = 'assets/icons/document.png'
+							const fileTitle = document.createElement('h3')
+							fileTitle.classList.add('fileTitle')
+							fileTitle.style.fontSize = globalFontvar
+
+							fileTitle.textContent =
+								documentRoutes[currentButton].drawings[index]
+							file.appendChild(fileImg)
+							file.appendChild(fileTitle)
+							fileGrid.appendChild(file)
+							const pdfShowed = document.querySelector('.pdfShowed')
+							const pdfX = document.querySelector('#pdfX')
+							const pdfCenterContainer = document.querySelector(
+								'.pdfCenterContainer'
+							)
+							pdfX.addEventListener('click', () => {
+								pdfShowed.style.transform = 'scale(0)'
+
+								setTimeout(() => {
+									pdfCenterContainer.innerHTML = ''
+								}, 300)
+							})
+							file.addEventListener('click', () => {
+								const pdfContainer = document.createElement('div')
+								pdfContainer.setAttribute('id', 'my-pdf')
+								pdfCenterContainer.appendChild(pdfContainer)
+
+								console.log(documentRoutes[currentButton].drawings[index])
+								var pdfPath = `/assets/${currentButton}/documents/drawings/${documentRoutes[currentButton].drawings[index]}`
+								PDFObject.embed(pdfPath, '#my-pdf')
+								pdfShowed.style.transform = 'scale(1)'
+							})
+						}
+					} else if (documentIndex === 3) {
+						documentWindow = 'pdf'
+						const specX = document.querySelector('#specX')
+
+						textContainerSpecModal.style.width = containVideoWidth + 'px'
+						textContainerSpecModal.style.height = containVideoHeight + 'px'
+						toggleEventListener(specX, 'click', specX.clickHandler, false)
+						specX.clickHandler = () => {
+							documentWindow = false
+							textContainerSpecModal.style.width = '0px'
+							textContainerSpecModal.style.height = '0px'
+						}
+						toggleEventListener(specX, 'click', specX.clickHandler, true)
+
+						specCenterContainer.innerHTML = ''
+						const fileGrid = document.createElement('div')
+						fileGrid.classList.add('fileGrid')
+						specCenterContainer.appendChild(fileGrid)
+						for (
+							let index = 0;
+							index < documentRoutes[currentButton].miscellaneous.length;
+							index++
+						) {
+							const file = document.createElement('div')
+							file.classList.add('file')
+							const fileImg = document.createElement('img')
+							fileImg.classList.add('fileImg')
+							fileImg.src = 'assets/icons/document.png'
+							const fileTitle = document.createElement('h3')
+							fileTitle.classList.add('fileTitle')
+							fileTitle.style.fontSize = globalFontvar
+
+							fileTitle.textContent =
+								documentRoutes[currentButton].miscellaneous[index]
+							file.appendChild(fileImg)
+							file.appendChild(fileTitle)
+							fileGrid.appendChild(file)
+							const pdfShowed = document.querySelector('.pdfShowed')
+							const pdfX = document.querySelector('#pdfX')
+							const pdfCenterContainer = document.querySelector(
+								'.pdfCenterContainer'
+							)
+							pdfX.addEventListener('click', () => {
+								pdfShowed.style.transform = 'scale(0)'
+
+								setTimeout(() => {
+									pdfCenterContainer.innerHTML = ''
+								}, 300)
+							})
+							file.addEventListener('click', () => {
+								const fileExtension = documentRoutes[
+									currentButton
+								].miscellaneous[index]
+									.split('.')
+									.pop()
+
+								switch (fileExtension) {
+									case 'png':
+										let imgPath = `/assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
+										const imageElement = document.createElement('img')
+										imageElement.classList.add('imageShowed')
+										imageElement.src = imgPath
+										imageElement.poster = ''
+										pdfCenterContainer.appendChild(imageElement)
+										break
+									case 'mp4':
+										const videoElement = document.createElement('video')
+										videoElement.classList.add('videoShowed')
+										let videoPath = `/assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
+										videoElement.src = videoPath
+										videoElement.autoplay = true
+										videoElement.poster = ''
+										videoElement.controls = true
+										pdfCenterContainer.appendChild(videoElement)
+
+										break
+									case 'pdf':
+										const pdfContainer = document.createElement('div')
+										pdfContainer.setAttribute('id', 'my-pdf')
+										pdfCenterContainer.appendChild(pdfContainer)
+										let pdfPath = `/assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
+										PDFObject.embed(pdfPath, '#my-pdf')
+
+										break
+
+									default:
+										break
+								}
+								pdfShowed.style.transform = 'scale(1)'
+							})
+						}
 					}
+					window.addEventListener('resize', () => {
+						if (documentWindow === 'img') {
+							textContainerImageModal.style.width = containVideoWidth + 'px'
+							textContainerImageModal.style.height = containVideoHeight + 'px'
+						} else if (documentWindow === 'pdf') {
+							textContainerSpecModal.style.width = containVideoWidth + 'px'
+							textContainerSpecModal.style.height = containVideoHeight + 'px'
+						}
+					})
 				})
 
 				infoContainer.appendChild(titleElement)
@@ -2484,7 +2688,6 @@ window.addEventListener('resize', function () {
 			window.scrollTo(0, document.body.scrollHeight)
 		}
 	}
-	// if(){}
 })
 
 ////////// Event Listeners for the main buttons //////////
@@ -2532,14 +2735,10 @@ mainMenuB.forEach((e, i) => {
 
 		createContent(buttonContent[nextButton], nextButton)
 
-		window.addEventListener('resize', function (e) {
+		window.addEventListener('resize', function () {
 			if (showCont.hasChildNodes()) {
 				const textContainer = document.querySelector('#centerContainer_text')
-
 				textContainer.remove()
-
-				// backButtonContainer.remove()
-
 				if (pageIndex === 'mainMenuFront') {
 					createContent(buttonContent[nextButton], nextButton)
 				} else {
@@ -2554,8 +2753,6 @@ mainMenuB.forEach((e, i) => {
 					) {
 						createContent()
 					} else {
-						console.log(currentButton)
-						console.log(nextButton)
 						createContent(buttonContent[currentButton].boxInfo[nextButton])
 					}
 					elementContainer.style.opacity = '1'
