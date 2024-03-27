@@ -186,6 +186,11 @@ const subVideoFinish1 = document.querySelector('#subVideoFinish1')
 const subVideoFinish2 = document.querySelector('#subVideoFinish2')
 const subVideoFinish3 = document.querySelector('#subVideoFinish3')
 
+const exploreProContainer = document.querySelector('.exploreProContainer')
+const exploreProImgContainer = document.querySelector('.exploreProImgContainer')
+const exploreProImg = document.querySelector('.exploreProImg')
+const buttonRow = document.querySelector('.buttonRow')
+
 let isMobile = false
 window.mobileCheck = function () {
 	let mobile = (function (a) {
@@ -1123,9 +1128,6 @@ function createContent(obj) {
 			buttonShort[i] = inputButtonId[i]
 			const subButton = document.createElement('button')
 			subButton.classList.add('pageButton')
-			subButton.style.width = `calc(40px + (145 - 40) * ((${
-				containVideoWidth + 'px'
-			} - 320px) / (1440 - 320)))`
 			subButton.textContent = e
 			subButton.style.fontSize = buttonFontvar
 			buttonGrid.appendChild(subButton)
@@ -2309,9 +2311,9 @@ function createBackButton(param) {
 		backButton.classList.add('backButton')
 		backButton.style.fontSize = buttonFontvar
 
-		backButton.style.width = `calc(47px + (147 - 47) * ((${
-			containVideoWidth + 'px'
-		} - 320px) / (1440 - 320)))`
+		// backButton.style.width = `calc(47px + (147 - 47) * ((${
+		// 	containVideoWidth + 'px'
+		// } - 320px) / (1440 - 320)))`
 
 		backButton.classList.add('button')
 
@@ -2323,8 +2325,91 @@ function createBackButton(param) {
 		backButtonContainer.classList.add('backButtonContainer')
 
 		firstPage.appendChild(backButtonContainer)
+		if (
+			nextButton === 'turnlock10' ||
+			nextButton === 'lifelineSw' ||
+			nextButton === 'circlelockSo' ||
+			nextButton === 'circlelockCombi'
+		) {
+			const backDuoContainer = document.createElement('div')
+			backDuoContainer.classList.add('backDuoContainer')
 
-		backButtonContainer.appendChild(backButton)
+			const explorePr = document.createElement('button')
+			explorePr.classList.add('backButton')
+			explorePr.classList.add('button')
+			explorePr.style.fontSize = buttonFontvar
+
+			explorePr.textContent = `Explore Product\nFamily`
+			backDuoContainer.appendChild(backButton)
+			backDuoContainer.appendChild(explorePr)
+			backButtonContainer.appendChild(backDuoContainer)
+
+			explorePr.addEventListener('click', () => {
+				createExploreBtns(nextButton)
+				function createExploreBtns(machine) {
+					let buttons = []
+					let buttonLabels = []
+					let gapStyle = ''
+					let imgSrc = ''
+
+					switch (machine) {
+						case 'turnlock10':
+							buttonLabels = ['Turnlock 100', 'Turnlock 150']
+							gapStyle = '24vw'
+							imgSrc = '../assets/productFa/turnlock.png'
+							break
+						case 'circlelockSo':
+							buttonLabels = ['Circlelock Solo', 'Circlelock Combi']
+							gapStyle = '24vw'
+							imgSrc = '../assets/productFa/circlelock.png'
+							break
+						case 'circlelockCombi':
+							buttonLabels = ['Circlelock Solo', 'Circlelock Combi']
+							gapStyle = '24vw'
+							imgSrc = '../assets/productFa/circlelock.png'
+							break
+						case 'lifelineSw':
+							buttonLabels = [
+								'Lifeline Swing',
+								'Speedlane\nCompact',
+								'Winglock Swing',
+							]
+							gapStyle = '15vw'
+							imgSrc = '../assets/productFa/speedlane.png'
+							break
+						default:
+							return
+					}
+
+					buttonLabels.forEach((label) => {
+						const exploreBtn = document.createElement('button')
+						exploreBtn.classList.add('button', 'pageButton')
+						exploreBtn.setAttribute('id', 'exploreBtn')
+						exploreBtn.style.fontSize = globalFontvar
+						exploreBtn.innerHTML = label
+						buttonRow.appendChild(exploreBtn)
+						buttons.push(exploreBtn)
+					})
+
+					buttonRow.style.gap = gapStyle
+					exploreProImg.src = imgSrc
+
+					buttons.forEach((btn, index) => {
+						btn.addEventListener('click', () => {
+							// Handle button click event here
+						})
+					})
+				}
+
+				exploreProImg.style.width = containVideoWidth + 'px'
+				exploreProImg.style.height = containVideoHeight + 'px'
+				exploreProContainer.style.display = 'flex'
+			})
+		} else {
+			backButton.style.marginLeft = '6.5%'
+			backButtonContainer.appendChild(backButton)
+		}
+
 		backButtonContainer.appendChild(brandIcon)
 
 		if (param === 'rotation') {
@@ -2448,7 +2533,8 @@ window.addEventListener('resize', function () {
 	if (loop.readyState >= 1) {
 		containVideoWidth = getImgSizeInfo(loop).width
 		containVideoHeight = getImgSizeInfo(loop).height
-
+		exploreProImg.style.width = containVideoWidth + 'px'
+		exploreProImg.style.height = containVideoHeight + 'px'
 		setFontSizes()
 
 		if (!mainButtons.classList.contains('disabled')) {
