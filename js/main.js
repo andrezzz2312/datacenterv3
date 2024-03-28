@@ -1,18 +1,18 @@
 //variableStart
 const documentRoutes = {
-	turnlock10: {
+	turnlock100: {
 		imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
 		drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
 		specifications: ['test1.pdf'],
 		miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
 	},
-	turnlock15: {
+	turnlock150: {
 		imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
 		drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
 		specifications: ['test1.pdf'],
 		miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
 	},
-	tourlock18: {
+	tourlock180: {
 		imagesVideos: [
 			'turnlock101.png',
 			'turnlock102.png',
@@ -33,7 +33,7 @@ const documentRoutes = {
 		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
 		miscellaneous: ['turnlock101.png'],
 	},
-	lifelineSw: {
+	lifelineSwing: {
 		imagesVideos: [
 			'turnlock101.png',
 			'turnlock102.png',
@@ -54,7 +54,7 @@ const documentRoutes = {
 		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
 		miscellaneous: ['turnlock101.png'],
 	},
-	circlelockSo: {
+	circlelockSolo: {
 		imagesVideos: [
 			'turnlock101.png',
 			'turnlock102.png',
@@ -219,7 +219,7 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
 // var buttonsText = []
 
 const buttonContent = {
-	turnlock10: {
+	turnlock100: {
 		textLeft: '0%',
 		textBottom: '0%',
 		title: `<span><span style = 'font-weight:bold'>FULL HEIGHT</span>  <span>TURNSTILE</span></span>`,
@@ -288,7 +288,7 @@ const buttonContent = {
 		},
 		// src: buttonsText[1],
 	},
-	turnlock15: {
+	turnlock150: {
 		textLeft: '0%',
 		textBottom: '0%',
 		title: `<span><span style = 'font-weight:bold'>FULL HEIGHT</span> <span>TURNSTILE</span></span>`,
@@ -394,12 +394,12 @@ const buttonContent = {
 			},
 		},
 	},
-	circlelockSo: {
+	circlelockSolo: {
 		textLeft: '0%',
 		textBottom: '0%',
 		title: `<span><span style = 'font-weight:bold'>INTERLOCKING</span> <span>SECURITY PORTAL</span></span>`,
 		subTitle: `Circlelock Solo`,
-		content: [1],
+		content: [],
 		inputButtonGrid: [
 			`Standard\nOperation`,
 			`Piggybacking\n Prevention 1`,
@@ -423,7 +423,6 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold'>Standard Operation</span>`,
-
 				content: [],
 			},
 			piggybackingP1: {
@@ -568,7 +567,7 @@ const buttonContent = {
 
 		// src: buttonsText[1],
 	},
-	tourlock18: {
+	tourlock180: {
 		textLeft: '0%',
 		textBottom: '0%',
 		title: `<span><span style = 'font-weight:bold'>SECURITY</span> <span>REVOLVING DOOR</span></span>`,
@@ -666,7 +665,7 @@ const buttonContent = {
 			},
 		},
 	},
-	lifelineSw: {
+	lifelineSwing: {
 		textLeft: '0%',
 		textBottom: '0%',
 		title: `<span><span style = 'font-weight:bold'>OPTICAL</span> <span>TURNSTILE</span></span>`,
@@ -734,19 +733,19 @@ const buttonContent = {
 }
 
 const rotationContent = {
-	turnlock10:
+	turnlock100:
 		'https://rotation.marketscale.com/Companies/BoonEdam/Turnlock100/Turnlock100.spin?fullscreen=false',
-	turnlock15:
+	turnlock150:
 		'https://rotation.marketscale.com/Companies/BoonEdam/Turnlock150/Turnlock150.spin?fullscreen=false',
-	tourlock18:
+	tourlock180:
 		'https://rotation.marketscale.com/Companies/BoonEdam/Tourlock180/Tourlock180.spin?fullscreen=false',
-	tourlock182:
+	tourlock180Alt2:
 		'https://rotation.marketscale.com/Companies/BoonEdam/Tourlock180/Tourlock180.spin?fullscreen=false',
-	lifelineSw:
+	lifelineSwing:
 		'https://rotation.marketscale.com/Companies/BoonEdam/LifeLineSwing/LifeLineSwing.spin?fullscreen=false',
-	circlelockSo:
+	circlelockSolo:
 		'https://rotation.marketscale.com/Companies/BoonEdam/CirclelockSolo/CirclelockSolo.spin?fullscreen=false',
-	circlelockSo2:
+	circlelockSoloAlt2:
 		'https://rotation.marketscale.com/Companies/BoonEdam/CirclelockSolo/CirclelockSolo.spin?fullscreen=false',
 	trilock60:
 		'https://rotation.marketscale.com/Companies/BoonEdam/TriLock60/TriLock60.spin?fullscreen=false',
@@ -1775,10 +1774,10 @@ function createContent(obj) {
 							let image = document.createElement('img')
 
 							if (
-								nextButton === 'tourlock18' ||
-								nextButton === 'tourlock182' ||
-								nextButton === 'circlelockSo' ||
-								nextButton === 'circlelockSo2'
+								nextButton === 'tourlock180' ||
+								nextButton === 'tourlock180Alt2' ||
+								nextButton === 'circlelockSolo' ||
+								nextButton === 'circlelockSoloAlt2'
 							) {
 								image.classList.add('tableImg')
 								image.src = `assets/${currentButton}/${nextButton}/${nextButton}${
@@ -1838,10 +1837,10 @@ function createContent(obj) {
 							let image = document.createElement('img')
 							image.classList.add('extraImg')
 							if (
-								nextButton === 'tourlock18' ||
-								nextButton === 'tourlock182' ||
-								nextButton === 'circlelockSo' ||
-								nextButton === 'circlelockSo2'
+								nextButton === 'tourlock180' ||
+								nextButton === 'tourlock180Alt2' ||
+								nextButton === 'circlelockSolo' ||
+								nextButton === 'circlelockSoloAlt2'
 							) {
 								image.src = `assets/${currentButton}/${nextButton}/${nextButton}${
 									i + 1
@@ -1909,12 +1908,12 @@ function createContent(obj) {
 	buttonGridContainer.appendChild(buttonGrid)
 
 	if (
-		nextButton === 'turnlock10' ||
-		nextButton === 'tourlock18' ||
-		nextButton === 'lifelineSw' ||
-		nextButton === 'circlelockSo' ||
+		nextButton === 'turnlock100' ||
+		nextButton === 'tourlock180' ||
+		nextButton === 'lifelineSwing' ||
+		nextButton === 'circlelockSolo' ||
 		nextButton === 'circlelockCombi' ||
-		nextButton === 'turnlock15'
+		nextButton === 'turnlock150'
 	) {
 		cornerIcons = document.createElement('div')
 		cornerIcons.classList.add('cornerIcons')
@@ -2340,11 +2339,11 @@ function createBackButton(param) {
 
 		firstPage.appendChild(backButtonContainer)
 		if (
-			nextButton === 'turnlock10' ||
-			nextButton === 'lifelineSw' ||
-			nextButton === 'circlelockSo' ||
+			nextButton === 'turnlock100' ||
+			nextButton === 'lifelineSwing' ||
+			nextButton === 'circlelockSolo' ||
 			nextButton === 'circlelockCombi' ||
-			nextButton === 'turnlock15'
+			nextButton === 'turnlock150'
 		) {
 			const backDuoContainer = document.createElement('div')
 			backDuoContainer.classList.add('backDuoContainer')
@@ -2359,11 +2358,11 @@ function createBackButton(param) {
 			backDuoContainer.appendChild(explorePr)
 			backButtonContainer.appendChild(backDuoContainer)
 			const idMapping = {
-				'Turnlock 100': 'turnlock10',
-				'Turnlock 150': 'turnlock15',
-				'Circlelock Solo': 'circlelockSo',
+				'Turnlock 100': 'turnlock100',
+				'Turnlock 150': 'turnlock150',
+				'Circlelock Solo': 'circlelockSolo',
 				'Circlelock Combi': 'circlelockCombi',
-				'Lifeline Swing': 'lifelineSw',
+				'Lifeline Swing': 'lifelineSwing',
 				'Speedlane\nCompact': 'speedCo',
 				'Winglock Swing': 'wingSw',
 			}
@@ -2376,17 +2375,17 @@ function createBackButton(param) {
 					let imgSrc = ''
 
 					switch (machine) {
-						case 'turnlock10':
+						case 'turnlock100':
 							buttonLabels = ['Turnlock 100', 'Turnlock 150']
 							gapStyle = '24vw'
 							imgSrc = 'assets/productFa/turnlock.png'
 							break
-						case 'turnlock15':
+						case 'turnlock150':
 							buttonLabels = ['Turnlock 100', 'Turnlock 150']
 							gapStyle = '24vw'
 							imgSrc = 'assets/productFa/turnlock.png'
 							break
-						case 'circlelockSo':
+						case 'circlelockSolo':
 							buttonLabels = ['Circlelock Solo', 'Circlelock Combi']
 							gapStyle = '24vw'
 							imgSrc = 'assets/productFa/circlelock.png'
@@ -2396,7 +2395,7 @@ function createBackButton(param) {
 							gapStyle = '24vw'
 							imgSrc = 'assets/productFa/circlelock.png'
 							break
-						case 'lifelineSw':
+						case 'lifelineSwing':
 							buttonLabels = [
 								'Lifeline Swing',
 								'Speedlane\nCompact',
@@ -2466,11 +2465,11 @@ function createBackButton(param) {
 
 										loop.classList.add('short-vanish')
 										loop.classList.remove('show')
-										// video1.style.opacity = 1
-
-										// video1.play()
-										// video1.addEventListener('ended', () => {
-										exploreProContainer.style.display = 'none'
+										exploreProContainer.classList.add('short-vanish')
+										setTimeout(() => {
+											exploreProContainer.style.display = 'none'
+										}, 500)
+										// exploreProContainer.style.display = 'none'
 										buttonRow.innerHTML = ''
 										animations()
 										InterpolateVideo(loop, video1, video2)
@@ -2479,45 +2478,6 @@ function createBackButton(param) {
 									}
 								}
 							}
-							// let videosCheck = false
-							// check1()
-							// function check1() {
-							// 	clearcheck = setInterval(repeatcheck, 600)
-							// 	function repeatcheck() {
-							// 		if (video1.readyState === 4) {
-							// 			videosCheck = true
-							// 		}
-
-							// 		setTimeout(() => {
-							// 			if (!videosCheck) {
-							// 				loader.style.zIndex = '200'
-							// 				loader.classList.add('show')
-							// 			}
-							// 		}, 3000)
-
-							// 		if (videosCheck) {
-							// 			loader.classList.remove('show')
-							// 			loader.classList.add('short-vanish')
-							// 			loader.style.zIndex = '-200'
-
-							// 			clearInterval(clearcheck)
-
-							// 			loop.classList.add('short-vanish')
-							// 			loop.classList.remove('show')
-							// 			video1.style.opacity = 1
-
-							// 			video1.play()
-							// 			video1.addEventListener('ended', () => {
-							// 				exploreProContainer.style.display = 'none'
-							// 				buttonRow.innerHTML = ''
-							// 				animations()
-							// 				InterpolateVideo(loop, video1, video2)
-							// 				// HideShowCont()
-							// 			})
-							// 		}
-							// 	}
-							// }
-							// Handle button click event here
 						})
 					})
 				}
@@ -2525,6 +2485,7 @@ function createBackButton(param) {
 				exploreProImg.style.width = containVideoWidth + 'px'
 				exploreProImg.style.height = containVideoHeight + 'px'
 				exploreProContainer.style.display = 'flex'
+				exploreProContainer.classList.remove('short-vanish')
 			})
 		} else {
 			backButton.style.marginLeft = '6.5%'
@@ -2701,14 +2662,13 @@ mainMenuB.forEach((e, i) => {
 	e.addEventListener('click', function (e) {
 		pageIndex = 'mainMenuFront'
 		nextButton = dataId[i]
-
+		console.log(nextButton)
 		HideShowMainButtons()
 		if (dataVariant[i]) {
-			console.log(`assets/${nextButton}${dataVariant[i]}/${nextButton}1.mp4`)
 			createVideos(
-				`assets/${nextButton}${dataVariant[i]}/${nextButton}1.mp4`,
-				`assets/${nextButton}${dataVariant[i]}/${nextButton}2.mp4`,
-				`assets/${nextButton}${dataVariant[i]}/${nextButton}3.mp4`
+				`assets/${nextButton}Alt${dataVariant[i]}/${nextButton}1.mp4`,
+				`assets/${nextButton}Alt${dataVariant[i]}/${nextButton}2.mp4`,
+				`assets/${nextButton}Alt${dataVariant[i]}/${nextButton}3.mp4`
 			)
 		} else {
 			createVideos(
