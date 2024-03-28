@@ -1,42 +1,80 @@
 //variableStart
 const documentRoutes = {
-    turnlock10: {
-        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
-        drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
-        specifications: ['test1.pdf'],
-        miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
-    },
-    turnlock15: {
-        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
-        drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
-        specifications: ['test1.pdf'],
-        miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
-    },
-    tourlock18: {
-        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.png', 'turnlock104.mp4', 'turnlock104.png', 'turnlock105.png'],
-        drawings: ['TURNLOCK-100EC CUTSHEET.pdf', 'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf', 'TURNLOCK-100ECP CUTSHEET.pdf', 'TURNLOCK-100ES CUTSHEET.pdf', 'TURNLOCK-100TC CUTSHEET.pdf', 'TURNLOCK-100TCP CUTSHEET.pdf', 'TURNLOCK-100TS -CUTSHEET.pdf'],
-        specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
-        miscellaneous: ['turnlock101.png'],
-    },
-    lifelineSw: {
-        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.png', 'turnlock104.mp4', 'turnlock104.png', 'turnlock105.png'],
-        drawings: ['TURNLOCK-100EC CUTSHEET.pdf', 'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf', 'TURNLOCK-100ECP CUTSHEET.pdf', 'TURNLOCK-100ES CUTSHEET.pdf', 'TURNLOCK-100TC CUTSHEET.pdf', 'TURNLOCK-100TCP CUTSHEET.pdf', 'TURNLOCK-100TS -CUTSHEET.pdf'],
-        specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
-        miscellaneous: ['turnlock101.png'],
-    },
-    circlelockSo: {
-        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.png', 'turnlock104.mp4'],
-        drawings: ['TURNLOCK-100EC CUTSHEET.pdf', 'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf'],
-        specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
-        miscellaneous: ['turnlock101.png'],
-    },
-    circlelockCombi: {
-        imagesVideos: ['turnlock101.png'],
-        drawings: ['turnlock101.png'],
-        specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
-        miscellaneous: ['turnlock101.png'],
-    },
-};
+	turnlock10: {
+		imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
+		drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
+		specifications: ['test1.pdf'],
+		miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
+	},
+	turnlock15: {
+		imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
+		drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
+		specifications: ['test1.pdf'],
+		miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
+	},
+	tourlock18: {
+		imagesVideos: [
+			'turnlock101.png',
+			'turnlock102.png',
+			'turnlock103.png',
+			'turnlock104.mp4',
+			'turnlock104.png',
+			'turnlock105.png',
+		],
+		drawings: [
+			'TURNLOCK-100EC CUTSHEET.pdf',
+			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
+			'TURNLOCK-100ECP CUTSHEET.pdf',
+			'TURNLOCK-100ES CUTSHEET.pdf',
+			'TURNLOCK-100TC CUTSHEET.pdf',
+			'TURNLOCK-100TCP CUTSHEET.pdf',
+			'TURNLOCK-100TS -CUTSHEET.pdf',
+		],
+		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
+		miscellaneous: ['turnlock101.png'],
+	},
+	lifelineSw: {
+		imagesVideos: [
+			'turnlock101.png',
+			'turnlock102.png',
+			'turnlock103.png',
+			'turnlock104.mp4',
+			'turnlock104.png',
+			'turnlock105.png',
+		],
+		drawings: [
+			'TURNLOCK-100EC CUTSHEET.pdf',
+			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
+			'TURNLOCK-100ECP CUTSHEET.pdf',
+			'TURNLOCK-100ES CUTSHEET.pdf',
+			'TURNLOCK-100TC CUTSHEET.pdf',
+			'TURNLOCK-100TCP CUTSHEET.pdf',
+			'TURNLOCK-100TS -CUTSHEET.pdf',
+		],
+		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
+		miscellaneous: ['turnlock101.png'],
+	},
+	circlelockSo: {
+		imagesVideos: [
+			'turnlock101.png',
+			'turnlock102.png',
+			'turnlock103.png',
+			'turnlock104.mp4',
+		],
+		drawings: [
+			'TURNLOCK-100EC CUTSHEET.pdf',
+			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
+		],
+		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
+		miscellaneous: ['turnlock101.png'],
+	},
+	circlelockCombi: {
+		imagesVideos: ['turnlock101.png'],
+		drawings: ['turnlock101.png'],
+		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
+		miscellaneous: ['turnlock101.png'],
+	},
+}
 //variableEnd
 
 // Variables
@@ -1024,7 +1062,7 @@ function setMediaElementSource(index, route) {
 	const selectedRoute = documentRoutes[route]
 	const fileName = selectedRoute.imagesVideos[index]
 	const extension = fileName.split('.').pop()
-	const filePath = `../assets/${route}/documents/imagesVideos/${fileName}`
+	const filePath = `assets/${route}/documents/imagesVideos/${fileName}`
 
 	if (extension === 'mp4') {
 		const videoElement = document.createElement('video')
@@ -1442,7 +1480,7 @@ function createContent(obj) {
 								pdfContainer.setAttribute('id', 'my-pdf')
 								pdfCenterContainer.appendChild(pdfContainer)
 
-								var pdfPath = `/assets/${currentButton}/documents/specifications/${documentRoutes[currentButton].specifications[index]}`
+								var pdfPath = `assets/${currentButton}/documents/specifications/${documentRoutes[currentButton].specifications[index]}`
 								PDFObject.embed(pdfPath, '#my-pdf')
 								pdfShowed.style.transform = 'scale(1)'
 							})
@@ -1502,7 +1540,7 @@ function createContent(obj) {
 								pdfCenterContainer.appendChild(pdfContainer)
 
 								console.log(documentRoutes[currentButton].drawings[index])
-								var pdfPath = `/assets/${currentButton}/documents/drawings/${documentRoutes[currentButton].drawings[index]}`
+								var pdfPath = `assets/${currentButton}/documents/drawings/${documentRoutes[currentButton].drawings[index]}`
 								PDFObject.embed(pdfPath, '#my-pdf')
 								pdfShowed.style.transform = 'scale(1)'
 							})
@@ -1587,7 +1625,7 @@ function createContent(obj) {
 
 								switch (fileExtension) {
 									case 'png':
-										let imgPath = `/assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
+										let imgPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
 										const imageElement = document.createElement('img')
 										imageElement.classList.add('imageShowed')
 										imageElement.src = imgPath
@@ -1595,7 +1633,7 @@ function createContent(obj) {
 										pdfCenterContainer.appendChild(imageElement)
 										break
 									case 'jpg':
-										imgPath = `/assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
+										imgPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
 										imageElement = document.createElement('img')
 										imageElement.classList.add('imageShowed')
 										imageElement.src = imgPath
@@ -1605,7 +1643,7 @@ function createContent(obj) {
 									case 'mp4':
 										const videoElement = document.createElement('video')
 										videoElement.classList.add('videoShowed')
-										let videoPath = `/assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
+										let videoPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
 										videoElement.src = videoPath
 										videoElement.autoplay = true
 										videoElement.poster = ''
@@ -1617,7 +1655,7 @@ function createContent(obj) {
 										const pdfContainer = document.createElement('div')
 										pdfContainer.setAttribute('id', 'my-pdf')
 										pdfCenterContainer.appendChild(pdfContainer)
-										let pdfPath = `/assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
+										let pdfPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
 										PDFObject.embed(pdfPath, '#my-pdf')
 
 										break
@@ -2341,22 +2379,22 @@ function createBackButton(param) {
 						case 'turnlock10':
 							buttonLabels = ['Turnlock 100', 'Turnlock 150']
 							gapStyle = '24vw'
-							imgSrc = '../assets/productFa/turnlock.png'
+							imgSrc = 'assets/productFa/turnlock.png'
 							break
 						case 'turnlock15':
 							buttonLabels = ['Turnlock 100', 'Turnlock 150']
 							gapStyle = '24vw'
-							imgSrc = '../assets/productFa/turnlock.png'
+							imgSrc = 'assets/productFa/turnlock.png'
 							break
 						case 'circlelockSo':
 							buttonLabels = ['Circlelock Solo', 'Circlelock Combi']
 							gapStyle = '24vw'
-							imgSrc = '../assets/productFa/circlelock.png'
+							imgSrc = 'assets/productFa/circlelock.png'
 							break
 						case 'circlelockCombi':
 							buttonLabels = ['Circlelock Solo', 'Circlelock Combi']
 							gapStyle = '24vw'
-							imgSrc = '../assets/productFa/circlelock.png'
+							imgSrc = 'assets/productFa/circlelock.png'
 							break
 						case 'lifelineSw':
 							buttonLabels = [
@@ -2365,7 +2403,7 @@ function createBackButton(param) {
 								'Winglock Swing',
 							]
 							gapStyle = '15vw'
-							imgSrc = '../assets/productFa/speedlane.png'
+							imgSrc = 'assets/productFa/speedlane.png'
 							break
 						default:
 							return
