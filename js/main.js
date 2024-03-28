@@ -1,79 +1,42 @@
 //variableStart
 const documentRoutes = {
-	turnlock10: {
-		imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
-		drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
-		specifications: ['test1.pdf'],
-		miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
-	},
-	tourlock18: {
-		imagesVideos: [
-			'turnlock101.png',
-			'turnlock102.png',
-			'turnlock103.png',
-			'turnlock104.mp4',
-			'turnlock104.png',
-			'turnlock105.png',
-		],
-		drawings: [
-			'TURNLOCK-100EC CUTSHEET.pdf',
-			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
-			'TURNLOCK-100ECP CUTSHEET.pdf',
-			'TURNLOCK-100ES CUTSHEET.pdf',
-			'TURNLOCK-100TC CUTSHEET.pdf',
-			'TURNLOCK-100TCP CUTSHEET.pdf',
-			'TURNLOCK-100TS -CUTSHEET.pdf',
-		],
-		specifications: [
-			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
-			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
-			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
-			'Boon Edam Spec_Turnlock 100_Rev_012023.docx',
-		],
-		miscellaneous: ['turnlock101.png'],
-	},
-	lifelineSw: {
-		imagesVideos: [
-			'turnlock101.png',
-			'turnlock102.png',
-			'turnlock103.png',
-			'turnlock104.mp4',
-			'turnlock104.png',
-			'turnlock105.png',
-		],
-		drawings: [
-			'TURNLOCK-100EC CUTSHEET.pdf',
-			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
-			'TURNLOCK-100ECP CUTSHEET.pdf',
-			'TURNLOCK-100ES CUTSHEET.pdf',
-			'TURNLOCK-100TC CUTSHEET.pdf',
-			'TURNLOCK-100TCP CUTSHEET.pdf',
-			'TURNLOCK-100TS -CUTSHEET.pdf',
-		],
-		specifications: [],
-		miscellaneous: ['turnlock101.png'],
-	},
-	circlelockSo: {
-		imagesVideos: [
-			'turnlock101.png',
-			'turnlock102.png',
-			'turnlock103.png',
-			'turnlock104.mp4',
-		],
-		drawings: [
-			'TURNLOCK-100EC CUTSHEET.pdf',
-			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
-		],
-		specifications: [],
-		miscellaneous: ['turnlock101.png'],
-	},
-	circlelockCombi: {
-		imagesVideos: ['turnlock101.png'],
-		drawings: ['turnlock101.png'],
-		specifications: [],
-		miscellaneous: ['turnlock101.png'],
-	},
-}
+    turnlock10: {
+        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
+        drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
+        specifications: ['test1.pdf'],
+        miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
+    },
+    turnlock15: {
+        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
+        drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
+        specifications: ['test1.pdf'],
+        miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
+    },
+    tourlock18: {
+        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.png', 'turnlock104.mp4', 'turnlock104.png', 'turnlock105.png'],
+        drawings: ['TURNLOCK-100EC CUTSHEET.pdf', 'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf', 'TURNLOCK-100ECP CUTSHEET.pdf', 'TURNLOCK-100ES CUTSHEET.pdf', 'TURNLOCK-100TC CUTSHEET.pdf', 'TURNLOCK-100TCP CUTSHEET.pdf', 'TURNLOCK-100TS -CUTSHEET.pdf'],
+        specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
+        miscellaneous: ['turnlock101.png'],
+    },
+    lifelineSw: {
+        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.png', 'turnlock104.mp4', 'turnlock104.png', 'turnlock105.png'],
+        drawings: ['TURNLOCK-100EC CUTSHEET.pdf', 'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf', 'TURNLOCK-100ECP CUTSHEET.pdf', 'TURNLOCK-100ES CUTSHEET.pdf', 'TURNLOCK-100TC CUTSHEET.pdf', 'TURNLOCK-100TCP CUTSHEET.pdf', 'TURNLOCK-100TS -CUTSHEET.pdf'],
+        specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
+        miscellaneous: ['turnlock101.png'],
+    },
+    circlelockSo: {
+        imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.png', 'turnlock104.mp4'],
+        drawings: ['TURNLOCK-100EC CUTSHEET.pdf', 'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf'],
+        specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
+        miscellaneous: ['turnlock101.png'],
+    },
+    circlelockCombi: {
+        imagesVideos: ['turnlock101.png'],
+        drawings: ['turnlock101.png'],
+        specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
+        miscellaneous: ['turnlock101.png'],
+    },
+};
 //variableEnd
 
 // Variables
@@ -123,6 +86,7 @@ let video1,
 	pageIndex,
 	nextButton,
 	specificVideo,
+	specificVideoLoop,
 	globalTitleFontvar,
 	globalMediumTitleFontvar,
 	globalBigTitleFontvar,
@@ -763,7 +727,6 @@ function InterpolateVideo(videoToPause, videoToVanish, videoToPlay, props) {
 	}
 
 	if (props === 'back') {
-		console.log('backarandas')
 		videoToVanish.classList.add('short-vanish')
 		videoToVanish.classList.remove('show')
 	} else {
@@ -1149,11 +1112,11 @@ function createContent(obj) {
 					pageIndex = currentButton
 					currentButton = nextButton
 					nextButton = buttonShort[i]
-					console.log('nextButton:' + nextButton)
-					console.log('currentButton:' + currentButton)
-					console.log('pageIndex:' + pageIndex)
+					// console.log('nextButton:' + nextButton)
+					// console.log('currentButton:' + currentButton)
+					// console.log('pageIndex:' + pageIndex)
 					specificVideo = document.createElement('video')
-					specificVideo.src = `assets/${pageIndex}/${currentButton}/${currentButton}/${nextButton}1.mp4`
+					specificVideo.src = `assets/${pageIndex}/${currentButton}/${nextButton}/${nextButton}1.mp4`
 					specificVideo.muted = true
 					specificVideo.setAttribute('playsinline', 'playsinline')
 					specificVideo.controls = false
@@ -1161,7 +1124,19 @@ function createContent(obj) {
 					specificVideo.classList.add('video')
 					specificVideo.style.opacity = 0
 					specificVideo.pause()
+
+					specificVideoLoop = document.createElement('video')
+					specificVideoLoop.src = `assets/${pageIndex}/${currentButton}/${nextButton}/${nextButton}2.mp4`
+					specificVideoLoop.muted = true
+					specificVideoLoop.setAttribute('playsinline', 'playsinline')
+					specificVideoLoop.controls = false
+					specificVideoLoop.autoplay = true
+					specificVideoLoop.classList.add('video')
+					specificVideoLoop.style.opacity = 0
+					specificVideoLoop.pause()
+
 					specificVideoContainer.appendChild(specificVideo)
+					specificVideoContainer.appendChild(specificVideoLoop)
 
 					let videosCheck = false
 					check1()
@@ -1191,6 +1166,9 @@ function createContent(obj) {
 								specificVideo.play()
 								animations()
 								HideShowCont()
+								specificVideo.addEventListener('ended', () => {
+									InterpolateVideo(subVideo2, specificVideo, specificVideoLoop)
+								})
 							}
 						}
 					}
@@ -1897,7 +1875,8 @@ function createContent(obj) {
 		nextButton === 'tourlock18' ||
 		nextButton === 'lifelineSw' ||
 		nextButton === 'circlelockSo' ||
-		nextButton === 'circlelockCombi'
+		nextButton === 'circlelockCombi' ||
+		nextButton === 'turnlock15'
 	) {
 		cornerIcons = document.createElement('div')
 		cornerIcons.classList.add('cornerIcons')
@@ -2088,9 +2067,6 @@ function exitRotation() {
 	window.removeEventListener('resize', resizeRotation)
 }
 function backButtonFunction() {
-	console.log('backbuttonfunction')
-	console.log(buttonGridContainer)
-
 	ArreglarLineas()
 	buttonGrid.style.pointerEvents = 'none'
 	backButton.style.pointerEvents = 'none'
@@ -2178,7 +2154,7 @@ function backButtonFunctionFront() {
 		subVideoFinish3.style.opacity = 0
 		subVideo2.style.opacity = 1
 	}
-
+	subVideo1.style.opacity = 0
 	InterpolateVideo(subVideo2, subVideo2, subVideo3, 'back')
 	HideShowCont()
 	subVideo3.addEventListener('ended', () => {
@@ -2219,6 +2195,8 @@ function backButtonFunctionSpecific() {
 	// InterpolateVideo(subVideo2, subVideo2, subVideo3)
 	specificVideo.classList.remove('show')
 	specificVideo.classList.add('short-vanish')
+	specificVideoLoop.classList.remove('show')
+	specificVideoLoop.classList.add('short-vanish')
 	HideShowCont()
 
 	// setTimeout(() => {
@@ -2228,21 +2206,19 @@ function backButtonFunctionSpecific() {
 
 	showCont.innerHTML = ''
 
-	// subVideo2.currentTime = 0
-
-	console.log(buttonContent[currentButton])
 	nextButton = currentButton
 	createContent(buttonContent[pageIndex].boxInfo[currentButton])
 	currentButton = pageIndex
 	pageIndex = 'mainMenuFront'
-	console.log('nextButton:' + nextButton)
-	console.log('currentButton:' + currentButton)
-	console.log('pageIndex:' + pageIndex)
+	// console.log('nextButton:' + nextButton)
+	// console.log('currentButton:' + currentButton)
+	// console.log('pageIndex:' + pageIndex)
 	animations()
 
 	HideShowCont()
 	setTimeout(() => {
 		specificVideo.remove()
+		specificVideoLoop.remove()
 	}, 500)
 }
 function backButtonFunctionBack() {
@@ -2329,7 +2305,8 @@ function createBackButton(param) {
 			nextButton === 'turnlock10' ||
 			nextButton === 'lifelineSw' ||
 			nextButton === 'circlelockSo' ||
-			nextButton === 'circlelockCombi'
+			nextButton === 'circlelockCombi' ||
+			nextButton === 'turnlock15'
 		) {
 			const backDuoContainer = document.createElement('div')
 			backDuoContainer.classList.add('backDuoContainer')
@@ -2343,7 +2320,15 @@ function createBackButton(param) {
 			backDuoContainer.appendChild(backButton)
 			backDuoContainer.appendChild(explorePr)
 			backButtonContainer.appendChild(backDuoContainer)
-
+			const idMapping = {
+				'Turnlock 100': 'turnlock10',
+				'Turnlock 150': 'turnlock15',
+				'Circlelock Solo': 'circlelockSo',
+				'Circlelock Combi': 'circlelockCombi',
+				'Lifeline Swing': 'lifelineSw',
+				'Speedlane\nCompact': 'speedCo',
+				'Winglock Swing': 'wingSw',
+			}
 			explorePr.addEventListener('click', () => {
 				createExploreBtns(nextButton)
 				function createExploreBtns(machine) {
@@ -2354,6 +2339,11 @@ function createBackButton(param) {
 
 					switch (machine) {
 						case 'turnlock10':
+							buttonLabels = ['Turnlock 100', 'Turnlock 150']
+							gapStyle = '24vw'
+							imgSrc = '../assets/productFa/turnlock.png'
+							break
+						case 'turnlock15':
 							buttonLabels = ['Turnlock 100', 'Turnlock 150']
 							gapStyle = '24vw'
 							imgSrc = '../assets/productFa/turnlock.png'
@@ -2382,9 +2372,11 @@ function createBackButton(param) {
 					}
 
 					buttonLabels.forEach((label) => {
+						console.log(label)
 						const exploreBtn = document.createElement('button')
 						exploreBtn.classList.add('button', 'pageButton')
-						exploreBtn.setAttribute('id', 'exploreBtn')
+						exploreBtn.setAttribute('id', idMapping[label])
+
 						exploreBtn.style.fontSize = globalFontvar
 						exploreBtn.innerHTML = label
 						buttonRow.appendChild(exploreBtn)
@@ -2396,6 +2388,97 @@ function createBackButton(param) {
 
 					buttons.forEach((btn, index) => {
 						btn.addEventListener('click', () => {
+							const btnId = btn.getAttribute('id')
+							nextButton = btnId
+							video1.remove()
+							video2.remove()
+							video3.remove()
+							createVideos(
+								`assets/${nextButton}/${nextButton}1.mp4`,
+								`assets/${nextButton}/${nextButton}2.mp4`,
+								`assets/${nextButton}/${nextButton}3.mp4`
+							)
+							if (showCont.innerHTML !== '') {
+								showCont.innerHTML = ''
+							}
+
+							createContent(buttonContent[nextButton], nextButton)
+							let videosCheck = false
+							check1()
+							function check1() {
+								clearcheck = setInterval(repeatcheck, 600)
+								function repeatcheck() {
+									if (video2.readyState === 4) {
+										videosCheck = true
+									}
+
+									setTimeout(() => {
+										if (!videosCheck) {
+											loader.style.zIndex = '200'
+											loader.classList.add('show')
+										}
+									}, 3000)
+
+									if (videosCheck) {
+										loader.classList.remove('show')
+										loader.classList.add('short-vanish')
+										loader.style.zIndex = '-200'
+
+										clearInterval(clearcheck)
+
+										loop.classList.add('short-vanish')
+										loop.classList.remove('show')
+										// video1.style.opacity = 1
+
+										// video1.play()
+										// video1.addEventListener('ended', () => {
+										exploreProContainer.style.display = 'none'
+										buttonRow.innerHTML = ''
+										animations()
+										InterpolateVideo(loop, video1, video2)
+										// HideShowCont()
+										// })
+									}
+								}
+							}
+							// let videosCheck = false
+							// check1()
+							// function check1() {
+							// 	clearcheck = setInterval(repeatcheck, 600)
+							// 	function repeatcheck() {
+							// 		if (video1.readyState === 4) {
+							// 			videosCheck = true
+							// 		}
+
+							// 		setTimeout(() => {
+							// 			if (!videosCheck) {
+							// 				loader.style.zIndex = '200'
+							// 				loader.classList.add('show')
+							// 			}
+							// 		}, 3000)
+
+							// 		if (videosCheck) {
+							// 			loader.classList.remove('show')
+							// 			loader.classList.add('short-vanish')
+							// 			loader.style.zIndex = '-200'
+
+							// 			clearInterval(clearcheck)
+
+							// 			loop.classList.add('short-vanish')
+							// 			loop.classList.remove('show')
+							// 			video1.style.opacity = 1
+
+							// 			video1.play()
+							// 			video1.addEventListener('ended', () => {
+							// 				exploreProContainer.style.display = 'none'
+							// 				buttonRow.innerHTML = ''
+							// 				animations()
+							// 				InterpolateVideo(loop, video1, video2)
+							// 				// HideShowCont()
+							// 			})
+							// 		}
+							// 	}
+							// }
 							// Handle button click event here
 						})
 					})
@@ -2583,6 +2666,7 @@ mainMenuB.forEach((e, i) => {
 
 		HideShowMainButtons()
 		if (dataVariant[i]) {
+			console.log(`assets/${nextButton}${dataVariant[i]}/${nextButton}1.mp4`)
 			createVideos(
 				`assets/${nextButton}${dataVariant[i]}/${nextButton}1.mp4`,
 				`assets/${nextButton}${dataVariant[i]}/${nextButton}2.mp4`,
@@ -2622,7 +2706,9 @@ mainMenuB.forEach((e, i) => {
 					} else {
 						createContent(buttonContent[currentButton].boxInfo[nextButton])
 					}
-					elementContainer.style.opacity = '1'
+					if (elementContainer) {
+						elementContainer.style.opacity = '1'
+					}
 				}
 
 				animations()
