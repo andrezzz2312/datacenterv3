@@ -1,9 +1,9 @@
 //variableStart
 const documentRoutes = {
 	turnlock100: {
-		imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
-		drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
-		specifications: ['test1.pdf'],
+		imagesVideos: [],
+		drawings: [],
+		specifications: [],
 		miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
 	},
 	turnlock150: {
@@ -1060,23 +1060,27 @@ function createSubVideos(source1, source2, source3) {
 function setMediaElementSource(index, route) {
 	const selectedRoute = documentRoutes[route]
 	const fileName = selectedRoute.imagesVideos[index]
-	const extension = fileName.split('.').pop()
-	const filePath = `assets/${route}/documents/imagesVideos/${fileName}`
+	if (fileName) {
+		const extension = fileName.split('.').pop()
+		const filePath = `assets/${route}/documents/imagesVideos/${fileName}`
 
-	if (extension === 'mp4') {
-		const videoElement = document.createElement('video')
-		videoElement.classList.add('videoShowed')
-		videoElement.src = filePath
-		videoElement.autoplay = true
-		videoElement.poster = ''
-		videoElement.controls = true
-		return videoElement
+		if (extension === 'mp4') {
+			const videoElement = document.createElement('video')
+			videoElement.classList.add('videoShowed')
+			videoElement.src = filePath
+			videoElement.autoplay = true
+			videoElement.poster = ''
+			videoElement.controls = true
+			return videoElement
+		} else if (extension === 'png' || extension === 'jpg') {
+			const imageElement = document.createElement('img')
+			imageElement.classList.add('imageShowed')
+			imageElement.src = filePath
+			imageElement.poster = ''
+			return imageElement
+		}
 	} else {
-		const imageElement = document.createElement('img')
-		imageElement.classList.add('imageShowed')
-		imageElement.src = filePath
-		imageElement.poster = ''
-		return imageElement
+		console.log('chuska')
 	}
 }
 
@@ -1394,12 +1398,17 @@ function createContent(obj) {
 							imageShowedHolder.innerHTML = ''
 							imageShowedHolder.appendChild(mediaElement)
 						}
-						toggleEventListener(
-							leftArrow,
-							'click',
-							leftArrow.clickHandler,
-							true
-						)
+						if (!documentRoutes[currentButton].imagesVideos.length === 0) {
+							toggleEventListener(
+								leftArrow,
+								'click',
+								leftArrow.clickHandler,
+								true
+							)
+						}
+
+						console.log(documentRoutes[currentButton].imagesVideos)
+
 						rightArrow.clickHandler = () => {
 							imageIndex =
 								(imageIndex + 1) %
@@ -1408,12 +1417,14 @@ function createContent(obj) {
 							imageShowedHolder.innerHTML = ''
 							imageShowedHolder.appendChild(mediaElement)
 						}
-						toggleEventListener(
-							rightArrow,
-							'click',
-							rightArrow.clickHandler,
-							true
-						)
+						if (!documentRoutes[currentButton].imagesVideos.length === 0) {
+							toggleEventListener(
+								rightArrow,
+								'click',
+								rightArrow.clickHandler,
+								true
+							)
+						}
 
 						imageX.clickHandler = () => {
 							textContainerImageModal.style.width = '0px'
@@ -1424,7 +1435,14 @@ function createContent(obj) {
 
 						mediaElement = setMediaElementSource(imageIndex, currentButton)
 						if (!imageShowedHolder.hasChildNodes()) {
-							imageShowedHolder.appendChild(mediaElement)
+							if (mediaElement) {
+								imageShowedHolder.appendChild(mediaElement)
+							} else {
+								const placeholderImg = document.createElement('img')
+								placeholderImg.src = `assets/icons/noMedia.png`
+								placeholderImg.classList.add('imageShowed')
+								imageShowedHolder.appendChild(placeholderImg)
+							}
 						}
 					} else if (documentIndex === 1) {
 						documentWindow = 'pdf'
@@ -1443,46 +1461,54 @@ function createContent(obj) {
 						const fileGrid = document.createElement('div')
 						fileGrid.classList.add('fileGrid')
 						specCenterContainer.appendChild(fileGrid)
-						for (
-							let index = 0;
-							index < documentRoutes[currentButton].specifications.length;
-							index++
-						) {
-							const file = document.createElement('div')
-							file.classList.add('file')
-							const fileImg = document.createElement('img')
-							fileImg.classList.add('fileImg')
-							fileImg.src = 'assets/icons/pdf.png'
-							const fileTitle = document.createElement('h3')
-							fileTitle.classList.add('fileTitle')
-							fileTitle.style.fontSize = globalFontvar
+						if (!documentRoutes[currentButton].specifications.length === 0) {
+							for (
+								let index = 0;
+								index < documentRoutes[currentButton].specifications.length;
+								index++
+							) {
+								const file = document.createElement('div')
+								file.classList.add('file')
+								const fileImg = document.createElement('img')
+								fileImg.classList.add('fileImg')
+								fileImg.src = 'assets/icons/pdf.png'
+								const fileTitle = document.createElement('h3')
+								fileTitle.classList.add('fileTitle')
+								fileTitle.style.fontSize = globalFontvar
 
-							fileTitle.textContent =
-								documentRoutes[currentButton].specifications[index]
-							file.appendChild(fileImg)
-							file.appendChild(fileTitle)
-							fileGrid.appendChild(file)
-							const pdfShowed = document.querySelector('.pdfShowed')
-							const pdfX = document.querySelector('#pdfX')
-							const pdfCenterContainer = document.querySelector(
-								'.pdfCenterContainer'
-							)
-							pdfX.addEventListener('click', () => {
-								pdfShowed.style.transform = 'scale(0)'
+								fileTitle.textContent =
+									documentRoutes[currentButton].specifications[index]
+								file.appendChild(fileImg)
+								file.appendChild(fileTitle)
+								fileGrid.appendChild(file)
+								const pdfShowed = document.querySelector('.pdfShowed')
+								const pdfX = document.querySelector('#pdfX')
+								const pdfCenterContainer = document.querySelector(
+									'.pdfCenterContainer'
+								)
+								pdfX.addEventListener('click', () => {
+									pdfShowed.style.transform = 'scale(0)'
 
-								setTimeout(() => {
-									pdfCenterContainer.innerHTML = ''
-								}, 300)
-							})
-							file.addEventListener('click', () => {
-								const pdfContainer = document.createElement('div')
-								pdfContainer.setAttribute('id', 'my-pdf')
-								pdfCenterContainer.appendChild(pdfContainer)
+									setTimeout(() => {
+										pdfCenterContainer.innerHTML = ''
+									}, 300)
+								})
+								file.addEventListener('click', () => {
+									const pdfContainer = document.createElement('div')
+									pdfContainer.setAttribute('id', 'my-pdf')
+									pdfCenterContainer.appendChild(pdfContainer)
 
-								var pdfPath = `assets/${currentButton}/documents/specifications/${documentRoutes[currentButton].specifications[index]}`
-								PDFObject.embed(pdfPath, '#my-pdf')
-								pdfShowed.style.transform = 'scale(1)'
-							})
+									var pdfPath = `assets/${currentButton}/documents/specifications/${documentRoutes[currentButton].specifications[index]}`
+									PDFObject.embed(pdfPath, '#my-pdf')
+									pdfShowed.style.transform = 'scale(1)'
+								})
+							}
+						} else {
+							fileGrid.style.gridTemplateColumns = 'auto auto auto'
+							const placeholderText = document.createElement('h2')
+							placeholderText.textContent = 'No documents uploaded'
+							placeholderText.classList.add('placeholderText')
+							fileGrid.appendChild(placeholderText)
 						}
 					} else if (documentIndex === 2) {
 						documentWindow = 'pdf'
@@ -1502,47 +1528,55 @@ function createContent(obj) {
 						const fileGrid = document.createElement('div')
 						fileGrid.classList.add('fileGrid')
 						specCenterContainer.appendChild(fileGrid)
-						for (
-							let index = 0;
-							index < documentRoutes[currentButton].drawings.length;
-							index++
-						) {
-							const file = document.createElement('div')
-							file.classList.add('file')
-							const fileImg = document.createElement('img')
-							fileImg.classList.add('fileImg')
-							fileImg.src = 'assets/icons/pdf.png'
-							const fileTitle = document.createElement('h3')
-							fileTitle.classList.add('fileTitle')
-							fileTitle.style.fontSize = globalFontvar
+						if (!documentRoutes[currentButton].drawings.length === 0) {
+							for (
+								let index = 0;
+								index < documentRoutes[currentButton].drawings.length;
+								index++
+							) {
+								const file = document.createElement('div')
+								file.classList.add('file')
+								const fileImg = document.createElement('img')
+								fileImg.classList.add('fileImg')
+								fileImg.src = 'assets/icons/pdf.png'
+								const fileTitle = document.createElement('h3')
+								fileTitle.classList.add('fileTitle')
+								fileTitle.style.fontSize = globalFontvar
 
-							fileTitle.textContent =
-								documentRoutes[currentButton].drawings[index]
-							file.appendChild(fileImg)
-							file.appendChild(fileTitle)
-							fileGrid.appendChild(file)
-							const pdfShowed = document.querySelector('.pdfShowed')
-							const pdfX = document.querySelector('#pdfX')
-							const pdfCenterContainer = document.querySelector(
-								'.pdfCenterContainer'
-							)
-							pdfX.addEventListener('click', () => {
-								pdfShowed.style.transform = 'scale(0)'
+								fileTitle.textContent =
+									documentRoutes[currentButton].drawings[index]
+								file.appendChild(fileImg)
+								file.appendChild(fileTitle)
+								fileGrid.appendChild(file)
+								const pdfShowed = document.querySelector('.pdfShowed')
+								const pdfX = document.querySelector('#pdfX')
+								const pdfCenterContainer = document.querySelector(
+									'.pdfCenterContainer'
+								)
+								pdfX.addEventListener('click', () => {
+									pdfShowed.style.transform = 'scale(0)'
 
-								setTimeout(() => {
-									pdfCenterContainer.innerHTML = ''
-								}, 300)
-							})
-							file.addEventListener('click', () => {
-								const pdfContainer = document.createElement('div')
-								pdfContainer.setAttribute('id', 'my-pdf')
-								pdfCenterContainer.appendChild(pdfContainer)
+									setTimeout(() => {
+										pdfCenterContainer.innerHTML = ''
+									}, 300)
+								})
+								file.addEventListener('click', () => {
+									const pdfContainer = document.createElement('div')
+									pdfContainer.setAttribute('id', 'my-pdf')
+									pdfCenterContainer.appendChild(pdfContainer)
 
-								console.log(documentRoutes[currentButton].drawings[index])
-								var pdfPath = `assets/${currentButton}/documents/drawings/${documentRoutes[currentButton].drawings[index]}`
-								PDFObject.embed(pdfPath, '#my-pdf')
-								pdfShowed.style.transform = 'scale(1)'
-							})
+									console.log(documentRoutes[currentButton].drawings[index])
+									var pdfPath = `assets/${currentButton}/documents/drawings/${documentRoutes[currentButton].drawings[index]}`
+									PDFObject.embed(pdfPath, '#my-pdf')
+									pdfShowed.style.transform = 'scale(1)'
+								})
+							}
+						} else {
+							fileGrid.style.gridTemplateColumns = 'auto auto auto'
+							const placeholderText = document.createElement('h2')
+							placeholderText.textContent = 'No documents uploaded'
+							placeholderText.classList.add('placeholderText')
+							fileGrid.appendChild(placeholderText)
 						}
 					} else if (documentIndex === 3) {
 						documentWindow = 'pdf'
@@ -1562,108 +1596,116 @@ function createContent(obj) {
 						const fileGrid = document.createElement('div')
 						fileGrid.classList.add('fileGrid')
 						specCenterContainer.appendChild(fileGrid)
-						for (
-							let index = 0;
-							index < documentRoutes[currentButton].miscellaneous.length;
-							index++
-						) {
-							const file = document.createElement('div')
-							file.classList.add('file')
-							const fileImg = document.createElement('img')
-							fileImg.classList.add('fileImg')
-							const fileExtension = documentRoutes[currentButton].miscellaneous[
-								index
-							]
-								.split('.')
-								.pop()
-							switch (fileExtension) {
-								case 'png':
-									fileImg.src = 'assets/icons/img.png'
-									break
-								case 'jpg':
-									fileImg.src = 'assets/icons/img.png'
-									break
-								case 'mp4':
-									fileImg.src = 'assets/icons/video.png'
-									break
-								case 'pdf':
-									fileImg.src = 'assets/icons/pdf.png'
-									break
-
-								default:
-									break
-							}
-
-							const fileTitle = document.createElement('h3')
-							fileTitle.classList.add('fileTitle')
-							fileTitle.style.fontSize = globalFontvar
-
-							fileTitle.textContent =
-								documentRoutes[currentButton].miscellaneous[index]
-							file.appendChild(fileImg)
-							file.appendChild(fileTitle)
-							fileGrid.appendChild(file)
-							const pdfShowed = document.querySelector('.pdfShowed')
-							const pdfX = document.querySelector('#pdfX')
-							const pdfCenterContainer = document.querySelector(
-								'.pdfCenterContainer'
-							)
-							pdfX.addEventListener('click', () => {
-								pdfShowed.style.transform = 'scale(0)'
-
-								setTimeout(() => {
-									pdfCenterContainer.innerHTML = ''
-								}, 300)
-							})
-							file.addEventListener('click', () => {
+						if (!documentRoutes[currentButton].miscellaneous.length === 0) {
+							for (
+								let index = 0;
+								index < documentRoutes[currentButton].miscellaneous.length;
+								index++
+							) {
+								const file = document.createElement('div')
+								file.classList.add('file')
+								const fileImg = document.createElement('img')
+								fileImg.classList.add('fileImg')
 								const fileExtension = documentRoutes[
 									currentButton
 								].miscellaneous[index]
 									.split('.')
 									.pop()
-
 								switch (fileExtension) {
 									case 'png':
-										let imgPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
-										const imageElement = document.createElement('img')
-										imageElement.classList.add('imageShowed')
-										imageElement.src = imgPath
-										imageElement.poster = ''
-										pdfCenterContainer.appendChild(imageElement)
+										fileImg.src = 'assets/icons/img.png'
 										break
 									case 'jpg':
-										imgPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
-										imageElement = document.createElement('img')
-										imageElement.classList.add('imageShowed')
-										imageElement.src = imgPath
-										imageElement.poster = ''
-										pdfCenterContainer.appendChild(imageElement)
+										fileImg.src = 'assets/icons/img.png'
 										break
 									case 'mp4':
-										const videoElement = document.createElement('video')
-										videoElement.classList.add('videoShowed')
-										let videoPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
-										videoElement.src = videoPath
-										videoElement.autoplay = true
-										videoElement.poster = ''
-										videoElement.controls = true
-										pdfCenterContainer.appendChild(videoElement)
-
+										fileImg.src = 'assets/icons/video.png'
 										break
 									case 'pdf':
-										const pdfContainer = document.createElement('div')
-										pdfContainer.setAttribute('id', 'my-pdf')
-										pdfCenterContainer.appendChild(pdfContainer)
-										let pdfPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
-										PDFObject.embed(pdfPath, '#my-pdf')
-
+										fileImg.src = 'assets/icons/pdf.png'
 										break
 
 									default:
 										break
 								}
-								pdfShowed.style.transform = 'scale(1)'
-							})
+
+								const fileTitle = document.createElement('h3')
+								fileTitle.classList.add('fileTitle')
+								fileTitle.style.fontSize = globalFontvar
+
+								fileTitle.textContent =
+									documentRoutes[currentButton].miscellaneous[index]
+								file.appendChild(fileImg)
+								file.appendChild(fileTitle)
+								fileGrid.appendChild(file)
+								const pdfShowed = document.querySelector('.pdfShowed')
+								const pdfX = document.querySelector('#pdfX')
+								const pdfCenterContainer = document.querySelector(
+									'.pdfCenterContainer'
+								)
+								pdfX.addEventListener('click', () => {
+									pdfShowed.style.transform = 'scale(0)'
+
+									setTimeout(() => {
+										pdfCenterContainer.innerHTML = ''
+									}, 300)
+								})
+								file.addEventListener('click', () => {
+									const fileExtension = documentRoutes[
+										currentButton
+									].miscellaneous[index]
+										.split('.')
+										.pop()
+
+									switch (fileExtension) {
+										case 'png':
+											let imgPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
+											const imageElement = document.createElement('img')
+											imageElement.classList.add('imageShowed')
+											imageElement.src = imgPath
+											imageElement.poster = ''
+											pdfCenterContainer.appendChild(imageElement)
+											break
+										case 'jpg':
+											imgPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
+											imageElement = document.createElement('img')
+											imageElement.classList.add('imageShowed')
+											imageElement.src = imgPath
+											imageElement.poster = ''
+											pdfCenterContainer.appendChild(imageElement)
+											break
+										case 'mp4':
+											const videoElement = document.createElement('video')
+											videoElement.classList.add('videoShowed')
+											let videoPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
+											videoElement.src = videoPath
+											videoElement.autoplay = true
+											videoElement.poster = ''
+											videoElement.controls = true
+											pdfCenterContainer.appendChild(videoElement)
+
+											break
+										case 'pdf':
+											const pdfContainer = document.createElement('div')
+											pdfContainer.setAttribute('id', 'my-pdf')
+											pdfCenterContainer.appendChild(pdfContainer)
+											let pdfPath = `assets/${currentButton}/documents/miscellaneous/${documentRoutes[currentButton].miscellaneous[index]}`
+											PDFObject.embed(pdfPath, '#my-pdf')
+
+											break
+
+										default:
+											break
+									}
+									pdfShowed.style.transform = 'scale(1)'
+								})
+							}
+						} else {
+							fileGrid.style.gridTemplateColumns = 'auto auto auto'
+							const placeholderText = document.createElement('h2')
+							placeholderText.textContent = 'No documents uploaded'
+							placeholderText.classList.add('placeholderText')
+							fileGrid.appendChild(placeholderText)
 						}
 					}
 					window.addEventListener('resize', () => {
@@ -2323,13 +2365,7 @@ function createBackButton(param) {
 		backButton = document.createElement('button')
 		backButton.classList.add('backButton')
 		backButton.style.fontSize = buttonFontvar
-
-		// backButton.style.width = `calc(47px + (147 - 47) * ((${
-		// 	containVideoWidth + 'px'
-		// } - 320px) / (1440 - 320)))`
-
 		backButton.classList.add('button')
-
 		backButton.textContent = 'Back'
 		backButtonContainer = document.createElement('div')
 		brandIcon = document.createElement('img')
@@ -2409,7 +2445,6 @@ function createBackButton(param) {
 					}
 
 					buttonLabels.forEach((label) => {
-						console.log(label)
 						const exploreBtn = document.createElement('button')
 						exploreBtn.classList.add('button', 'pageButton')
 						exploreBtn.setAttribute('id', idMapping[label])
@@ -2466,6 +2501,7 @@ function createBackButton(param) {
 										loop.classList.add('short-vanish')
 										loop.classList.remove('show')
 										exploreProContainer.classList.add('short-vanish')
+										exploreProContainer.classList.remove('show')
 										setTimeout(() => {
 											exploreProContainer.style.display = 'none'
 										}, 500)
@@ -2484,8 +2520,12 @@ function createBackButton(param) {
 
 				exploreProImg.style.width = containVideoWidth + 'px'
 				exploreProImg.style.height = containVideoHeight + 'px'
-				exploreProContainer.style.display = 'flex'
+
+				exploreProContainer.classList.add('show')
 				exploreProContainer.classList.remove('short-vanish')
+				setTimeout(() => {
+					exploreProContainer.style.display = 'flex'
+				}, 500)
 			})
 		} else {
 			backButton.style.marginLeft = '6.5%'
@@ -2666,9 +2706,9 @@ mainMenuB.forEach((e, i) => {
 		HideShowMainButtons()
 		if (dataVariant[i]) {
 			createVideos(
-				`assets/${nextButton}Alt${dataVariant[i]}/${nextButton}1.mp4`,
-				`assets/${nextButton}Alt${dataVariant[i]}/${nextButton}2.mp4`,
-				`assets/${nextButton}Alt${dataVariant[i]}/${nextButton}3.mp4`
+				`assets/${nextButton}/altVideos/${dataVariant[i]}/${nextButton}1.mp4`,
+				`assets/${nextButton}/altVideos/${dataVariant[i]}/${nextButton}2.mp4`,
+				`assets/${nextButton}/altVideos/${dataVariant[i]}/${nextButton}3.mp4`
 			)
 		} else {
 			createVideos(

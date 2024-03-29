@@ -879,6 +879,10 @@ a {
 	/* transform: scale(0); */
 	/* overflow: hidden; */
 }
+.placeholderText {
+	font-size: 3vw;
+	color: white;
+}
 #pCont2 {
 	display: none;
 }
