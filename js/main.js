@@ -1197,6 +1197,10 @@ function createContent(obj) {
 								createContent()
 
 								specificVideo.classList.add('show')
+								setTimeout(() => {
+									subVideo1.remove()
+									subVideo2.classList.add('show')
+								}, 500)
 
 								specificVideo.play()
 								animations()
@@ -2303,7 +2307,7 @@ function backButtonFunctionSpecific() {
 		specificVideoLoop.classList.remove('show')
 		specificVideoLoop.classList.add('short-vanish')
 	}
-
+	subVideo2.play()
 	HideShowCont()
 
 	// setTimeout(() => {
