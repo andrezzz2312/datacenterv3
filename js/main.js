@@ -34,14 +34,7 @@ const documentRoutes = {
 		miscellaneous: ['turnlock101.png'],
 	},
 	lifelineSwing: {
-		imagesVideos: [
-			'turnlock101.png',
-			'turnlock102.png',
-			'turnlock103.png',
-			'turnlock104.mp4',
-			'turnlock104.png',
-			'turnlock105.png',
-		],
+		imagesVideos: ['turnlock103.png'],
 		drawings: [
 			'TURNLOCK-100EC CUTSHEET.pdf',
 			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
@@ -141,6 +134,7 @@ let video1,
 	paint,
 	clearcheck,
 	elementContainer,
+	videoPlaying,
 	documentWindow = false
 
 let currentButton = 'mainMenuFront'
@@ -673,14 +667,14 @@ const buttonContent = {
 		content: [],
 		inputButtonGrid: [
 			`Standard\nOperation`,
-			`Tailgating\nPrevention`,
+			`Tailgating\nDetection`,
 			`Emergency\nEgress`,
 			`Finish\nOptions`,
 			`Glass\nOptions`,
 		],
 		inputButtonId: [
 			`standardO`,
-			`tailgatingP`,
+			`tailgatingD`,
 			`emergencyE`,
 			`finishO`,
 			`glassO`,
@@ -692,7 +686,7 @@ const buttonContent = {
 				title: `<span style = 'font-weight:bold'>Standard Operation</span>`,
 				content: [],
 			},
-			tailgatingP: {
+			tailgatingD: {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold'>Tailgating Prevention</span>`,
@@ -1207,7 +1201,9 @@ function createContent(obj) {
 								specificVideo.play()
 								animations()
 								HideShowCont()
+								videoPlaying = 1
 								specificVideo.addEventListener('ended', () => {
+									videoPlaying = 2
 									InterpolateVideo(subVideo2, specificVideo, specificVideoLoop)
 								})
 							}
@@ -1289,9 +1285,11 @@ function createContent(obj) {
 								subVideo1.style.opacity = 1
 
 								subVideo1.play()
+								videoPlaying = 1
 								HideShowCont()
 								animations()
 								subVideo1.addEventListener('ended', () => {
+									videoPlaying = 2
 									console.log('subVideo1 ending')
 									InterpolateVideo(video3, subVideo1, subVideo2)
 								})
@@ -1388,6 +1386,7 @@ function createContent(obj) {
 						)
 						toggleEventListener(imageX, 'click', imageX.clickHandler, false)
 						leftArrow.clickHandler = () => {
+							console.log('clicked left')
 							imageIndex =
 								(imageIndex -
 									1 +
@@ -1398,16 +1397,18 @@ function createContent(obj) {
 							imageShowedHolder.innerHTML = ''
 							imageShowedHolder.appendChild(mediaElement)
 						}
-						if (!documentRoutes[currentButton].imagesVideos.length === 0) {
+						console.log(documentRoutes[currentButton].imagesVideos.length)
+						if (documentRoutes[currentButton].imagesVideos.length > 1) {
+							leftArrow.style.display = 'block'
 							toggleEventListener(
 								leftArrow,
 								'click',
 								leftArrow.clickHandler,
 								true
 							)
+						} else {
+							leftArrow.style.display = 'none'
 						}
-
-						console.log(documentRoutes[currentButton].imagesVideos)
 
 						rightArrow.clickHandler = () => {
 							imageIndex =
@@ -1417,13 +1418,16 @@ function createContent(obj) {
 							imageShowedHolder.innerHTML = ''
 							imageShowedHolder.appendChild(mediaElement)
 						}
-						if (!documentRoutes[currentButton].imagesVideos.length === 0) {
+						if (documentRoutes[currentButton].imagesVideos.length > 1) {
+							rightArrow.style.display = 'block'
 							toggleEventListener(
 								rightArrow,
 								'click',
 								rightArrow.clickHandler,
 								true
 							)
+						} else {
+							rightArrow.style.display = 'none'
 						}
 
 						imageX.clickHandler = () => {
@@ -1434,15 +1438,16 @@ function createContent(obj) {
 						toggleEventListener(imageX, 'click', imageX.clickHandler, true)
 
 						mediaElement = setMediaElementSource(imageIndex, currentButton)
-						if (!imageShowedHolder.hasChildNodes()) {
-							if (mediaElement) {
-								imageShowedHolder.appendChild(mediaElement)
-							} else {
-								const placeholderImg = document.createElement('img')
-								placeholderImg.src = `assets/icons/noMedia.png`
-								placeholderImg.classList.add('imageShowed')
-								imageShowedHolder.appendChild(placeholderImg)
-							}
+
+						if (mediaElement) {
+							imageShowedHolder.innerHTML = ''
+							imageShowedHolder.appendChild(mediaElement)
+						} else {
+							imageShowedHolder.innerHTML = ''
+							const placeholderImg = document.createElement('img')
+							placeholderImg.src = `assets/icons/noMedia.png`
+							placeholderImg.classList.add('imageShowed')
+							imageShowedHolder.appendChild(placeholderImg)
 						}
 					} else if (documentIndex === 1) {
 						documentWindow = 'pdf'
@@ -1937,9 +1942,9 @@ function createContent(obj) {
 		gridTitle.classList.add('gridTitle')
 
 		if (nextButton === 'beSecure') {
-			gridTitle.textContent = 'BE Secure escenarios'
+			gridTitle.textContent = 'BE Secure scenarios'
 		} else if (nextButton === 'stereoV') {
-			gridTitle.textContent = 'StereoVision escenarios'
+			gridTitle.textContent = 'StereoVision scenarios'
 		}
 
 		buttonGridContainer.style.flexDirection = 'column'
@@ -1999,6 +2004,16 @@ function createContent(obj) {
 						subVideo3.readyState === 4
 					) {
 						videosCheck = true
+					} else {
+						if (subVideo1.readyState !== 4) {
+							subVideo1.load()
+						}
+						if (subVideo2.readyState !== 4) {
+							subVideo2.load()
+						}
+						if (subVideo3.readyState !== 4) {
+							subVideo3.load()
+						}
 					}
 					setTimeout(() => {
 						if (!videosCheck) {
@@ -2022,7 +2037,9 @@ function createContent(obj) {
 						subVideo1.style.opacity = 1
 						setTimeout(() => {
 							subVideo1.play()
+							videoPlaying = 1
 							subVideo1.addEventListener('ended', () => {
+								videoPlaying = 2
 								animations()
 								InterpolateVideo(video3, subVideo1, subVideo2)
 								HideShowCont()
@@ -2234,7 +2251,14 @@ function backButtonFunctionFront() {
 		subVideo2.style.opacity = 1
 	}
 	subVideo1.style.opacity = 0
-	InterpolateVideo(subVideo2, subVideo2, subVideo3, 'back')
+
+	if (videoPlaying === 1) {
+		subVideo2.style.opacity = '0'
+		InterpolateVideo(subVideo1, subVideo1, subVideo3, 'back')
+	} else if (videoPlaying === 2) {
+		InterpolateVideo(subVideo2, subVideo2, subVideo3, 'back')
+	}
+
 	HideShowCont()
 	subVideo3.addEventListener('ended', () => {
 		console.log('video3 ended')
@@ -2263,6 +2287,7 @@ function backButtonFunctionFront() {
 			subVideo2.remove()
 			subVideo3.remove()
 		}, 500)
+		videoPlaying = 2
 	})
 }
 function backButtonFunctionSpecific() {
@@ -2274,8 +2299,11 @@ function backButtonFunctionSpecific() {
 	// InterpolateVideo(subVideo2, subVideo2, subVideo3)
 	specificVideo.classList.remove('show')
 	specificVideo.classList.add('short-vanish')
-	specificVideoLoop.classList.remove('show')
-	specificVideoLoop.classList.add('short-vanish')
+	if (videoPlaying === 2) {
+		specificVideoLoop.classList.remove('show')
+		specificVideoLoop.classList.add('short-vanish')
+	}
+
 	HideShowCont()
 
 	// setTimeout(() => {
@@ -2299,6 +2327,7 @@ function backButtonFunctionSpecific() {
 		specificVideo.remove()
 		specificVideoLoop.remove()
 	}, 500)
+	videoPlaying = 2
 }
 function backButtonFunctionBack() {
 	ArreglarLineas()
@@ -2446,7 +2475,12 @@ function createBackButton(param) {
 
 					buttonLabels.forEach((label) => {
 						const exploreBtn = document.createElement('button')
-						exploreBtn.classList.add('button', 'pageButton')
+						if (label === 'Speedlane\nCompact' || label === 'Winglock Swing') {
+							exploreBtn.classList.add('button', 'disabledPageButton')
+						} else {
+							exploreBtn.classList.add('button', 'pageButton')
+						}
+
 						exploreBtn.setAttribute('id', idMapping[label])
 
 						exploreBtn.style.fontSize = globalFontvar
@@ -2540,7 +2574,7 @@ function createBackButton(param) {
 			nextButton === 'piggybackingP' ||
 			nextButton === 'emergencyE' ||
 			nextButton === 'finishO' ||
-			nextButton === 'tailgatingP' ||
+			nextButton === 'tailgatingD' ||
 			nextButton === 'tailgatingP1' ||
 			nextButton === 'tailgatingP2' ||
 			nextButton === 'glassO' ||

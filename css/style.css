@@ -325,6 +325,26 @@ video::slotted::-webkit-media-controls-container {
 	animation: morph 1s linear infinite;
 	height: 3.7em;
 }
+.disabledPageButton {
+	text-align: center;
+	white-space: pre-line;
+	font-weight: bold;
+	padding: 0.5em 1em;
+	width: 10em;
+	border: none;
+	color: white;
+	cursor: pointer;
+	border-radius: 10vh;
+	z-index: 2;
+	overflow: hidden;
+	background: #018c3c;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	pointer-events: none;
+	filter: contrast(60%);
+	/* filter: grayscale(50%); */
+	/* animation: morph 1s linear infinite; */
+	height: 3.7em;
+}
 .pageButton:hover,
 .button:hover {
 	filter: brightness(150%);
@@ -1034,8 +1054,8 @@ li:last-child {
 	background-color: #303030;
 }
 .rotationContainer {
-	width: 90%;
-	height: 100%;
+	width: 87%;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
