@@ -1026,10 +1026,10 @@ function createSubVideos(source1, source2, source3) {
 	if (source2) {
 		subVideo2 = document.createElement('video')
 		subVideo2.src = source2
-		if (nextButton === 'emergencyE') {
-			subVideo2.loop = true
-		}
-		// subVideo2.loop = true
+		// if (nextButton === 'emergencyE') {
+		// 	subVideo2.loop = true
+		// }
+		subVideo2.loop = true
 		subVideo2.muted = true
 		subVideo2.setAttribute('playsinline', 'playsinline')
 		subVideo2.controls = false
@@ -1735,7 +1735,7 @@ function createContent(obj) {
 				)
 
 				const documentTypes = [
-					{ title: 'Photo/Video', icon: 'documents1.png' },
+					{ title: 'Photos/Videos', icon: 'documents1.png' },
 					{ title: 'Specifications', icon: 'documents2.png' },
 					{ title: 'Drawings', icon: 'documents3.png' },
 					{ title: 'Miscellaneous', icon: 'documents4.png' },
