@@ -40,6 +40,13 @@
 	text-align: center;
 	color: white;
 }
+.textButtonContainer {
+	width: 90%;
+	display: grid;
+	grid-template-columns: 70% 30%;
+	gap: 0.5vw;
+	align-items: center;
+}
 .title1 {
 	display: flex;
 	flex-direction: column;
