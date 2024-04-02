@@ -1,18 +1,22 @@
 //variableStart
 const documentRoutes = {
 	turnlock100: {
-		imagesVideos: [],
 		drawings: [],
+		miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
+		imagesVideos: [],
 		specifications: [],
-		miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
-	},
-	turnlock150: {
-		imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
-		drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
-		specifications: ['test1.pdf'],
-		miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
 	},
 	tourlock180: {
+		drawings: [
+			'TURNLOCK-100EC CUTSHEET.pdf',
+			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
+			'TURNLOCK-100ECP CUTSHEET.pdf',
+			'TURNLOCK-100ES CUTSHEET.pdf',
+			'TURNLOCK-100TC CUTSHEET.pdf',
+			'TURNLOCK-100TCP CUTSHEET.pdf',
+			'TURNLOCK-100TS -CUTSHEET.pdf',
+		],
+		miscellaneous: ['turnlock101.png'],
 		imagesVideos: [
 			'turnlock101.png',
 			'turnlock102.png',
@@ -21,20 +25,9 @@ const documentRoutes = {
 			'turnlock104.png',
 			'turnlock105.png',
 		],
-		drawings: [
-			'TURNLOCK-100EC CUTSHEET.pdf',
-			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
-			'TURNLOCK-100ECP CUTSHEET.pdf',
-			'TURNLOCK-100ES CUTSHEET.pdf',
-			'TURNLOCK-100TC CUTSHEET.pdf',
-			'TURNLOCK-100TCP CUTSHEET.pdf',
-			'TURNLOCK-100TS -CUTSHEET.pdf',
-		],
 		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
-		miscellaneous: ['turnlock101.png'],
 	},
 	lifelineSwing: {
-		imagesVideos: ['turnlock103.png'],
 		drawings: [
 			'TURNLOCK-100EC CUTSHEET.pdf',
 			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
@@ -44,28 +37,47 @@ const documentRoutes = {
 			'TURNLOCK-100TCP CUTSHEET.pdf',
 			'TURNLOCK-100TS -CUTSHEET.pdf',
 		],
-		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
 		miscellaneous: ['turnlock101.png'],
+		imagesVideos: ['turnlock103.png'],
+		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
 	},
 	circlelockSolo: {
+		drawings: [
+			'TURNLOCK-100EC CUTSHEET.pdf',
+			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
+		],
+		miscellaneous: ['turnlock101.png'],
 		imagesVideos: [
 			'turnlock101.png',
 			'turnlock102.png',
 			'turnlock103.png',
 			'turnlock104.mp4',
 		],
-		drawings: [
-			'TURNLOCK-100EC CUTSHEET.pdf',
-			'TURNLOCK-100EC2-18 CUSTOM FEATURES CUTSHEET.pdf',
-		],
 		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
-		miscellaneous: ['turnlock101.png'],
 	},
 	circlelockCombi: {
-		imagesVideos: ['turnlock101.png'],
 		drawings: ['turnlock101.png'],
-		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
 		miscellaneous: ['turnlock101.png'],
+		imagesVideos: ['turnlock101.png'],
+		specifications: ['Boon Edam Spec_Turnlock 100_Rev_012023.docx'],
+	},
+	turnlock150: {
+		drawings: ['2 - Copy.pdf', '2.pdf', 'test1.pdf'],
+		miscellaneous: ['test1.pdf', 'turnlock101.png', 'turnlock103.mp4'],
+		imagesVideos: ['turnlock101.png', 'turnlock102.png', 'turnlock103.mp4'],
+		specifications: ['test1.pdf'],
+	},
+	turnlockSideGate: {
+		drawings: [],
+		miscellaneous: [],
+		imagesVideos: [],
+		specifications: [],
+	},
+	TQM: {
+		drawings: [],
+		miscellaneous: [],
+		imagesVideos: [],
+		specifications: [],
 	},
 }
 //variableEnd
