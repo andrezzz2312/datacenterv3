@@ -1226,7 +1226,7 @@
 							sequence:
 								/(^[^#|]*([#]+)[^#|]*)($|[|]([0-9]+)\.\.([0-9]+))($|[|]([0-9]+)$)/,
 						},
-						cdn: 'http://code.vostrel.cz/',
+						cdn: 'https://code.vostrel.cz/',
 						math: {
 							envelope: function (f, j, o, t, r, g) {
 								return j + Fa(t, r, -f * g) / o
