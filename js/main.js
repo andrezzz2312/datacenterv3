@@ -2705,8 +2705,11 @@ window.addEventListener('resize', function () {
 	if (loop.readyState >= 1) {
 		containVideoWidth = getImgSizeInfo(loop).width
 		containVideoHeight = getImgSizeInfo(loop).height
-		exploreProImg.style.width = containVideoWidth + 'px'
-		exploreProImg.style.height = containVideoHeight + 'px'
+		if (exploreProImg) {
+			exploreProImg.style.width = containVideoWidth + 'px'
+			exploreProImg.style.height = containVideoHeight + 'px'
+		}
+
 		setFontSizes()
 
 		if (!mainButtons.classList.contains('disabled')) {
