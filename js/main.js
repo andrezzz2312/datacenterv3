@@ -349,6 +349,7 @@ const buttonContent = {
 				textLeft: '0%',
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold' data-subId = 'finishO'>Finish Options</span>`,
+				paint: 2,
 				content: [],
 			},
 			documents: {
@@ -717,7 +718,7 @@ const buttonContent = {
 				textTop: '0%',
 				title: `<span style = 'font-weight:bold'>Glass Options</span>`,
 				content: [],
-				paint: [2],
+				paint: 2,
 				delay: [1],
 			},
 			glassO: {
