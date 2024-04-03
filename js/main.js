@@ -2138,10 +2138,7 @@ function createRotation() {
 
 	HideShowCont()
 	$('#product-reel')
-		.reel({
-			images: `./assets/${nextButton}/threesixty/${nextButton}_#.jpg`,
-			cursor: './jquery.reel.min.js', // Specify the path to jquery.reel.cur
-		})
+		.reel('images', `./assets/${nextButton}/threesixty/${nextButton}_#.jpg`)
 		.bind('loaded', function () {
 			initial.classList.remove('show')
 			initial.classList.add('short-vanish')
@@ -2150,7 +2147,7 @@ function createRotation() {
 				initial.style.zIndex = '-200'
 			}, 400)
 		})
-
+	$('#product-reel').css('cursor', 'auto')
 	rotation.classList.toggle('show')
 	rotation.classList.toggle('hidden')
 	createBackButton('rotationPage')
