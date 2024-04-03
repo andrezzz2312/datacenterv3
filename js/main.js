@@ -2147,7 +2147,7 @@ function createRotation() {
 				initial.style.zIndex = '-200'
 			}, 400)
 		})
-	$('#product-reel').css('cursor', 'auto')
+
 	rotation.classList.toggle('show')
 	rotation.classList.toggle('hidden')
 	createBackButton('rotationPage')
