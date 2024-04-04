@@ -337,6 +337,18 @@ const buttonContent = {
 				title: `<span style = 'font-weight:bold' data-subId = 'piggybackingP'>Piggybacking Prevention</span>`,
 				content: [],
 			},
+			beSecure: {
+				textLeft: '0%',
+				textTop: '0%',
+				title: `<span style = 'font-weight:bold' data-subId = 'beSecure'>Finish Options</span>`,
+				content: [],
+				inputButtonGrid: [
+					`Authorized\nEntry`,
+					`Walk Away\nDetection`,
+					`Piggybacking`,
+				],
+				inputButtonId: [`authorizedE`, `walkA`, `piggyBBS`],
+			},
 			emergencyE: {
 				textLeft: '0%',
 				textTop: '0%',
@@ -353,6 +365,7 @@ const buttonContent = {
 				delay: [2],
 				content: [],
 			},
+
 			documents: {
 				textLeft: '0%',
 				textTop: '0%',
