@@ -271,7 +271,7 @@ const buttonContent = {
 				title: `<span style = 'font-weight:bold' data-subId = 'finishO'>Finish Options</span>`,
 				content: [],
 				paint: 3,
-				delay: [3],
+				delay: [2],
 			},
 			beSecure: {
 				textLeft: '0%',
