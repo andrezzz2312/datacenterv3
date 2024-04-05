@@ -1791,9 +1791,12 @@ function createContent(obj) {
 					'finishContainer'
 				)
 
-				subVideoFinish1.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${1}.mp4`
-				subVideoFinish2.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${2}.mp4`
-				subVideoFinish3.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${3}.mp4`
+				if (paint === 2) {
+					subVideoFinish1.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${1}.mp4`
+					subVideoFinish2.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${2}.mp4`
+				} else if (paint === 3) {
+					subVideoFinish3.src = `assets/${currentButton}/${nextButton}/paint/${nextButton}${3}.mp4`
+				}
 
 				for (let i = 0; i < paint; i++) {
 					let infoContainer = document.createElement('div')
