@@ -1497,7 +1497,7 @@ function createContent(obj) {
 						const fileGrid = document.createElement('div')
 						fileGrid.classList.add('fileGrid')
 						specCenterContainer.appendChild(fileGrid)
-						if (!documentRoutes[currentButton].specifications.length === 0) {
+						if (documentRoutes[currentButton].specifications.length !== 0) {
 							for (
 								let index = 0;
 								index < documentRoutes[currentButton].specifications.length;
@@ -1564,7 +1564,7 @@ function createContent(obj) {
 						const fileGrid = document.createElement('div')
 						fileGrid.classList.add('fileGrid')
 						specCenterContainer.appendChild(fileGrid)
-						if (!documentRoutes[currentButton].drawings.length === 0) {
+						if (documentRoutes[currentButton].drawings.length !== 0) {
 							for (
 								let index = 0;
 								index < documentRoutes[currentButton].drawings.length;
@@ -1632,7 +1632,7 @@ function createContent(obj) {
 						const fileGrid = document.createElement('div')
 						fileGrid.classList.add('fileGrid')
 						specCenterContainer.appendChild(fileGrid)
-						if (!documentRoutes[currentButton].miscellaneous.length === 0) {
+						if (documentRoutes[currentButton].miscellaneous.length !== 0) {
 							for (
 								let index = 0;
 								index < documentRoutes[currentButton].miscellaneous.length;
